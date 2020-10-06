@@ -1,24 +1,25 @@
 <template>
-    <div class="app">
-        <div class="wrapper">
-            <TheHeader/>
-            <div class="body-container">
-                <router-view></router-view>
-            </div>
-            <TheFooter/>
-        </div>
+    <div class="main-wrapper">
+      <TheSidebar/>
+      <div class="main-content">
+        <TheHeader/>
+        <router-view></router-view>
+      </div>
+      <TheFooter/>
     </div>
 </template>
 
 <script>
     import TheHeader from './TheHeader'
     import TheFooter from './TheFooter'
+    import TheSidebar from "@/containers/TheSidebar";
 
     export default {
         name: 'TheContainer',
         components: {
+          TheSidebar,
             TheHeader,
-            TheFooter
+            TheFooter,
         }
     }
 </script>

@@ -1,5 +1,7 @@
 @import "../lib/mixins";
 @import "../lib/var";
+::-moz-selection { background: $pink; }
+::selection { background: $pink; }
 .my-btn{
   background: linear-gradient(90deg, #60359E 0%, #D932C5 100%);
   position: relative;
@@ -47,17 +49,6 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
-  display: block;
-  width: 100%;
-  height: 50px;
-  background: #F6F6F9;
-  border-radius: 5px;
-  padding:  20px;
-  padding-right: 50px;
-  border: 2px solid transparent;
-  transition: all .2s linear;
-  font-family: $bold;
-  font-size: 15px;
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 input:-webkit-autofill,
@@ -84,9 +75,6 @@ input:-webkit-autofill:active  {
   label{
     position: relative;
     display: block;
-  }
-  input:-internal-autofill-selected{
-    background-color: #fff !important;
   }
   &__input{
     display: block;
@@ -118,6 +106,10 @@ input:-webkit-autofill:active  {
           }
         }
       }
+    }
+    &[readonly]{
+      color: #C6C6D7 !important;
+      background: #F6F6F9 !important;
     }
   }
   &__icon{
@@ -273,5 +265,19 @@ input:-webkit-autofill:active  {
   transition: all .2s linear;
   &:hover{
     border-color: transparent;
+  }
+}
+.switcher-wrap {
+  display: flex;
+  align-items: center;
+  + .switcher-wrap {
+    margin-top: 35px;
+
+    @include max-screen(sm){
+      margin-top: 15px;
+    }
+  }
+  .switcher {
+    flex: none;
   }
 }
