@@ -1,34 +1,36 @@
 <template>
-  <div class="google-auth">
-    <div class="ga-form-input">
-      <input @input="input_1"    @paste="paste" ref="ref1" class="two-fa-input form-control" v-model="inp1" maxlength="6"   autofocus/>
+    <div class="two-fa-google-auth-form">
+        <div class="ga-form-input">
+          <input @input="input_1"    @paste="paste" ref="ref1" class="mb-0 two-fa-input form-control" v-model="inp1" maxlength="6"   autofocus/>
+        </div>
+        <div class="ga-form-input">
+          <input @input="input_2"    ref="ref2" class="mb-0 two-fa-input form-control" v-model="inp2" maxlength="1"/>
+        </div>
+        <div class="ga-form-input">
+          <input @input="input_3"    ref="ref3" class="mb-0 two-fa-input form-control"  v-model="inp3" maxlength="1"/>
+        </div>
+        <div class="ga-form-input">
+          <input @input="input_4"   ref="ref4" class="mb-0 two-fa-input form-control" v-model="inp4" maxlength="1"/>
+        </div>
+        <div class="ga-form-input">
+          <input @input="input_5"   ref="ref5" class="mb-0 two-fa-input form-control" v-model="inp5" maxlength="1"/>
+        </div>
+        <div class="ga-form-input">
+          <input @input="input_6"   ref="ref6" class="mb-0 two-fa-input form-control" v-model="inp6" maxlength="1"/>
+        </div>
     </div>
-    <div class="ga-form-input">
-      <input @input="input_2"    ref="ref2" class="two-fa-input form-control" v-model="inp2" maxlength="1"/>
-    </div>
-    <div class="ga-form-input">
-      <input @input="input_3"    ref="ref3" class="two-fa-input form-control"  v-model="inp3" maxlength="1"/>
-    </div>
-    <div class="ga-form-input">
-      <input @input="input_4"   ref="ref4" class="two-fa-input form-control" v-model="inp4" maxlength="1"/>
-    </div>
-    <div class="ga-form-input">
-      <input @input="input_5"   ref="ref5" class="two-fa-input form-control" v-model="inp5" maxlength="1"/>
-    </div>
-    <div class="ga-form-input">
-      <input @input="input_6"   ref="ref6" class="two-fa-input form-control" v-model="inp6" maxlength="1"/>
-    </div>
-  </div>
 </template>
 
 <script>
+    //import {mapActions} from 'vuex'
+
     export default {
         name: "TwoFaGoogleAuthForm",
         props:{
             clearFields:{
                 type:Boolean,
                 required: false
-            }
+            },
         },
         watch : {
             clearFields : function (newV, oldV) {
@@ -36,16 +38,25 @@
             }
         },
         methods: {
-            sendInputsValue(){
-                this.twaCode += this.inp1;this.twaCode += this.inp2;this.twaCode += this.inp3;
-                this.twaCode += this.inp4;this.twaCode += this.inp5;this.twaCode += this.inp6;
-                this.$emit('enteredLastValue',this.twaCode)
-            },
-            input_1(value){
-                if (value.data !== null){
-                    this.$refs.ref2.focus();
-                }
-            },
+            // ...mapActions({
+            //     confirmTwoFa: 'user/confirmTwoFa',
+            // }),
+            //
+            // sendInputsValue(){
+            //     this.twaCode += this.inp1;this.twaCode += this.inp2;this.twaCode += this.inp3;
+            //     this.twaCode += this.inp4;this.twaCode += this.inp5;this.twaCode += this.inp6;
+            //     this.confirmTwoFa(this.twaCode)
+            //         .then(res => {
+            //             this.$emit('twoFaCorrect')
+            //         })
+            //         .catch(err => {
+            //             this.twaCode = "";
+            //             this.inp1="";this.inp2="";
+            //             this.inp3="";this.inp4="";
+            //             this.inp5="";this.inp6="";
+            //             this.$refs.ref1.focus()
+            //         })
+            // },
             paste(e) {
                 this.text = e.clipboardData.getData('text').replace(/[^\d;]/g, '');
                 if(this.text.length>=6) {
@@ -55,9 +66,17 @@
                     this.inp4 = this.text[3];
                     this.inp5 = this.text[4];
                     this.inp6 = this.text[5];
-                    setTimeout(()=>this.authorize(),500);
                 } else {
                     this.inp1 = '';
+                }
+                setTimeout(()=> {
+                    this.inp1 = this.inp1[0];
+                    this.$refs.ref6.focus();
+                },300);
+            },
+            input_1(value){
+                if (value.data !== null){
+                    this.$refs.ref2.focus();
                 }
             },
             input_2(value){
@@ -131,9 +150,7 @@
                 twaCode:''
             }
         },
-        created() {
-            this.$refs.ref1.focus();
-        }
+        created() {}
     }
 </script>
 

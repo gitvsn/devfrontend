@@ -23,8 +23,8 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex'
-    import TwoFaGoogleAuthForm from "../plugins/TwoFaGoogleAuthForm";
+    //import {mapActions} from 'vuex'
+    import TwoFaGoogleAuthForm from "./TwoFaGoogleAuthForm";
 
     export default {
         name: "StepFour",

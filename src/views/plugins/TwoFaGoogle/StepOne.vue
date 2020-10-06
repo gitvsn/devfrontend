@@ -6,10 +6,10 @@
     </div>
     <ul class="app-download">
       <li><a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">
-        <img src="@/assets/img/google-play.svg" alt="">
+<!--        <img src="@/assets/img/google-play.svg" alt="">-->
       </a></li>
       <li><a href="https://apps.apple.com/ru/app/google-authenticator/id388497605" target="_blank">
-        <img src="@/assets/img/app-store.svg" alt="">
+<!--        <img src="@/assets/img/app-store.svg" alt="">-->
       </a></li>
     </ul>
 <!--    <div class="step-control">-->

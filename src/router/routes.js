@@ -8,19 +8,49 @@ const SetNewPassword = () => import("../views/pages/SetNewPassword");
 const TheContainer = () => import("../containers/TheContainer");
 const NotExistPage = () => import("../views/pages/404");
 const TwoFaGoogle = () => import("../views/pages/TwoFaGoogle");
+const Dashboard = () => import("../views/pages/Dashboard");
+const Send = () => import("../views/pages/Send");
+const Profile = () => import("../views/pages/Profile");
 
 export default [
     {
         path: '/',
-        redirect: '/ ',
-        name: 'Home',
+        redirect: '/dashboard',
+    },
+    {
+        path: '/dashboard',
+        redirect: 'dashboard',
+        name: 'User-admin-panel',
         component: TheContainer,
+        meta: {
+            //requiresAuth: true
+        },
         children: [
             {
-                path: '/ ',
-                name: 'Home-page',
-                component: Homepage,
-            }
+                path: '/dashboard',
+                name: 'Dashboard',
+                component: Dashboard,
+                // beforeEnter(to, from, next) {
+                //     store.dispatch('user/setRoute', to.name);
+                //     next()
+                // }
+            },
+            {
+                path: '/send',
+                name: 'Send',
+                props: true,
+                component: Send,
+                // beforeEnter(to, from, next) {
+                //     store.dispatch('user/setRoute', to.name);
+                //     next()
+                // }
+            },
+            {
+                path: '/profile',
+                name: 'Profile',
+                component: Profile,
+            },
+
         ]
     },
     {

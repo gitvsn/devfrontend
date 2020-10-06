@@ -19,7 +19,7 @@
 
 <script>
     //import {mapActions, mapGetters} from 'vuex'
-    import TwoFaGoogleAuthForm from "../plugins/TwoFaGoogleAuthForm";
+    import TwoFaGoogleAuthForm from "../plugins/TwoFaGoogle/TwoFaGoogleAuthForm";
 
 
     export default {
