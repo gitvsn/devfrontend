@@ -7,6 +7,7 @@ const RestorePassword = () => import("../views/pages/RestorePassword");
 const SetNewPassword = () => import("../views/pages/SetNewPassword");
 const TheContainer = () => import("../containers/TheContainer");
 const NotExistPage = () => import("../views/pages/404");
+const TwoFaGoogle = () => import("../views/pages/TwoFaGoogle");
 
 export default [
     {
@@ -39,6 +40,11 @@ export default [
                 //     store.dispatch('user/setRoute', to.name);
                 //     next()
                 // }
+            },
+            {
+                path: '/2fa-google',
+                name: 'TwoFaGoogle-page',
+                component: TwoFaGoogle
             },
             {
                 path: '/register',
