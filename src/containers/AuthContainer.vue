@@ -1,10 +1,8 @@
 <template>
-    <div class="app">
-        <div class="wrapper">
-            <div class="body-container">
-                <router-view></router-view>
-            </div>
-        </div>
+    <div class="auth-page">
+      <div class="auth-box">
+        <router-view></router-view>
+      </div>
     </div>
 </template>
 
