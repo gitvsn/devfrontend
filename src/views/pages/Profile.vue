@@ -1,6 +1,7 @@
 <template>
 <div class="profile-page">
-    <GoogleAuthSetModal/>
+<!--    <GoogleAuthSetModal/>-->
+    <GoogleAuthDisableModal/>
   <div class="page-title">
     <p>Account settings</p>
   </div>
@@ -199,10 +200,12 @@
 
 <script>
     import GoogleAuthSetModal from "../plugins/TwoFaGoogle/GoogleAuthSetModal";
+    import GoogleAuthDisableModal from "../plugins/TwoFaGoogle/GoogleAuthDisableModal";
     export default {
         name: "Profile",
         components:{
-            GoogleAuthSetModal
+            GoogleAuthSetModal,
+            GoogleAuthDisableModal
         }
     }
 </script>

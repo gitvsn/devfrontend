@@ -1,139 +1,101 @@
 <template>
-    <div class="page-modal">
-        <div class="modal">
-            <div class="modal-close" @click="closeSuccessWindow"></div>
-            <div class="modal-container">
-                <div class="modal-title">{{$t('Enable google auth')}}</div>
-                <div class="notice-container">
-                    <img src="../../../assets/icons/2fa-disable.svg" alt="">
-                    <div class="notice-text">
-                        <div class="notice-title">
-                            Ваша учетная запись более защищена, если включены пароль и Google Authenticator. </div>
-                        <div class="notice-subtitle">
-                            Отключение Google Authenticator облегчает взлом вашего аккаунта.
-                        </div>
-                    </div>
-                </div>
-                <div class="disable-google-auth" :class="{error : isErrors}">
-                    <div class="input-container">
-                        <div class="label">{{$t('Password')}}</div>
-                        <input :type="showPass? 'text' : 'password'" placeholder="password" v-model="password">
-                        <div class="show-password" @click="showPassword">
-                            <img src="../../../assets/icons/show-password.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="ga-code-cont">
-                        <div class="title">Google auth code</div>
-                        <div class="ga-code">
-                            <two-fa-google-auth-form-simple :clearFields="clearTwoFa" @twaCode="getTwaCode"/>
-                        </div>
-                        <div class="error-message">
-                            <div class="icon"></div>
-                            <div class="text">{{$t('you entered the wrong password or code')}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="confirm-btn-container">
-                    <div class="confirm-btn" @click="send">
-                        {{$t('disable')}}
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <TwoFaGoogleAuthForm/>
+        <SuccessModal/>
+        <ErrorModal/>
     </div>
 </template>
 
 <script>
     import TwoFaGoogleAuthForm from "./TwoFaGoogleAuthForm";
-    import TwoFaGoogleAuthFormSimple from "./TwoFaGoogleAuthFormSimple";
-    import {mapActions} from 'vuex'
-    import SuccessModal from "../SuccessModal";
+    import SuccessModal from "../../../components/SuccessModal";
+    import ErrorModal from "../../../components/ErrorModal";
 
     export default {
         name: "GoogleAuthDisableModal",
         components: {
-            TwoFaGoogleAuthForm,
-            TwoFaGoogleAuthFormSimple,
-            SuccessModal
+            ErrorModal,
+            SuccessModal,
+            TwoFaGoogleAuthForm
         },
-        data() {
-            return {
-                twaCode: '',
-                password: '',
-                showPass:false,
-                clearTwoFa:false,
-                isErrors:false,
-            }
-        },
-        props:{
-            confirm:{
-                type : Boolean,
-                required: false,
-                default: false,
-            }
-        },
-        watch: {
-            confirm(newValue, oldValue) {
-                this.send();
-            }
-        },
-        methods: {
-            ...mapActions({
-                disableTwoFa: 'user/disableTwoFa',
-            }),
-            send() {
-                this.validation();
-                let disableTwoFaDTO = {
-                    password: this.password,
-                    code:this.twaCode
-                };
-
-                this.disableTwoFa(disableTwoFaDTO)
-                    .then(res => {
-                        if(res.data.status !== 200){
-                            this.clearTwoFa = !this.clearTwoFa;
-                            this.showErrors()
-                        } else {
-                           this.closeSuccessWindow()
-                        }
-                    })
-
-            },
-            getTwaCode(code){
-                this.twaCode = code;
-            },
-            showPassword(){
-                this.showPass = !this.showPass;
-            },
-            showErrors(){
-                this.isErrors = true;
-                setTimeout(()=> {
-                    this.isErrors = false;
-                },2300)
-            },
-            closeSuccessWindow(){
-                this.$modalWindow = {type: 'error'};
-                this.$emit('closeWindow');
-            },
-            validation(){
-                return this.passwordValid && this.passwordTwaCode;
-            }
-        },
-        computed:{
-            passwordValid(){
-                if(this.password === null || this.password === undefined){
-                    return  false;
-                }
-                return this.password.replace(/\s/g, '').length > 4;
-            },
-            passwordTwaCode(){
-                if(this.twaCode === null || this.twaCode === undefined){
-                    return  false;
-                }
-                return this.twaCode.replace(/\s/g, '').length === 6;
-            }
-        },
-        mounted(){}
+        // data() {
+        //     return {
+        //         twaCode: '',
+        //         password: '',
+        //         showPass:false,
+        //         clearTwoFa:false,
+        //         isErrors:false,
+        //     }
+        // },
+        // props:{
+        //     confirm:{
+        //         type : Boolean,
+        //         required: false,
+        //         default: false,
+        //     }
+        // },
+        // watch: {
+        //     confirm(newValue, oldValue) {
+        //         this.send();
+        //     }
+        // },
+        // methods: {
+        //     ...mapActions({
+        //         disableTwoFa: 'user/disableTwoFa',
+        //     }),
+        //     send() {
+        //         this.validation();
+        //         let disableTwoFaDTO = {
+        //             password: this.password,
+        //             code:this.twaCode
+        //         };
+        //
+        //         this.disableTwoFa(disableTwoFaDTO)
+        //             .then(res => {
+        //                 if(res.data.status !== 200){
+        //                     this.clearTwoFa = !this.clearTwoFa;
+        //                     this.showErrors()
+        //                 } else {
+        //                    this.closeSuccessWindow()
+        //                 }
+        //             })
+        //
+        //     },
+        //     getTwaCode(code){
+        //         this.twaCode = code;
+        //     },
+        //     showPassword(){
+        //         this.showPass = !this.showPass;
+        //     },
+        //     showErrors(){
+        //         this.isErrors = true;
+        //         setTimeout(()=> {
+        //             this.isErrors = false;
+        //         },2300)
+        //     },
+        //     closeSuccessWindow(){
+        //         this.$modalWindow = {type: 'error'};
+        //         this.$emit('closeWindow');
+        //     },
+        //     validation(){
+        //         return this.passwordValid && this.passwordTwaCode;
+        //     }
+        // },
+        // computed:{
+        //     passwordValid(){
+        //         if(this.password === null || this.password === undefined){
+        //             return  false;
+        //         }
+        //         return this.password.replace(/\s/g, '').length > 4;
+        //     },
+        //     passwordTwaCode(){
+        //         if(this.twaCode === null || this.twaCode === undefined){
+        //             return  false;
+        //         }
+        //         return this.twaCode.replace(/\s/g, '').length === 6;
+        //     }
+        // },
+        // mounted(){}
     }
 </script>
 
