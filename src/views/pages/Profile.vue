@@ -1,7 +1,9 @@
 <template>
 <div class="profile-page">
 <!--    <GoogleAuthSetModal/>-->
-    <GoogleAuthDisableModal/>
+<!--    <GoogleAuthDisableModal/>-->
+<!--  <SuccessModal/>-->
+  <ErrorModal/>
   <div class="page-title">
     <p>Account settings</p>
   </div>
@@ -201,9 +203,13 @@
 <script>
     import GoogleAuthSetModal from "../plugins/TwoFaGoogle/GoogleAuthSetModal";
     import GoogleAuthDisableModal from "../plugins/TwoFaGoogle/GoogleAuthDisableModal";
+    import ErrorModal from "@/components/ErrorModal";
+    import SuccessModal from "@/components/SuccessModal";
     export default {
         name: "Profile",
         components:{
+          ErrorModal,
+           SuccessModal,
             GoogleAuthSetModal,
             GoogleAuthDisableModal
         }

@@ -1,9 +1,41 @@
 <template>
-    <div>
-        <TwoFaGoogleAuthForm/>
-        <SuccessModal/>
-        <ErrorModal/>
+  <div class="KawaiiPopup-container">
+    <div class="KawaiiPopup-bg"></div>
+    <div class="KawaiiPopup-slide">
+      <div class="KawaiiPopup TwoFaPopup">
+        <button @click="close" class="KawaiiPopup__close"></button>
+        <div class="KawaiiPopup__title mb-3">
+          <p>Google authenticator</p>
+        </div>
+        <div class="auth-alert-msg">
+          <img src="@/assets/img/alert-shield.svg" alt="">
+          <p>
+            <strong>Your account is more secure
+              if password and Google Authenticator are enabled.
+              </strong>
+            Disabling Google Authenticator makes it easier to hack your account.
+          </p>
+        </div>
+        <div class="custom-input mt-3">
+          <label>
+            <input type="password" class="custom-input__input" required>
+            <span class="custom-input__content">
+          <span class="custom-input__text">Password</span>
+        <span class="custom-input__icon">
+          <button class="pass-toggle"></button>
+        </span>
+        </span>
+          </label>
+          <div class="error-msg">
+            <p>User is not found</p>
+          </div>
+        </div>
+        <div class="mt-3">
+          <TwoFaGoogleAuthForm/>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -14,8 +46,7 @@
     export default {
         name: "GoogleAuthDisableModal",
         components: {
-            ErrorModal,
-            SuccessModal,
+
             TwoFaGoogleAuthForm
         },
         // data() {
