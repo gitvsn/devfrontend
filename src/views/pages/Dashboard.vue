@@ -18,12 +18,12 @@
             <button class="copy-btn"><img src="@/assets/img/copy.svg" alt=""> copy</button>
           </div>
         </div>
-        <div class="box balance-box-wrapper">
-          <div class="d-flex align-items-center mb-3">
+        <div class="box balance-box-wrapper mb-3 mb-xl-0">
+          <div class="d-md-flex align-items-center mb-3">
             <div class="title m-0">
               <p>Balance history</p>
             </div>
-            <nav class="chart-nav ml-auto">
+            <nav class="chart-nav ml-md-auto mt-2 mt-md-0">
               <ul>
                 <li class="active"><button type="button">1d</button></li>
                 <li><button type="button">7d</button></li>

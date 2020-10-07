@@ -4,6 +4,7 @@
 /* width */
 ::-webkit-scrollbar {
   width: 3px;
+  height: 3px;
 }
 
 /* Track */
@@ -55,10 +56,17 @@ body {
   padding-left: 280px;
   padding-top: 50px;
   padding-right: 50px;
+  @include max-screen(lg){
+    padding: 0 20px;
+    padding-bottom: 70px;
+  }
 }
 
 .main-content {
   position: relative;
+  @include max-screen(lg){
+    padding-top: 80px;
+  }
 }
 
 .logo {
@@ -81,6 +89,18 @@ body {
   background: #fff;
   min-height: 100vh;
 
+  @include max-screen(lg){
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    min-height: initial;
+    z-index: 9999;
+    .logo{
+      display: none;
+    }
+  }
+
   &__content {
     position: absolute;
     left: 0;
@@ -90,16 +110,38 @@ body {
     min-height: 100vh;
     overflow-y: auto;
     padding-top: 15px;
+    @include max-screen(lg){
+      padding: 0;
+      min-height: initial;
+      overflow: visible;
+    }
   }
 
   &__nav {
     margin-top: 30px;
     padding: 0 40px;
 
+    @include max-screen(lg){
+      padding:  0;
+      margin: 0;
+      border-top: 1px solid #F6F6F9;
+    }
     ul {
+      @include max-screen(lg){
+        display: flex;
+        align-items: center;
+      }
       li {
         border-top: 1px solid #F6F6F9;
-
+        @include max-screen(lg){
+          border-top: none;
+          flex: 1;
+        }
+        +li{
+          @include max-screen(lg){
+            border-left: 1px solid #F6F6F9;
+          }
+        }
         > * {
           opacity: .2;
           font-family: $bold;
@@ -111,10 +153,26 @@ body {
           position: relative;
           padding-left: 35px;
           text-decoration: none;
+          @include max-screen(lg){
+            height: 50px;
+            justify-content: center;
+            padding: 0;
+          }
+          @include max-screen(sm){
+            font-size: 0;
+          }
 
           img {
             @include vertical-absolute();
             left: 5px;
+            @include max-screen(lg){
+              @include cancel-absolute();
+              position: relative;
+              margin-right: 10px;
+            }
+            @include max-screen(sm){
+              margin-right: 0;
+            }
           }
         }
 
@@ -144,25 +202,39 @@ body {
   background: #FFFFFF;
   box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.3);
   padding: 60px 80px;
-
+  @include max-screen(sm){
+    max-width: 90%;
+    width: 100%;
+    padding: 30px 15px;
+  }
   &__title {
     font-family: $bold;
     text-align: center;
     font-size: 33px;
     line-height: 40px;
     margin-bottom: 30px;
+    @include max-screen(sm){
+      font-size: 24px;
+      line-height: 32px;
+    }
 
     &-text {
       font-family: $base-font;
       color: #B9B9CE;
       font-size: 18px;
       line-height: 22px;
+      @include max-screen(sm){
+        font-size: 16px;
+      }
     }
   }
 
   &__link {
     font-family: $bold;
     font-size: 16px;
+    @include max-screen(sm){
+      font-size: 14px;
+    }
   }
 }
 
@@ -209,8 +281,23 @@ body {
   right: 0;
   top: 0;
   z-index: 999;
+  @include max-screen(lg){
+    display: flex;
+    align-items: center;
+    background: #fff;
+    width: calc(100% + 40px);
+    right: -20px;
+    padding: 0 20px;
+    height: 60px;
+  }
 }
-
+.mobile-logo{
+  width: 90px ;
+  display: none;
+  @include max-screen(lg){
+    display: block;
+  }
+}
 .user-short {
   display: flex;
   align-items: center;
@@ -225,6 +312,11 @@ body {
     margin-right: 15px;
     position: relative;
     z-index: 2;
+    @include max-screen(lg){
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
   }
 
   &__content {
@@ -232,6 +324,10 @@ body {
     font-family: $medium;
     padding-right: 25px;
     position: relative;
+    @include max-screen(lg){
+      font-size: 12px;
+      padding-right: 20px;
+    }
 
     > a {
       position: relative;
@@ -322,12 +418,18 @@ body {
   line-height: 36px;
   font-family: $bold;
   margin-bottom: 20px;
+  @include max-screen(lg){
+    text-align: center;
+  }
 }
 
 .box {
   padding: 25px 30px;
   background: #FFFFFF;
   border-radius: 10px;
+  @include max-screen(lg){
+    padding: 15px 20px;
+  }
 }
 
 .dashboard {
@@ -344,10 +446,24 @@ body {
 .dashboard-wallet {
 
   height: 145px;
+  @include max-screen(sm){
+    height: auto;
+  }
 }
 
 .my-wallet {
   display: flex;
+  .custom-input__input{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-right: 20px;
+    @include max-screen(sm){
+      border-radius: 6px;
+    }
+  }
+  @include max-screen(sm){
+    display: block;
+  }
 }
 
 .balance-statistic {
@@ -369,7 +485,10 @@ body {
   font-size: 13px;
   font-family: $bold;
   border: none;
-
+  @include max-screen(sm){
+    margin-top: 10px;
+    border-radius: 6px;
+  }
   img {
     margin-right: 5px;
   }
@@ -377,15 +496,24 @@ body {
 
 .content {
   display: flex;
+  @include max-screen(lg){
+    display: block;
+  }
 
   &__wrap {
     flex: 1;
     padding-right: 20px;
+    @include max-screen(lg){
+      padding-right: 0;
+    }
   }
 
   &__side {
     flex: none;
     width: 200px;
+    @include max-screen(lg){
+      width: 100%;
+    }
   }
 }
 
@@ -478,24 +606,50 @@ body {
 
 .balance-box-wrapper {
   height: 350px;
+  @include max-screen(lg){
+    height: auto;
+  }
 }
 
 .profile {
   display: flex;
+  @include max-screen(sm){
+    display: block;
+  }
   &__main {
     width: 240px;
     padding-right: 30px;
     flex: none;
+    @include max-screen(lg){
+      padding-right: 15px;
+    }
+    @include max-screen(sm){
+      margin: 0 auto;
+      padding-right: 0;
+      margin-bottom: 15px;
+    }
   }
 
   &__info {
     padding-left: 30px;
     border-left: 1px solid #F3F0FA;
+    @include max-screen(lg){
+      padding-left: 15px;
+    }
+    @include max-screen(sm){
+      padding-left: 0;
+      border-left: none;
+      border-top: 1px solid #F3F0FA;
+      padding-top: 15px;
+    }
   }
 }
 
 .profile-photo {
   padding-bottom: 30px;
+  @include max-screen(sm){
+    padding-bottom: 15px;
+  }
 
   label {
     display: block;
@@ -617,23 +771,40 @@ body {
 }
 .send-wallet-wrapper{
   height: 180px;
+  @include max-screen(sm){
+    height: auto;
+  }
 }
 .amount{
   display: flex;
   align-items: center;
+  @include max-screen(sm){
+    display: block;
+  }
   .custom-input{
     width: 170px;
     flex: none;
     margin-right: 20px;
+    @include max-screen(sm){
+      margin-right: 0;
+      width: 100%;
+    }
   }
   .my-btn{
     width: 170px;
     margin-left: auto;
+    @include max-screen(sm){
+      width: 100%;
+    }
   }
   &__info{
     font-size: 13px;
     line-height: 16px;
     color: #B9B9CE;
+    @include max-screen(sm){
+      margin: 15px 0;
+      text-align: center;
+    }
     span{
       color: #40404E;
       font-family: $bold;
@@ -648,8 +819,14 @@ body {
   line-height: 22px;
   height: calc(100vh - 390px);
   overflow-y: auto;
+  @include max-screen(sm){
+    overflow: auto;
+  }
   table{
     width: 100%;
+    @include max-screen(sm){
+      width: 1200px;
+    }
   }
   td{
     vertical-align: middle;
@@ -684,6 +861,9 @@ body {
 .page-404{
   padding-top: 80px;
   text-align: center;
+  @include max-screen(sm){
+    padding-top: 0;
+  }
   &__img{
     margin-bottom: 20px;
   }
@@ -692,11 +872,18 @@ body {
     line-height: 40px;
     font-family: $bold;
     margin-bottom: 20px;
+    @include max-screen(sm){
+      font-size: 24px;
+      line-height: 32px;
+    }
   }
   &__text{
     color: #B9B9CE;
     font-size: 24px;
     text-align: center;
+    @include max-screen(sm){
+      font-size: 18px;
+    }
   }
 }
 
@@ -838,6 +1025,9 @@ body {
   text-align: center;
   .two-fa-google-auth-form{
     margin:  0 -30px;
+    @include max-screen(sm){
+      margin: 0;
+    }
     &__title{
       display: none;
     }

@@ -3,7 +3,7 @@
 <!--    <GoogleAuthSetModal/>-->
 <!--    <GoogleAuthDisableModal/>-->
 <!--  <SuccessModal/>-->
-  <ErrorModal/>
+<!--  <ErrorModal/>-->
   <div class="page-title">
     <p>Account settings</p>
   </div>

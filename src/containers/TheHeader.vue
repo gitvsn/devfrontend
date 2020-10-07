@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-
+    <a href="/" class="mobile-logo"><img src="@/assets/img/logo.svg" alt=""></a>
     <div class="user-short ml-auto">
       <a href="/" class="user-short__icon">
         <img src="@/assets/img/user-img.jpg" alt="">

@@ -46,7 +46,7 @@
               <p>Balance</p>
             </div>
           </div>
-          <div class="balance-box__value mt-2">
+          <div class="balance-box__value mt-2 text-center">
             <p><span>47 547</span> VSN</p>
           </div>
 
