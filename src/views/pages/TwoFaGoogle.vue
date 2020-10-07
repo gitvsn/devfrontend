@@ -1,20 +1,18 @@
 <template>
-    <div class="auth-page">
-        <a href="/" class="login-logo">
-<!--            <img src="@/assets/img/logo.svg" alt="">-->
-        </a>
-        <div class="auth-box text-center">
-            <div class="auth-box__title">
-                <p>Two-factor authentication
-                    <span>Google Authentication</span>
-                </p>
-            </div>
-            <div class="google-auth">
-<!--              <two-fa-google-auth-form :clearFields="clearField" @enteredLastValue="enteredLastValue"/>-->
-                <TwoFaGoogleAuthForm/>
-            </div>
-        </div>
+  <div class="auth-box__content">
+    <div class="auth-box__title">
+      <p>Two-factor<br>
+        authentication</p>
+      <div class="auth-box__title-text mt-2">
+        <p>Google Authentication</p>
+      </div>
     </div>
+    <div class="google-auth">
+      <TwoFaGoogleAuthForm/>
+      <button class="my-btn w-100 mt-3"><span>submit</span></button>
+    </div>
+
+  </div>
 </template>
 
 <script>

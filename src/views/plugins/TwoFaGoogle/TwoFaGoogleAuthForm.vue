@@ -1,7 +1,7 @@
 <template>
   <div class="two-fa-google-auth-form">
     <div class="two-fa-google-auth-form__title">
-      <p>Google auth co</p>
+      <p>Google Authentication</p>
     </div>
     <div class="two-fa-google-auth-form__wrap">
       <div class="ga-form-input">

@@ -834,3 +834,12 @@ body {
     font-family: $bold;
   }
 }
+.google-auth{
+  text-align: center;
+  .two-fa-google-auth-form{
+    margin:  0 -30px;
+    &__title{
+      display: none;
+    }
+  }
+}
