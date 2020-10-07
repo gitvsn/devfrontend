@@ -1,30 +1,28 @@
 <template>
-  <header class="header">
-    <a href="/" class="mobile-logo"><img src="@/assets/img/logo.svg" alt=""></a>
-    <div class="user-short ml-auto">
-      <a href="/" class="user-short__icon">
-        <img src="@/assets/img/user-img.jpg" alt="">
-      </a>
-      <div class="user-short__content">
-        <a href="/">Mike Smith</a>
-      </div>
-      <div class="user-short__drop">
-        <ul>
-          <li><a href="/">Profile</a></li>
-          <li><a href="/">Wallet</a></li>
-          <li><a href="/">Log out</a></li>
-        </ul>
-      </div>
-    </div>
-  </header>
+	<header class="header">
+		<router-link to="profile" class="mobile-logo">
+			<img src="@/assets/img/logo.svg" alt=""
+		/></router-link>
+		<div class="user-short ml-auto">
+			<router-link to="profile" class="user-short__icon">
+				<img src="@/assets/img/user-img.jpg" alt="" />
+			</router-link>
+			<div class="user-short__content">
+				<router-link to="profile">Mike Smith</router-link>
+			</div>
+			<div class="user-short__drop">
+				<ul>
+					<li><router-link to="login">Log out</router-link></li>
+				</ul>
+			</div>
+		</div>
+	</header>
 </template>
 
 <script>
-    export default {
-        name: "TheHeader"
-    }
+export default {
+	name: 'TheHeader',
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
