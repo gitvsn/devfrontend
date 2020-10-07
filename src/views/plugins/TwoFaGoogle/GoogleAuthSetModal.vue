@@ -27,22 +27,12 @@
                 <StepThree v-if="currentStep === 3"/>
                 <StepFour v-if="currentStep === 4" :confirm="confirm"/>
 
-                <div class="stepper-footer">
-                    <div class="step-control">
+              <div class="stepper-footer">
+                <button type="button" class="my-btn w-100" v-if="currentStep !== 4" @click="nextStep"><span>Next step <img src="@/assets/img/right-arrow.svg" alt="" class="ml-2"></span></button>
+                <button type="button" class="my-btn w-100" v-if="currentStep === 4" @click="_confirm"><span>Confirm <img src="@/assets/img/right-arrow.svg" alt="" class="ml-2"></span></button>
+                <button type="button" class="custom-link" v-if="currentStep !== 1" @click="prevStep">Previous step</button>
 
-                        <button class="my-btn my-btn--border my-btn--white my-btn--big" v-if="currentStep !== 1" @click="prevStep">
-<!--                            <img src="@/assets/img/left-arrow.svg" alt=""-->
-<!--                                 class="mr-2">Prev step-->
-
-                        </button>
-                        <button class="my-btn my-btn--border my-btn--white my-btn--big" v-if="currentStep !== 4" @click="nextStep">
-                            Next step <img src="@/assets/img/right-arrow.svg" alt="" class="ml-2"></button>
-
-                        <button class="my-btn my-btn--border my-btn--white my-btn--big" v-if="currentStep === 4" @click="_confirm">
-                            Confirm <img alt="" class="ml-2"></button>
-                    </div>
-
-                </div>
+              </div>
             </div>
         </div>
     </div>

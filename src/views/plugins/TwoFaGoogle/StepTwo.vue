@@ -1,11 +1,14 @@
 <template>
   <div class="google-two-fa">
     <div class="KawaiiPopup__text">
-      <p>Scan this QR code in the<br> Google Authenticator app</p>
+      <p>Scan this QR code in the<br>
+        Google Authenticator app
+      </p>
     </div>
     <div class="qr-box">
       <div class="qr-box__value">
 <!--        <img style="height: 120px" :src="qrcodelink" alt="">-->
+        <img style="height: 120px" src="@/assets/img/qr.png" alt="">
       </div>
       <div class="twoFaText">
         <p>If you are unable to scan the QR code, please enter this code manually into the app.<br>

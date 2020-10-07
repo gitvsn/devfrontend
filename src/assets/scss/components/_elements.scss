@@ -20,6 +20,7 @@
   color: #fff;
   border: none;
   overflow: hidden;
+  text-decoration: none;
   span{
     position: relative;
     z-index: 2;
@@ -259,7 +260,12 @@ input:-webkit-autofill:active  {
   }
 }
 .custom-link{
+  font-family: $bold;
+  font-size: 16px;
+  padding: 0;
   color: #D932C5;
+  border: none;
+  background: none;
   border-bottom:1px solid rgba(217,50,197, 0.4);
   text-decoration: none;
   transition: all .2s linear;

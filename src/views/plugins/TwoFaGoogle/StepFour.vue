@@ -4,21 +4,24 @@
     <div class="KawaiiPopup__text">
       <p>Enable your Google Authenticator.</p>
     </div>
-    <div class="default-input">
-      <div class="default-input__title">
-        <p>Enter password</p>
-      </div>
-      <div class="default-input__input">
-<!--        <input type="text" v-model="password">-->
+    <div class="custom-input mt-3">
+      <label>
+        <input type="password" class="custom-input__input" required>
+        <span class="custom-input__content">
+          <span class="custom-input__text">Password</span>
+        <span class="custom-input__icon">
+          <button class="pass-toggle"></button>
+        </span>
+        </span>
+      </label>
+      <div class="error-msg">
+        <p>User is not found</p>
       </div>
     </div>
-    <div class="default-input">
-      <div class="default-input__title">
-        <p>Google auth code</p>
-      </div>
-<!--      <TwoFaGoogleAuthForm :clearFields="clearField" @enteredLastValue="enteredLastValue"/>-->
+    <div class="mt-3">
       <TwoFaGoogleAuthForm/>
     </div>
+
   </div>
 </template>
 
