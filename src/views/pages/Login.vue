@@ -96,23 +96,27 @@
 				Forgot your password?</router-link
 			>
 		</div>
+<!--    <Login2faModal :type="twoFaModalWindowType" v-if="open2fa" @enteredLastValue="enteredLastValue"/>-->
+    <TwoFaGoogle @close="closeModalWindow" v-if="open2fa"/>
 	</div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import  API  from '@/api/api';
+import TwoFaGoogle from "@/views/plugins/TwoFaGoogle/GoogleAuthSetModal";
 
 
 export default {
 	name: 'Login',
-	data() {
+  components: {TwoFaGoogle},
+  data() {
 		return {
 			email: '',
 			password: '',
 			fieldType: false,
       isPending: false,
+      open2fa: false,
 			errors: [],
 		};
 	},
@@ -122,9 +126,6 @@ export default {
 		}),
 	},
 	methods: {
-		...mapActions({
-			authorization: 'user/login',
-		}),
 		login() {
 			let payload = {
 				email: this.email,
@@ -140,8 +141,7 @@ export default {
                 localStorage.token =  'Bearer_' + response.data.response.token;
                 this.goToLDashboardPage();
               } else {
-                //localStorage.email = response.data.response.username;
-                //this.open2fa = true;
+                this.open2fa = true;
               }
               return;
             }
@@ -162,7 +162,9 @@ export default {
           });
 		},
 
-
+    closeModalWindow() {
+      this.open2fa = false;
+    },
 		goToLDashboardPage() {
 			this.$router.push({ name: 'Dashboard' });
 		},

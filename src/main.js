@@ -24,9 +24,9 @@ Object.defineProperty(Vue.prototype, '$modalWindow', {
 
 router.beforeEach((to, from, next) => {
 
-	// if (location.protocol === 'http:' && location.hostname !== 'localhost') {
-	// 	window.location.replace("https://" + location.hostname);
-	// }
+	if (location.protocol === 'http:' && location.hostname !== 'localhost') {
+		window.location.replace("https://" + location.hostname);
+	}
 
 	const isRequiresAuth = to.matched.some(route => route.meta.requiresAuth);
 

@@ -1,223 +1,116 @@
-import http from '..';
+import axios from 'axios';
 
-const userEndpoints = {
-	REGISTER: () => `/registration`,
-	LOGIN: () => `/authorization`,
-	CONFIRM_LOGIN: () => `/confirm_login`,
-	CHECK_TOKEN: () => `/check_token`,
-	UPLOAD_AVATAR: () => `/upload/avatar`,
-	GET_AVATAR: () => `/getAvatar`,
-	GET_ID: () => `/get_id`,
-	CONFIRM_TWO_FA: () => `/confirm_two_fa`,
 
-	GET_TWO_FA_QR_CODE: () => `/get_two_fa_qr_link`,
-	GET_TWO_FA_SECRET: () => `/get_two_fa_secret`,
+const UPLOAD_AVATAR = '/upload/avatar';
+//const GET_AVATAR = '/getAvatar';
+const GET_USER_ID = '/get_id';
 
-	ENABLE_TWO_FA: () => `/enable_two_fa`,
-	DISABLE_TWO_FA: () => `/disable_two_fa`,
-	TWO_FA_IS_ENABLE: () => `/two_fa_is_enable`,
+const GET_GOOGLE_2FA_STATUS = '/two_fa_is_enable';
 
-	RESTORE_PASSWORD_CHECK_EMAIL: (email) => `restore_password/email/${email}`,
-	RESTORE_PASSWORD_CHECK_TOKEN: (token, newPassword) =>
-		`restore_password/${token}/${newPassword}`,
+const GET_PERSONAL_INFO = '/get_personal_info';
 
-	CHANGE_PERSONAL_INFO: () => `/change_personal_info`,
-	GET_PERSONAL_INFO: () => `/get_personal_info`,
+const GET_SUBSCRIBE_INFO = '/getSubInfo';
 
-	GET_SUBSCRIBE_INFO: () => `/getSubInfo`,
-};
-
-const state = {
-	email: null,
+const state = () => ({
+	avatar: {},
+	personalInfo: {},
+	subscribeInfo: {},
+	isGoogle2FAEnable: false,
 	userId: null,
-	route: null,
-};
+});
 
 const mutations = {
-	setCurrentRoute(state, route) {
-		state.route = route;
+	setUserState(state, { field, value }) {
+		state[field] = value;
 	},
-};
+}
 
 const actions = {
-	setRoute({ dispatch, commit, state, rootState }, payload) {
-		commit('setCurrentRoute', payload);
+	// setAvatar(context) {
+	// 	const normalizeAvatarObject = (data) => {
+	// 		const defaultAvatar = require('@/assets/icons/user-default.svg');
+	//
+	// 		if (data) {
+	// 			return !data.avatar || data.avatar === 'none'
+	// 				? { ...data, avatar: defaultAvatar }
+	// 				: { ...data, avatar: 'data:image/png;base64, ' + data.avatar };
+	// 		}
+	// 		return { avatar: defaultAvatar };
+	// 	}
+	//
+	// 	return axios.post(GET_AVATAR)
+	// 		.then(res => {
+	// 			const data = {
+	// 				field: 'avatar',
+	// 				value: normalizeAvatarObject(res.data),
+	// 			}
+	// 			context.commit('setUserState', data);
+	// 		});
+	// },
+
+	setSubscribeInfo(context) {
+		return axios.post(GET_SUBSCRIBE_INFO)
+			.then(res => {
+				const data = {
+					field: 'subscribeInfo',
+					value: res.data.response,
+				}
+				context.commit('setUserState', data);
+			});
 	},
 
-	register({ commit, state, rootState }, payload) {
-		return http.post(`${userEndpoints.REGISTER()}`, payload);
+	setPersonalInfo(context) {
+		return axios.post(GET_PERSONAL_INFO)
+			.then(res => {
+				const data = {
+					field: 'personalInfo',
+					value: res.data,
+				}
+				context.commit('setUserState', data);
+			});
 	},
 
-	login({ commit, state, dispatch, rootState }, payload) {
-		return http.post(`${userEndpoints.LOGIN()}`, payload, {}).then((res) => {
-			if (res.data.status === 200) {
-				localStorage.setItem('token', 'Bearer_' + res.data.response.token);
-			}
-			return res;
-		});
-	},
-
-	confirmLogin({ commit, state, dispatch, rootState }, payload) {
-		return http.post(
-			`${userEndpoints.CONFIRM_LOGIN()}`,
-			{},
-			{
-				headers: {
-					Authorization: localStorage.getItem('token'),
-				},
-				params: {
-					code: payload,
-				},
-			}
-		);
-	},
-
-	confirmTwoFa({ commit, state, dispatch, rootState }, payload) {
-		return http.post(
-			`${userEndpoints.CONFIRM_TWO_FA()}`,
-			{},
-			{
-				headers: {
-					Authorization: localStorage.getItem('token'),
-				},
-				params: {
-					code: payload,
-				},
-			}
-		);
-	},
-
-	getTwoQrLink({ commit, state, dispatch, rootState }) {
-		return http.post(
-			`${userEndpoints.GET_TWO_FA_QR_CODE()}`,
-			{},
-			{ headers: { Authorization: localStorage.getItem('token') } }
-		);
-	},
-
-	getTwoSecret({ commit, state, dispatch, rootState }) {
-		return http.post(
-			`${userEndpoints.GET_TWO_FA_SECRET()}`,
-			{},
-			{ headers: { Authorization: localStorage.getItem('token') } }
-		);
-	},
-
-	checkToken({ commit, state, dispatch, rootState }) {
-		return http.post(
-			`${userEndpoints.CHECK_TOKEN()}`,
-			{},
-			{
-				headers: {
-					Authorization: localStorage.getItem('token'),
-				},
-			}
-		);
-	},
-
-	enableTwoFa({ commit, state, dispatch, rootState }, payload) {
-		return http.post(`${userEndpoints.ENABLE_TWO_FA()}`, payload, {
-			headers: { Authorization: localStorage.getItem('token') },
-		});
-	},
-
-	disableTwoFa({ commit, state, dispatch, rootState }, payload) {
-		return http.post(`${userEndpoints.DISABLE_TWO_FA()}`, payload, {
-			headers: { Authorization: localStorage.getItem('token') },
-		});
-	},
-
-	twoFaIsEnable({ commit, state, dispatch, rootState }) {
-		return http.post(
-			`${userEndpoints.TWO_FA_IS_ENABLE()}`,
-			{},
-			{ headers: { Authorization: localStorage.getItem('token') } }
-		);
-	},
-
-	uploadUserAvatar({ dispatch, commit, state, rootState }, payload) {
-		let formData = new FormData();
+	uploadUserAvatar(context, payload) {
+		const formData = new FormData();
 		formData.append('document', payload);
 
-		return http
-			.post(`${userEndpoints.UPLOAD_AVATAR()}`, formData, {
-				headers: {
-					Authorization: localStorage.getItem('token'),
-				},
-			})
-			.then((res) => {
+		axios.post(UPLOAD_AVATAR, formData)
+			.then(res => {
 				if (res.status === 200) {
-					return res.data;
+					context.dispatch('setAvatar');
 				}
-			})
-			.catch((e) => {});
+			});
 	},
 
-	getAvatar({ commit, state, dispatch, rootState }) {
-		return http.post(
-			`${userEndpoints.GET_AVATAR()}`,
-			{},
-			{ headers: { Authorization: localStorage.getItem('token') } }
-		);
-	},
-	getId({ commit, state, dispatch, rootState }) {
-		return http.post(
-			`${userEndpoints.GET_ID()}`,
-			{},
-			{ headers: { Authorization: localStorage.getItem('token') } }
-		);
+	getGoogle2FAStatus(context) {
+		return axios.post(GET_GOOGLE_2FA_STATUS)
+			.then(res => {
+				if (res.data.status === 200) {
+					const data = {
+						field: 'isGoogle2FAEnable',
+						value: res.data.response,
+					}
+					context.commit('setUserState', data);
+				}
+			});
 	},
 
-	restorePasswordCheckEmail({ commit, state, dispatch, rootState }, email) {
-		return http.post(
-			`${userEndpoints.RESTORE_PASSWORD_CHECK_EMAIL(email)}`,
-			{},
-			{}
-		);
+	getUserId(context) {
+		return axios.post(GET_USER_ID)
+			.then(res => {
+				if (res.data.status === 200) {
+					const data = {
+						field: 'userId',
+						value: res.data.response,
+					}
+					context.commit('setUserState', data);
+				}
+			});
 	},
-
-	restorePasswordCheckToken({ commit, state, dispatch, rootState }, payload) {
-		return http.post(
-			`${userEndpoints.RESTORE_PASSWORD_CHECK_TOKEN(
-				payload.token,
-				payload.password
-			)}`,
-			{},
-			{}
-		);
-	},
-
-	changePersonalInfo({ commit, state, dispatch, rootState }, payload) {
-		return http.post(`${userEndpoints.CHANGE_PERSONAL_INFO()}`, payload, {
-			headers: { Authorization: localStorage.getItem('token') },
-		});
-	},
-
-	getPersonalInfo({ commit, state, dispatch, rootState }) {
-		return http.post(
-			`${userEndpoints.GET_PERSONAL_INFO()}`,
-			{},
-			{ headers: { Authorization: localStorage.getItem('token') } }
-		);
-	},
-
-	getSubscribeCrm({ commit, state, dispatch, rootState }) {
-		return http.post(
-			`${userEndpoints.GET_SUBSCRIBE_INFO()}`,
-			{},
-			{ headers: { Authorization: localStorage.getItem('token') } }
-		);
-	},
-};
-
-const getters = {
-	getRoute: (state) => state.route,
 };
 
 export default {
-	namespaced: true,
 	state,
-	actions,
 	mutations,
-	getters,
-};
+	actions,
+}

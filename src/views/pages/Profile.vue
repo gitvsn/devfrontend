@@ -19,14 +19,19 @@
 					<div class="title">
 						<p>
 							Safety
-							<span>2FA disabled</span>
+							<span>
+              {{(google2FAStatus
+                    ? '2FA enabled'
+                    : '2FA disabled'
+                )}}
+              </span>
 						</p>
 					</div>
 					<div class="switcher-wrap ml-auto">
 						<div class="switcher">
 							<label>
 								<input type="checkbox" />
-								<span class="switcher__box"></span>
+								<span class="switcher__box" :class="{active:google2FAStatus}"></span>
 							</label>
 						</div>
 					</div>
@@ -242,19 +247,98 @@
 </template>
 
 <script>
+
 import { checkTypeFile, checkSizeFile } from '@/util/fileUploadValidation.js';
-import GoogleAuthSetModal from '../plugins/TwoFaGoogle/GoogleAuthSetModal';
-import GoogleAuthDisableModal from '../plugins/TwoFaGoogle/GoogleAuthDisableModal';
-import ErrorModal from '@/components/ErrorModal';
-import SuccessModal from '@/components/SuccessModal';
+import API from '@/api/api';
+import {mapActions, mapState} from 'vuex'
+
 export default {
 	name: 'Profile',
 	components: {
-		ErrorModal,
-		SuccessModal,
-		GoogleAuthSetModal,
-		GoogleAuthDisableModal,
 	},
+  data() {
+    return {
+      openEnable2FaModalWindow: false,
+      openDisable2FaModalWindow: false,
+      oldPassword: true,
+      confirmPassword: true,
+    }
+  },
+  computed: {
+    ...mapState({
+      //avatarUrl: state => state.user.avatar.avatar,
+      //userInfo: state => ({ ...state.user.personalInfo }),
+      google2FAStatus: state => state.user.isGoogle2FAEnable,
+    }),
+  },
+  methods: {
+    ...mapActions({
+      uploadUserAvatar: 'uploadUserAvatar',
+      getGoogle2FAStatus: 'getGoogle2FAStatus',
+    }),
+    // uploadAvatar() {
+    //   let files = this.$refs.avatarInput.files;
+    //   if (!files.length) return;
+    //   if (!checkTypeFile(files)) {
+    //     return;
+    //   }
+    //   if (!checkSizeFile(files)) {
+    //     return;
+    //   }
+    //   let file = files[0];
+    //   let binary = file;
+    //
+    //   this.uploadUserAvatar(binary);
+    // },
+    // openModalWindow() {
+    //   if (this.google2FAStatus) {
+    //     this.openDisable2FaModalWindow = true;
+    //   } else {
+    //     this.openEnable2FaModalWindow = true;
+    //   }
+    // },
+    // closeEnableModalWindow(isSuccess) {
+    //   if (isSuccess) {
+    //     //this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_ENABLED};
+    //   }
+    //   this.openEnable2FaModalWindow = false;
+    //   this.getGoogle2FAStatus();
+    // },
+    // closeDisableModalWindow(isSuccess) {
+    //   if (isSuccess) {
+    //     //this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_DISABLED};
+    //   }
+    //   this.openDisable2FaModalWindow = false;
+    //   this.getGoogle2FAStatus();
+    // },
+    // changeUserPersonalInfo(e) {
+    //   let userInfo = {
+    //     'oldPassword': this.userInfo.oldPassword !== null ? this.userInfo.oldPassword.replace(/\s+/g, '') : null,
+    //     'newPassword': this.userInfo.newPassword !== null ? this.userInfo.newPassword.replace(/\s+/g, '') : null,
+    //     'confirmPassword': this.userInfo.confirmPassword !== null ? this.userInfo.confirmPassword.replace(/\s+/g, '') : null,
+    //   };
+    //
+    //   if (this.userInfo.newPassword && this.userInfo.newPassword && this.userInfo.confirmPassword) {
+    //     e.preventDefault();
+    //
+    //     if (this.userInfo.newPassword !== this.userInfo.confirmPassword) {
+    //       this.confirmPassword = false;
+    //     }
+    //     else {
+    //       API.changePersonalInfo(userInfo)
+    //           .then(res => {
+    //             this.oldPassword = true;
+    //             this.confirmPassword = true;
+    //             //this.$modalWindow = {type: modalTypes.DATA_SAVED};
+    //           })
+    //           .catch(err => {
+    //             this.oldPassword = false;
+    //             (this.userInfo.newPassword !== this.userInfo.confirmPassword) ? this.confirmPassword = false : this.confirmPassword = true;
+    //           });
+    //     }
+    //   }
+    // }
+  },
 };
 </script>
 
