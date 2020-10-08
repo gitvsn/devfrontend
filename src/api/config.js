@@ -12,7 +12,7 @@ const prodHosts = [
 
 
 export const baseHost = 'http://localhost:8777';
-export const prodHost = 'http://104.219.250.215:80';
+export const prodHost = 'http://209.188.21.146:8080';
 
 axios.defaults.baseURL = prodHost + '/api/';
 
