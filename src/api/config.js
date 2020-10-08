@@ -12,8 +12,9 @@ const prodHosts = [
 
 
 export const baseHost = 'http://localhost:8777';
+export const prodHost = 'http://104.219.250.215:80';
 
-axios.defaults.baseURL = baseHost + '/api/';
+axios.defaults.baseURL = prodHost + '/api/';
 
 axios.interceptors.request.use(config => {
   config.headers.Authorization = localStorage.token;
