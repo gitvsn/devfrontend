@@ -86,7 +86,7 @@
 				</span>
 			</label>
 		</div>
-		<button type="button" class="my-btn w-100 mt-4" @click="login">
+		<button type="button" class="my-btn w-100 mt-4" v-bind:disabled="isPending" @click="login">
 			<span>
 				sign in <img class="ml-3" src="@/assets/img/right-arrow.svg" alt="" />
 			</span>
@@ -112,6 +112,7 @@ export default {
 			email: '',
 			password: '',
 			fieldType: false,
+      isPending: false,
 			errors: [],
 		};
 	},
@@ -134,13 +135,34 @@ export default {
 
       API.login(payload)
           .then(response => {
-            debugger
+            if (response.data.status === 200) {
+              if (!response.data.twoFaEnable){
+                localStorage.token =  'Bearer_' + response.data.response.token;
+                this.goToLDashboardPage();
+              } else {
+                //localStorage.email = response.data.response.username;
+                //this.open2fa = true;
+              }
+              return;
+            }
+
+            switch (response.data.error) {
+              case 'Error authorization':
+                return this.errors.push("password");
+
+              default:
+                //this.$modalWindow = { type: response.data.error };
+            }
           })
           .catch(err => {
           //  this.$modalWindow = { type: err.message };
           })
-
+          .finally(() => {
+            this.isPending = false;
+          });
 		},
+
+
 		goToLDashboardPage() {
 			this.$router.push({ name: 'Dashboard' });
 		},
