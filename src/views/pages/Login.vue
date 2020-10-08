@@ -52,6 +52,7 @@
 			<label>
 				<input
 					:type="fieldType ? 'text' : 'password'"
+          v-model="password"
 					class="custom-input__input"
 					required
 				/>
@@ -101,6 +102,9 @@
 <script>
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
+import  API  from '@/api/api';
+
+
 export default {
 	name: 'Login',
 	data() {
@@ -124,19 +128,18 @@ export default {
 			let payload = {
 				email: this.email,
 				password: this.password,
-				backOfficeToken: '',
-				callback: '',
 			};
 
-			this.authorization(payload)
-				.then((response) => {
-					if (response.data.status === 200) {
-						// this.open2fa = true;
-					} else {
-						this.errors.push('password');
-					}
-				})
-				.catch(({ response }) => {});
+			console.log(API);
+
+      API.login(payload)
+          .then(response => {
+            debugger
+          })
+          .catch(err => {
+          //  this.$modalWindow = { type: err.message };
+          })
+
 		},
 		goToLDashboardPage() {
 			this.$router.push({ name: 'Dashboard' });

@@ -2,6 +2,8 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router/index';
 import store from './store';
+import API from './api/api'
+import './api/config';
 //Vue.config.productionTip = true;
 
 const modalWindow = Vue.observable({
@@ -19,6 +21,32 @@ Object.defineProperty(Vue.prototype, '$modalWindow', {
 	},
 });
 
+
+router.beforeEach((to, from, next) => {
+	const isRequiresAuth = to.matched.some(route => route.meta.requiresAuth);
+
+	if (localStorage.token) {
+		API.checkToken()
+			.then(() => {
+				const isLoginPage = to.path.includes('login');
+
+				if (isLoginPage) {
+					return next('/dashboard');
+				}
+				next();
+			})
+			.catch(() => {
+				delete localStorage.token;
+				next('/login');
+			});
+	}
+	else if (isRequiresAuth) {
+		next('/login');
+	}
+	else {
+		next();
+	}
+});
 new Vue({
 	el: '#app',
 	router,
