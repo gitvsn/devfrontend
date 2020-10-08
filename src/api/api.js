@@ -24,6 +24,15 @@ const confirm2FA = (code) => {
   return axios.post('confirm_two_fa', {}, setConfigParams({ code }));
 }
 
+// Restore password
+const restorePasswordCheckEmail = (email) => {
+  return axios.post(`restore_password/email/${email}`);
+};
+
+const restorePasswordCheckToken = ({ token, password }) => {
+  return axios.post(`restore_password/${token}/${password}`);
+};
+
 
 export default {
   register,
@@ -31,4 +40,6 @@ export default {
   confirmLogin,
   confirm2FA,
   checkToken,
+  restorePasswordCheckEmail,
+  restorePasswordCheckToken,
 };

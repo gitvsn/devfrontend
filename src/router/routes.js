@@ -23,7 +23,7 @@ export default [
 		name: 'Dashboard',
 		component: TheContainer,
 		meta: {
-			//requiresAuth: true
+			requiresAuth: true
 		},
 		children: [
 			{
@@ -98,6 +98,12 @@ export default [
 				name: 'Set new password',
 				alias: '/new',
 				component: SetNewPassword,
+				beforeEnter(to, from, next) {
+					if (to.query.type && to.query.token) {
+						localStorage.tim = to.query.token;
+					}
+					next()
+				}
 				// beforeEnter(to, from, next) {
 				//     if (to.query.type && to.query.token) {
 				//         let type = to.query.type;

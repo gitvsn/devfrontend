@@ -12,7 +12,8 @@
           <div class="my-wallet">
             <div class="custom-input w-100">
               <label>
-                <input type="text" class="custom-input__input " value="0xjdkf9ficksock4m4g354l5k6mdj5" readonly required>
+                <input type="text" class="custom-input__input " value="0xjdkf9ficksock4m4g354l5k6mdj5" readonly
+                       required>
               </label>
             </div>
             <button class="copy-btn"><img src="@/assets/img/copy.svg" alt=""> copy</button>
@@ -25,11 +26,21 @@
             </div>
             <nav class="chart-nav ml-md-auto mt-2 mt-md-0">
               <ul>
-                <li class="active"><button type="button">1d</button></li>
-                <li><button type="button">7d</button></li>
-                <li><button type="button">1m</button></li>
-                <li><button type="button">3m</button></li>
-                <li><button type="button">1y</button></li>
+                <li class="active">
+                  <button type="button">1d</button>
+                </li>
+                <li>
+                  <button type="button">7d</button>
+                </li>
+                <li>
+                  <button type="button">1m</button>
+                </li>
+                <li>
+                  <button type="button">3m</button>
+                </li>
+                <li>
+                  <button type="button">1y</button>
+                </li>
               </ul>
             </nav>
           </div>
@@ -63,7 +74,6 @@
 </template>
 
 <script>
-
 
 
 export default {
