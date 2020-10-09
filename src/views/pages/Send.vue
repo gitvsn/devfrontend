@@ -30,7 +30,7 @@
               </div>
             </div>
             <div class="amount__info">
-              <p> <span>0 USD</span> Сommission 1%</p>
+              <p><span>0 USD</span> Сommission 1%</p>
             </div>
             <button class="my-btn"><span>send</span></button>
           </div>
@@ -70,257 +70,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value positive">+10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
-            </tr>
-            <tr>
-              <td><p class="wallet-address">1BQ9qza7fn9snSCyJQB3ZcN46biBtkt4ee</p></td>
-              <td>07.10.2020</td>
-              <td>12:47:14</td>
-              <td>Receipt</td>
-              <td><p class="amount-value negative">-10,457 VSN</p></td>
+            <tr v-for="el in transactions">
+              <td @click="goToEtherscan(el.hash)"><p class="wallet-address">{{ el.hash }}</p></td>
+              <td>{{new Date(el.created).customFormat("#DD#.#MM#.#YYYY#")}}</td>
+              <td>{{new Date(el.created).customFormat("#hh#:#mm#:#ss#")}}</td>
+              <td>{{el.type === 'DEPOSIT' ? 'Received' : 'Sent'}}</td>
+              <td><p :class="el.type === 'DEPOSIT' ? 'amount-value positive' :'amount-value negative' ">10,457 VSN</p></td>
             </tr>
             </tbody>
           </table>
@@ -332,9 +87,38 @@
 </template>
 
 <script>
-    export default {
-        name: "Send"
+import {mapActions, mapState} from 'vuex'
+import API from '@/api/api';
+
+export default {
+  name: "Send",
+  data() {
+    return {
+      transactions: [],
+      currentPage: 1
     }
+  },
+  methods: {
+    getTransactions() {
+      API.getTransactions(this.currentPage)
+          .then(res => {
+            if (res.data.status === 200) {
+               this.transactions = res.data.response.content
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    },
+    goToEtherscan(link){
+      let href = `https://etherscan.io/tx/${link}`;
+      window.open(href, '_blank');
+    }
+  },
+  mounted() {
+    this.getTransactions()
+  }
+}
 </script>
 
 <style scoped lang="scss">

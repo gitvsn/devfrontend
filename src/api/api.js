@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const TRANSACTIONS_LIMIT = 10;
 
 const setConfigParams = (params) => ({ params });
 
@@ -39,7 +40,14 @@ const get2FASecret = () => axios.post('get_two_fa_secret');
 const enable2FA = data => axios.post('enable_two_fa', data);
 const disable2FA = data => axios.post('disable_two_fa', data);
 
-
+// Transactions
+const getTransactions = (page = 1) => {
+  return axios.post(
+      'get_user_transactions' +
+      `?page=${page}` +
+      `&size=${TRANSACTIONS_LIMIT}`
+  );
+};
 
 
 export default {
@@ -54,4 +62,5 @@ export default {
   disable2FA,
   restorePasswordCheckEmail,
   restorePasswordCheckToken,
+  getTransactions
 };
