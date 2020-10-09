@@ -55,7 +55,7 @@
 				Back to login
 			</router-link>
 		</div>
-		<modal-window-success />
+		<modal-window-success @close="goToLoginPage()" />
 	</div>
 </template>
 
@@ -86,10 +86,11 @@ export default {
 				this.isPending = true;
 				API.restorePasswordCheckEmail(this.email)
 					.then((res) => {
-						this.goToLoginPage();
-						setTimeout(() => {
-							this.$modalWindowSuccess = { type: 'Check your email!' };
-						}, 400);
+						this.$modalWindowSuccess = {
+							type:
+								'Password recovery link sent successfully. Please, check your email!',
+						};
+						return;
 					})
 					.catch((err) => {
 						if (err.response && err.response.status === 403) {
