@@ -3,6 +3,9 @@ import axios from 'axios';
 
 const setConfigParams = (params) => ({ params });
 
+const changePersonalInfo = (personalInfo) => {
+  return axios.post('change_personal_info', personalInfo);
+}
 
 // Authorization
 const register = data => axios.post('registration', data);
@@ -39,7 +42,9 @@ const get2FASecret = () => axios.post('get_two_fa_secret');
 const enable2FA = data => axios.post('enable_two_fa', data);
 const disable2FA = data => axios.post('disable_two_fa', data);
 
-
+const getPersonalInfo = () => {
+  return axios.post('get_personal_info');
+};
 
 
 export default {
@@ -52,6 +57,8 @@ export default {
   get2FASecret,
   enable2FA,
   disable2FA,
+  changePersonalInfo,
+  getPersonalInfo,
   restorePasswordCheckEmail,
   restorePasswordCheckToken,
 };
