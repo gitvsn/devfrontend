@@ -11,8 +11,9 @@
 			<div class="profile__main">
 				<div class="profile-photo">
 					<label>
-						<input type="file" class="profile-photo__input" />
-						<img src="@/assets/img/user-img.jpg" alt="" />
+						<input type="file" class="profile-photo__input" @change="uploadAvatar" ref='avatarInput'/>
+<!--						<img src="@/assets/img/user-img.jpg" alt="" />-->
+            <img :src="avatarUrl" alt="" />
 					</label>
 				</div>
 				<div class="safety">
@@ -276,6 +277,7 @@ export default {
 	},
   data() {
     return {
+      //avatarUrl: "",
       password: "",
       newPassword: "",
       confirmNewPassword: "",
@@ -297,30 +299,30 @@ export default {
   },
   computed: {
     ...mapState({
-      //avatarUrl: state => state.user.avatar.avatar,
+      avatarUrl: state => state.user.avatar.avatar,
       //userInfo: state => ({ ...state.user.personalInfo }),
       google2FAStatus: state => state.user.isGoogle2FAEnable,
     }),
   },
   methods: {
     ...mapActions({
-      //uploadUserAvatar: 'uploadUserAvatar',
+      uploadUserAvatar: 'uploadUserAvatar',
       getGoogle2FAStatus: 'getGoogle2FAStatus',
     }),
-    // uploadAvatar() {
-    //   let files = this.$refs.avatarInput.files;
-    //   if (!files.length) return;
-    //   if (!checkTypeFile(files)) {
-    //     return;
-    //   }
-    //   if (!checkSizeFile(files)) {
-    //     return;
-    //   }
-    //   let file = files[0];
-    //   let binary = file;
-    //
-    //   this.uploadUserAvatar(binary);
-    // },
+    uploadAvatar() {
+      let files = this.$refs.avatarInput.files;
+      if (!files.length) return;
+      if (!checkTypeFile(files)) {
+        return;
+      }
+      if (!checkSizeFile(files)) {
+        return;
+      }
+      let file = files[0];
+      let binary = file;
+
+      this.uploadUserAvatar(binary);
+    },
     getUserInfo(){
       API.getPersonalInfo()
           .then(res => {

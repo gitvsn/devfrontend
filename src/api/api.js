@@ -8,6 +8,10 @@ const changePersonalInfo = (personalInfo) => {
   return axios.post('change_personal_info', personalInfo);
 }
 
+const getAvatar = (personalInfo) => {
+  return axios.post('change_personal_info', personalInfo);
+}
+
 // Authorization
 const register = data => axios.post('registration', data);
 const login = data => axios.post('authorization', data);
