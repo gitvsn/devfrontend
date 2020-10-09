@@ -9,67 +9,52 @@
     </div>
     <div class="google-auth">
       <TwoFaGoogleAuthForm/>
-      <button class="my-btn w-100 mt-3"><span>submit</span></button>
+      <button class="my-btn w-100 mt-3" @click="onSubmit"><span>submit</span></button>
     </div>
 
   </div>
 </template>
 
 <script>
-    //import {mapActions, mapGetters} from 'vuex'
-    import TwoFaGoogleAuthForm from "../plugins/TwoFaGoogle/TwoFaGoogleAuthForm";
+import TwoFaGoogleAuthForm from "../plugins/TwoFaGoogle/TwoFaGoogleAuthForm";
+import API from '@/api/api';
 
-
-    export default {
-        name: 'TwoFaGoogle',
-        components: {
-            TwoFaGoogleAuthForm,
-        },
-        // methods: {
-        //     ...mapActions({
-        //         signIn: 'user/signIn',
-        //         getInfo: 'user/getInfo',
-        //         loadNotifications: 'user/loadNotifications',
-        //         loadUserSettings: 'user/loadUserSettings',
-        //         getUserInfo: 'user/getUserInfo',
-        //         loadUserAvatar: 'user/loadUserAvatar',
-        //         selectPair: 'market/selectPair'
-        //     }),
-        //     authorize() {
-        //         this.signIn({email: localStorage.e, password: localStorage.p, code: this.twaCode}).then(res => {
-        //             this.$router.push({name: 'Trade'});
-        //             this.getUserInfo().then(res => {
-        //                 this.loadUserSettings().then(res => {
-        //                     this.loadNotifications().then(res => {
-        //                         this.loadUserAvatar().then(res => {
-        //                             this.getInfo().then(res => {
-        //                                 localStorage.removeItem('e');
-        //                                 localStorage.removeItem('p');
-        //                                 this.selectPair('LTC-BTC')
-        //                             })
-        //                         })
-        //                     })
-        //                 })
-        //             }).catch(e => {
-        //             })
-        //         }).catch(e => {
-        //             this.$message = {type: 'error', title: 'Error 2FA', text: 'Invalid code'};
-        //             this.clearField = !this.clearField;
-        //         })
-        //
-        //     },
-        //     enteredLastValue(value) {
-        //         this.twaCode = value;
-        //         this.authorize();
-        //     }
-        // },
-        // data() {
-        //     return {
-        //         twaCode: '',
-        //         clearField: false
-        //     }
-        // }
+export default {
+  name: 'TwoFaGoogle',
+  components: {
+    TwoFaGoogleAuthForm,
+  },
+  methods: {
+    onSubmit() {
+      API.confirmLogin(this.twaCode, this.username)
+          .then((res) => {
+            this.goToLDashboardPage();
+          })
+          .catch((err) => {
+            localStorage.removeItem("token");
+            if (err.response && err.response.status === 400) {
+              this.setError('invalid_code')
+            } else {
+              //this.$modalWindow = { type: err.message };
+            }
+          });
+    },
+    // enteredLastValue(value) {
+    //     this.twaCode = value;
+    //     this.authorize();
+    // },
+    goToLDashboardPage() {
+      this.$router.push({name: "Dashboard"});
+    },
+  },
+  data() {
+    return {
+      twaCode: localStorage.getItem("twaCode"),
+      username: localStorage.getItem("username"),
+      clearField: false
     }
+  }
+}
 </script>
 <style lang="scss">
 

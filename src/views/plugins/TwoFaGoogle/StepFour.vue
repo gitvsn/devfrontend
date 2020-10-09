@@ -27,9 +27,7 @@
       </div>
     </div>
     <div class="mt-3">
-      <TwoFaGoogleAuthForm
-          :onUpdate="onUpdateCode"
-      />
+      <TwoFaGoogleAuthForm />
     </div>
 
   </div>
@@ -47,7 +45,7 @@ export default {
   },
   data() {
     return {
-      code: '',
+      twaCode: '',
       password: '',
       actionType: 'login',
       clearField: false,
@@ -69,12 +67,12 @@ export default {
   },
   methods: {
     onUpdateCode(code) {
-      this.code = code;
+      this.twaCode = code;
     },
     send() {
       let enableTwoFaDTO = {
         password: this.password,
-        code: this.code
+        code: localStorage.getItem("twaCode")
       };
 
       API.enable2FA(enableTwoFaDTO)
@@ -86,6 +84,7 @@ export default {
             }
           })
           .catch(err => {
+            this.showErrors()
             //this.$modalWindow = { type: err.message };
           })
 

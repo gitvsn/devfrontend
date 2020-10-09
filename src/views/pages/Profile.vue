@@ -279,7 +279,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      uploadUserAvatar: 'uploadUserAvatar',
+      //uploadUserAvatar: 'uploadUserAvatar',
       getGoogle2FAStatus: 'getGoogle2FAStatus',
     }),
     // uploadAvatar() {
@@ -296,6 +296,7 @@ export default {
     //
     //   this.uploadUserAvatar(binary);
     // },
+
     openModalWindow() {
       if (this.google2FAStatus) {
         this.openDisable2FaModalWindow = true;
@@ -345,6 +346,9 @@ export default {
     //   }
     // }
   },
+  mounted() {
+    this.getGoogle2FAStatus();
+  }
 };
 </script>
 

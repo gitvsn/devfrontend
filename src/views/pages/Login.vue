@@ -1,5 +1,6 @@
 <template>
-	<div class="auth-box__content">
+  <TwoFaGoogle @close="closeModalWindow" v-if="open2fa"/>
+	<div class="auth-box__content" v-else>
 		<div class="auth-box__title">
 			<p>Sign in to account</p>
 		</div>
@@ -97,14 +98,13 @@
 			>
 		</div>
 <!--    <Login2faModal :type="twoFaModalWindowType" v-if="open2fa" @enteredLastValue="enteredLastValue"/>-->
-    <TwoFaGoogle @close="closeModalWindow" v-if="open2fa"/>
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import  API  from '@/api/api';
-import TwoFaGoogle from "@/views/plugins/TwoFaGoogle/GoogleAuthSetModal";
+import TwoFaGoogle from "@/views/pages/TwoFaGoogle";
 
 
 export default {
@@ -137,7 +137,7 @@ export default {
       API.login(payload)
           .then(response => {
             if (response.data.status === 200) {
-              if (!response.data.twoFaEnable){
+              if (!response.data.response.twoFaEnable){
                 localStorage.token =  'Bearer_' + response.data.response.token;
                 this.goToLDashboardPage();
               } else {
