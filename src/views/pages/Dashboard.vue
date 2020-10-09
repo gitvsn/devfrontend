@@ -12,7 +12,7 @@
           <div class="my-wallet">
             <div class="custom-input w-100">
               <label>
-                <input type="text" class="custom-input__input " value="0xjdkf9ficksock4m4g354l5k6mdj5" readonly
+                <input type="text" class="custom-input__input " v-model="userWalletAddress" readonly
                        required>
               </label>
             </div>
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="balance-box__value">
-            <p><span>47 547</span> VSN</p>
+            <p><span>{{userWalletBalance}}</span> VSN</p>
           </div>
 
         </div>
@@ -75,9 +75,34 @@
 
 <script>
 
+import  API  from '@/api/api';
 
 export default {
   name: "Dashboard",
+  data() {
+    return {
+      userWalletAddress: null,
+      userWalletBalance: null,
+    }
+  },
+  methods: {
+    getWalletAddress() {
+      API.getWallet()
+          .then(response => {
+            this.userWalletAddress = response.data.response[0].address
+            this.userWalletBalance = response.data.response[0].balance
+          })
+          .catch(err => {
+            //  this.$modalWindow = { type: err.message };
+          })
+          .finally(() => {
+          //  this.isPending = false;
+          });
+    }
+  },
+  mounted() {
+    this.getWalletAddress();
+  }
 }
 </script>
 
