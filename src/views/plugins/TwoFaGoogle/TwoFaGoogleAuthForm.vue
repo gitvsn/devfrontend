@@ -104,7 +104,6 @@ export default {
     input_6(value){
       if (value.data !== null){
         this.sendInputsValue()
-        this.clearField()
       } else {
         this.$refs.ref5.focus();
       }
