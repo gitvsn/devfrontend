@@ -141,6 +141,7 @@ export default {
                 localStorage.token =  'Bearer_' + response.data.response.token;
                 this.goToLDashboardPage();
               } else {
+                localStorage.email = response.data.response.username;
                 this.open2fa = true;
               }
               return;

@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      API.confirmLogin(this.twaCode, this.username)
+      API.confirmLogin(this.code)
           .then((res) => {
             this.goToLDashboardPage();
           })
@@ -35,6 +35,7 @@ export default {
             if (err.response && err.response.status === 400) {
               this.setError('invalid_code')
             } else {
+              alert(err.message)
               //this.$modalWindow = { type: err.message };
             }
           });
@@ -49,8 +50,7 @@ export default {
   },
   data() {
     return {
-      twaCode: localStorage.getItem("twaCode"),
-      username: localStorage.getItem("username"),
+      code : "dsfa",
       clearField: false
     }
   }

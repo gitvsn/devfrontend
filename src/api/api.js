@@ -10,14 +10,14 @@ const login = data => axios.post('authorization', data);
 const checkToken = () => axios.post('check_token');
 
 const confirmLogin = (code) => {
-  const config = setConfigParams({ code, email: localStorage.email });
+  const config = setConfigParams({ code , email: localStorage.email });
 
   return axios.post('confirm_login', {}, config)
-    .then(res => {
-      localStorage.token = 'Bearer_' + res.data.token;
+      .then(res => {
+        localStorage.token = 'Bearer_' + res.data.token;
 
-      return res;
-    });
+        return res;
+      });
 }
 
 const confirm2FA = (code) => {
