@@ -132,8 +132,6 @@ export default {
 				password: this.password,
 			};
 
-			console.log(API);
-
 			API.login(payload)
 				.then((response) => {
 					if (response.data.status === 200) {

@@ -1,5 +1,5 @@
 <template>
-	<div class="KawaiiPopup-container">
+	<div v-show="show" class="KawaiiPopup-container">
 		<div class="KawaiiPopup-bg"></div>
 		<div class="KawaiiPopup-slide">
 			<div class="KawaiiPopup">
@@ -9,13 +9,7 @@
 						<img src="@/assets/img/success-icon.svg" alt="" />
 					</div>
 					<div class="KawaiiPopup__title mt-3">
-						<p v-if="type === CHECK_MAIL">Please check your mail</p>
-						<p v-if="type === PASSWORD_CHANGED">
-							Your password has been successfully changed
-						</p>
-						<p v-if="type === DATA_SAVED">
-							Your data has been saved successfully
-						</p>
+						<p>{{ type }}</p>
 					</div>
 					<button type="button" class="my-btn" @click="closeWindow">
 						<span>OK</span>
@@ -42,13 +36,10 @@ export default {
 		return {
 			show: false,
 			type: null,
-			CHECK_MAIL,
-			PASSWORD_CHANGED,
-			DATA_SAVED,
 		};
 	},
 	watch: {
-		$modalWindow(newValue, oldValue) {
+		$modalWindowSuccess(newValue, oldValue) {
 			this.type = newValue.type;
 			this.show = !this.show;
 		},
