@@ -5,6 +5,7 @@ import store from './store';
 import API from './api/api';
 import Clipboard from 'v-clipboard';
 import './api/config';
+import customFormat from "@/util/customDate";
 //Vue.config.productionTip = true;
 
 Vue.use(Clipboard);
