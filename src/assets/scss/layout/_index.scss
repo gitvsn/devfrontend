@@ -825,7 +825,7 @@ body {
 .custom-table{
   font-size: 13px;
   line-height: 22px;
-  height: calc(100vh - 390px);
+  height: calc(100vh - 420px);
   overflow-y: auto;
   @include max-screen(sm){
     overflow: auto;
