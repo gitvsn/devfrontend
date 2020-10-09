@@ -4,7 +4,7 @@
     <div class="KawaiiPopup__text">
       <p>Enable your Google Authenticator.</p>
     </div>
-    <div class="custom-input mt-3">
+    <div class="custom-input mt-3" :class="{error : isErrorInPass}">
       <label>
         <input class="custom-input__input" :type="showPass? 'text' : 'password'"
                v-model="password" required>
@@ -22,12 +22,15 @@
         </span>
         </span>
       </label>
-      <div class="error-msg">
-        <p>User is not found</p>
+      <div class="error-msg" >
+        <p>Wrong data!</p>
       </div>
     </div>
-    <div class="mt-3">
+    <div class="mt-3" :class="{error : isErrorInCode}">
       <TwoFaGoogleAuthForm @twaCode="getTwoFa"/>
+      <div class="error-msg" >
+        <p>Wrong code!</p>
+      </div>
     </div>
 
   </div>
@@ -50,7 +53,8 @@ export default {
       actionType: 'login',
       clearField: false,
       showPass: false,
-      isErrors: false,
+      isErrorInPass: false,
+      isErrorInCode: false,
     }
   },
   props: {
@@ -74,10 +78,12 @@ export default {
 
       API.enable2FA(enableTwoFaDTO)
           .then(res => {
-            if (res.data.status !== 200) {
-              this.showErrors()
+            if (res.data.status === 400) {
+              this.isErrorInCode = true;
+            } else if (res.data.status === 403){
+              this.isErrorInPass = true;
             } else {
-              this.closeSuccessWindow();
+              this.showErrors();
             }
           })
           .catch(err => {
@@ -90,9 +96,11 @@ export default {
       this.showPass = !this.showPass;
     },
     showErrors() {
-      this.isErrors = true;
+      this.isErrorInPass = true;
+      this.isErrorInCode = true;
       setTimeout(() => {
-        this.isErrors = false;
+        this.isErrorInPass = false;
+        this.isErrorInCode = false;
       }, 3000);
     },
     getTwoFa(twoFa){

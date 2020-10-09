@@ -30,11 +30,11 @@
 							</span>
 						</p>
 					</div>
-					<div class="switcher-wrap ml-auto" @click="openModalWindow">
-						<div class="switcher" :class="{ active: google2FAStatus }">
+					<div class="switcher-wrap ml-auto">
+						<div class="switcher" @click="openModalWindow">
 							<label>
 								<input type="checkbox" />
-								<span class="switcher__box"></span>
+								<span class="switcher__box" :class="{active:google2FAStatus}"></span>
 							</label>
 						</div>
 					</div>
