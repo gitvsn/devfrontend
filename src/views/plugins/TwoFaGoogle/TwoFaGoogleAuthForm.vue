@@ -45,10 +45,10 @@ export default {
   },
   methods: {
     sendInputsValue(){
-
       this.twaCode += this.inp1;this.twaCode += this.inp2;this.twaCode += this.inp3;
       this.twaCode += this.inp4;this.twaCode += this.inp5;this.twaCode += this.inp6;
       this.$emit('twaCode',this.twaCode);
+
 
       this.twaCode = "";
     },

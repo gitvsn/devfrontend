@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="google-auth">
-      <TwoFaGoogleAuthForm @twoFa="getTwoFa"/>
+      <TwoFaGoogleAuthForm @twaCode="twoFa"/>
       <button class="my-btn w-100 mt-3" @click="onSubmit"><span>submit</span></button>
     </div>
 
@@ -40,12 +40,7 @@ export default {
             }
           });
     },
-    // enteredLastValue(value) {
-    //     this.twaCode = value;
-    //     this.authorize();
-    // },
-
-    getTwoFa(twoFa){
+    twoFa(twoFa){
       this.code = twoFa;
     },
     goToLDashboardPage() {
