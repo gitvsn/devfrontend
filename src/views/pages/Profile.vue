@@ -17,8 +17,8 @@
 							@change="uploadAvatar"
 							ref="avatarInput"
 						/>
-						<!--						<img src="@/assets/img/user-img.jpg" alt="" />-->
-						<img :src="avatarUrl" alt="" />
+						<img v-if="!avatarUrl" src="@/assets/img/user-default.svg" alt="" />
+						<img v-else :src="avatarUrl" alt="" />
 					</label>
 				</div>
 				<div class="safety">
@@ -34,7 +34,10 @@
 						<div class="switcher" @click="openModalWindow">
 							<label>
 								<input type="checkbox" />
-								<span class="switcher__box" :class="{active:google2FAStatus}"></span>
+								<span
+									class="switcher__box"
+									:class="{ active: google2FAStatus }"
+								></span>
 							</label>
 						</div>
 					</div>
@@ -396,8 +399,8 @@ export default {
 					this.country = res.data.country;
 					this.phone = res.data.phone;
 					this.email = res.data.email;
-          localStorage.name = res.data.name;
-          localStorage.surname = res.data.surname;
+					localStorage.name = res.data.name;
+					localStorage.surname = res.data.surname;
 				})
 				.catch((err) => {
 					this.userInfo = false;
@@ -426,14 +429,12 @@ export default {
 		},
 		changeUserPersonalInfo(e) {
 			let userInfo = {
-				name:
-            this.name !== null ? this.name.replace(/\s+/g, '') : null,
+				name: this.name !== null ? this.name.replace(/\s+/g, '') : null,
 				surname:
 					this.surname !== null ? this.surname.replace(/\s+/g, '') : null,
 				country:
 					this.country !== null ? this.country.replace(/\s+/g, '') : null,
-				phone:
-            this.phone !== null ? this.phone.replace(/\s+/g, '') : null,
+				phone: this.phone !== null ? this.phone.replace(/\s+/g, '') : null,
 
 				oldPassword:
 					this.password !== null ? this.password.replace(/\s+/g, '') : null,

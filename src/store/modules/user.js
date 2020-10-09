@@ -9,7 +9,6 @@ const GET_PERSONAL_INFO = '/get_personal_info';
 const GET_WALLET_INFO = '/getWallets';
 const CHANGE_PERSONAL_INFO = '/change_personal_info';
 
-
 const state = () => ({
 	avatar: {},
 	personalInfo: {},
@@ -38,7 +37,6 @@ const actions = {
 			}
 			return { avatar: defaultAvatar };
 		};
-
 		return axios.post(GET_AVATAR).then((res) => {
 			const data = {
 				field: 'avatar',
@@ -99,10 +97,9 @@ const actions = {
 		});
 	},
 
-	changePersonalInfo(context,payload) {
-		return axios.post(CHANGE_PERSONAL_INFO, payload)
-	}
-
+	changePersonalInfo(context, payload) {
+		return axios.post(CHANGE_PERSONAL_INFO, payload);
+	},
 };
 
 export default {

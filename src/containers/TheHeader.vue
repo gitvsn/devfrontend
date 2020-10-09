@@ -5,7 +5,8 @@
 		/></router-link>
 		<div class="user-short ml-auto">
 			<router-link to="profile" class="user-short__icon">
-				<img :src="avatarUrl" alt="" />
+				<img v-if="!avatarUrl" src="@/assets/img/user-default.svg" alt="" />
+				<img v-else :src="avatarUrl" alt="" />
 			</router-link>
 			<div class="user-short__content">
 				<router-link to="profile">{{ name }} {{ surname }}</router-link>
@@ -21,24 +22,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
 	name: 'TheHeader',
 	components: {},
 	data() {
 		return {
-      name: localStorage.name,
-      surname: localStorage.surname,
+			name: localStorage.name,
+			surname: localStorage.surname,
 			isShow: false,
 		};
 	},
 	computed: {
 		...mapState({
-			avatarUrl: state => state.user.avatar.avatar,
+			avatarUrl: (state) => state.user.avatar.avatar,
 		}),
 	},
 	methods: {
+		...mapActions({
+			setAvatar: 'setAvatar',
+		}),
 		goToLoginPage() {
 			localStorage.removeItem('token');
 			this.$router.push({ name: 'Login' });
@@ -61,6 +65,7 @@ export default {
 	},
 	mounted() {
 		window.addEventListener('click', this.toggleMobileUserCard);
+		this.setAvatar();
 	},
 	beforeDestroy() {
 		window.removeEventListener('click', this.toggleMobileUserCard);
