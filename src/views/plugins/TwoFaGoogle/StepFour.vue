@@ -83,7 +83,7 @@ export default {
             } else if (res.data.status === 403){
               this.isErrorInPass = true;
             } else {
-              this.showErrors();
+              this.closeSuccessWindow();
             }
           })
           .catch(err => {

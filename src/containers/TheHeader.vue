@@ -5,7 +5,7 @@
 		/></router-link>
 		<div class="user-short ml-auto">
 			<router-link to="profile" class="user-short__icon">
-				<img src="@/assets/img/user-img.jpg" alt="" />
+				<img :src="avatarUrl" alt="" />
 			</router-link>
 			<div class="user-short__content">
 				<router-link to="profile">{{ name }} {{ surname }}</router-link>
@@ -28,14 +28,14 @@ export default {
 	components: {},
 	data() {
 		return {
-			name: '',
-			surname: '',
+      name: localStorage.name,
+      surname: localStorage.surname,
 			isShow: false,
 		};
 	},
 	computed: {
 		...mapState({
-			//avatarUrl: state => state.user.avatar.avatar,
+			avatarUrl: state => state.user.avatar.avatar,
 		}),
 	},
 	methods: {

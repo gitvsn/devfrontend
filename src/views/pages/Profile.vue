@@ -396,6 +396,8 @@ export default {
 					this.country = res.data.country;
 					this.phone = res.data.phone;
 					this.email = res.data.email;
+          localStorage.name = res.data.name;
+          localStorage.surname = res.data.surname;
 				})
 				.catch((err) => {
 					this.userInfo = false;
@@ -458,9 +460,6 @@ export default {
 						})
 						.catch((err) => {
 							this.oldPassword = false;
-							this.newPassword !== this.confirmPassword
-								? (this.confirmPassword = false)
-								: (this.confirmPassword = true);
 						});
 				}
 			}
