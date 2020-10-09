@@ -71,7 +71,7 @@
             </thead>
             <tbody>
             <tr v-for="el in transactions">
-              <td @click="goToEtherscan(el.hash)"><p class="wallet-address">{{ el.hash }}</p></td>
+              <td><p class="wallet-address"><button class="link" @click="goToEtherscan(el.hash)">{{ el.hash }}</button></p></td>
               <td>{{new Date(el.created).customFormat("#DD#.#MM#.#YYYY#")}}</td>
               <td>{{new Date(el.created).customFormat("#hh#:#mm#:#ss#")}}</td>
               <td>{{el.type === 'DEPOSIT' ? 'Received' : 'Sent'}}</td>

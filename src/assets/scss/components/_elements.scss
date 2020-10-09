@@ -140,6 +140,26 @@ input:-webkit-autofill:active {
 		font-size: 14px;
 	}
 }
+.has-content{
+	.custom-input__input{
+		border: 2px solid #f6f6f9;
+		background: #fff;
+		+ .custom-input__content {
+			color: #b9b9ce;
+			.custom-input__text {
+				color: #b9b9ce;
+				font-size: 12px;
+				background: #fff;
+				margin-top: -25px;
+			}
+			.custom-input__icon {
+				path {
+					fill: #b9b9ce !important;
+				}
+			}
+		}
+	}
+}
 .error {
 	.error-msg {
 		display: block;
@@ -292,5 +312,14 @@ input:-webkit-autofill:active {
 	}
 	.switcher {
 		flex: none;
+	}
+}
+.link{
+	border: none;
+	padding: 0;
+	text-decoration: underline;
+	color: $pink;
+	&:hover{
+		text-decoration: none;
 	}
 }

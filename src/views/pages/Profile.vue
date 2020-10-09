@@ -158,9 +158,9 @@
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div class="custom-input" :class="userInfo ? '' : 'error'">
+						<div class="custom-input has-content" :class="userInfo ? '' : 'error'">
 							<label>
-								<input type="text" class="custom-input__input" v-model="email" disabled/>
+								<input type="text" class="custom-input__input" v-model="email" disabled required/>
 								<span class="custom-input__content">
 									<span class="custom-input__text">E-mail</span>
 									<span class="custom-input__icon">

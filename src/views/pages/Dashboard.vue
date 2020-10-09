@@ -74,11 +74,25 @@
 					<div class="title">
 						<p>Balance statistics</p>
 					</div>
-					<div
-						style="display:flex; height:100%; align-items: center; justify-content: center"
-					>
+					<div>
 						<doughnut :data="data" :label="label" />
 					</div>
+          <ul class="chart-controls mt-3">
+            <li>
+              <p>
+                <span style="background: #6237A0;"></span>
+                Deposit
+                <strong>45,523 VSN</strong>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span style="background: #D932C5;"></span>
+                Withdraw
+                <strong>45,523 VSN</strong>
+              </p>
+            </li>
+          </ul>
 				</div>
 			</div>
 		</div>

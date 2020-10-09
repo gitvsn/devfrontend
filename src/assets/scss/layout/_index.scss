@@ -22,7 +22,9 @@
   background: #D932C5 ;
 }
 
-
+*{
+  outline: none !important;
+}
 button, input {
   font-family: $base-font;
 }
@@ -248,6 +250,9 @@ body {
 
   li {
     width: 50%;
+    button{
+      color: #C6C6D7 !important;
+    }
 
     > * {
       background: none;
@@ -267,6 +272,9 @@ body {
     }
 
     &.active {
+      button{
+        color: $purple !important;
+      }
       > * {
         color: $purple;
         font-family: $bold;
@@ -1064,5 +1072,37 @@ body {
   .my-btn{
     width: 150px;
     margin-top: 25px;
+  }
+}
+.chart-controls{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  li{
+    +li{
+      margin-top: 15px;
+    }
+    >*{
+      cursor: pointer;
+      position: relative;
+      padding-left: 25px;
+      color: #C6C6D7;
+      font-size: 11px;
+      span{
+        border-radius: 100px;
+        position: absolute;
+        left: 0;
+        top: 5px;
+        width: 15px;
+        height: 4px;
+        display: block;
+      }
+      strong{
+        display: block;
+        font-family: $bold;
+        color: #40404E;
+        font-size: 14px;
+      }
+    }
   }
 }
