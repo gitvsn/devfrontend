@@ -67,7 +67,7 @@
 				>Back to login
 			</router-link>
 		</div>
-		<ModalWindowSuccess />
+		<ModalWindowSuccess @close="goToLoginPage()" />
 		<ModalWindowError />
 	</div>
 </template>
@@ -111,10 +111,7 @@ export default {
 				API.restorePasswordCheckToken({ token: token, password: this.password })
 					.then((res) => {
 						localStorage.removeItem('tim');
-						this.goToLoginPage();
-						setTimeout(() => {
-							this.$modalWindowSuccess = { type: 'Password changed!' };
-						}, 400);
+						this.$modalWindowSuccess = { type: 'Password changed!' };
 					})
 					.catch((err) => {
 						this.setError(err);

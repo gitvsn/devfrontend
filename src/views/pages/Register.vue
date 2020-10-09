@@ -1,7 +1,7 @@
 <template>
 	<div class="auth-box__content">
 		<div class="auth-box__title">
-			<p>Sign in to account</p>
+			<p>Registration</p>
 		</div>
 		<nav class="auth-nav">
 			<ul>
@@ -225,7 +225,7 @@
 			</router-link>
 		</div>
 		<modal-window-error />
-		<modal-window-success />
+		<modal-window-success @close="goToLoginPage()" />
 	</div>
 </template>
 
@@ -272,14 +272,10 @@ export default {
 				API.register(payload)
 					.then((response) => {
 						if (response.data.status === 200) {
-							setTimeout(
-								() =>
-									(this.$modalWindowSuccess = {
-										type: 'Registration successful!',
-									}),
-								400
-							);
-							return this.goToLoginPage();
+							this.$modalWindowSuccess = {
+								type: 'Registration successful!',
+							};
+							return;
 						}
 
 						switch (response.data.error) {
