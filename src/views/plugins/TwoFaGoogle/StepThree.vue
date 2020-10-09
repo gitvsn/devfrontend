@@ -7,47 +7,34 @@
     <div class="twoFaText mt-4">
       <p>Resetting your Google Authentication requires opening a support ticket and takes at least 7 days to process.
         <strong class="d-block mt-3">
-<!--          {{codeSecret}}-->
+          {{ codeSecret }}
         </strong></p>
     </div>
   </div>
 </template>
 
-<!--<script>-->
-<!--    import { mapGetters, mapMutations, mapActions } from 'vuex'-->
+<script>
+import API from '@/api/api';
 
-<!--    export default {-->
-<!--        name: "StepThree",-->
-<!--      data(){-->
-<!--        return {-->
-<!--          codeSecret: '',-->
-<!--        }-->
-<!--      },-->
-<!--      computed: {-->
-<!--        ...mapGetters({-->
-<!--          getUserSecret: 'user/getUserSecret'-->
-<!--        }),-->
-<!--      },-->
-<!--      methods: {-->
-<!--        ...mapActions({-->
-<!--          changeUserTwa: 'user/changeUserTwa',-->
-<!--          loadTwaLink: 'user/loadTwaLink',-->
-<!--          loadUserSettings: 'user/loadUserSettings',-->
-<!--          getUserInfo: 'user/getUserInfo',-->
-<!--        }),-->
-<!--      },-->
-<!--      mounted(){-->
-<!--        this.getUserInfo().then(res => {-->
-<!--          this.loadUserSettings().then(res => {-->
-<!--            this.loadTwaLink().then(res => {-->
-<!--              this.codeSecret = this.getUserSecret;-->
-<!--            })-->
-<!--          })-->
-<!--        });-->
+export default {
+  name: "StepThree",
+  data() {
+    return {
+      codeSecret: '',
+    }
+  },
+  mounted() {
+    API.get2FASecret()
+        .then(res => {
+          this.codeSecret = res.data.response;
+        })
+        .catch(err => {
+          this.$modalWindow = {type: err.message};
+        })
 
-<!--      }-->
-<!--    }-->
-<!--</script>-->
+  }
+}
+</script>
 
 <style scoped lang="scss">
 

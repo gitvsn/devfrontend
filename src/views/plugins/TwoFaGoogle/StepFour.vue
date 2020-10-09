@@ -6,11 +6,19 @@
     </div>
     <div class="custom-input mt-3">
       <label>
-        <input type="password" class="custom-input__input" required>
+        <input class="custom-input__input" :type="showPass? 'text' : 'password'"
+               v-model="password" required>
         <span class="custom-input__content">
-          <span class="custom-input__text">Password</span>
+          <span
+              class="custom-input__text"
+          >Password
+          </span>
         <span class="custom-input__icon">
-          <button class="pass-toggle"></button>
+          <button
+              @click="showPassword"
+              :class="!showPass ? 'pass-toggle active' : 'pass-toggle'"
+          >
+          </button>
         </span>
         </span>
       </label>
@@ -19,71 +27,86 @@
       </div>
     </div>
     <div class="mt-3">
-      <TwoFaGoogleAuthForm/>
+      <TwoFaGoogleAuthForm
+          :onUpdate="onUpdateCode"
+      />
     </div>
 
   </div>
 </template>
 
 <script>
-    //import {mapActions} from 'vuex'
-    import TwoFaGoogleAuthForm from "./TwoFaGoogleAuthForm";
+//import {mapActions} from 'vuex'
+import API from '@/api/api';
+import TwoFaGoogleAuthForm from "./TwoFaGoogleAuthForm";
 
-    export default {
-        name: "StepFour",
-        components: {
-            TwoFaGoogleAuthForm,
-        },
-      // data() {
-      //   return {
-      //     twaCode: '',
-      //     password: '',
-      //     actionType: 'login',
-      //     clearField: false
-      //   }
-      // },
-      // props:{
-      //   confirm:{
-      //     type : Boolean,
-      //     required: false,
-      //     default: false,
-      //   }
-      // },
-      // watch: {
-      //   confirm : function (newV,oldV) {
-      //     this.clickTwa();
-      //   }
-      // },
-      // methods: {
-      //   ...mapActions({
-      //     changeUserTwa: 'user/changeUserTwa',
-      //     checkPassword: 'user/checkPassword'
-      //   }),
-      //   clickTwa() {
-      //     this.checkPassword(this.password)
-      //       .then(res => {
-      //         this.changeUserTwa({twaCode: this.twaCode, actionType: this.actionType })
-      //           .then(res => {
-      //             alert("2FA enabled")
-      //             this.$message = {type: 'success', title: 'Success', text: '2FA enabled'};
-      //           })
-      //           .catch(e => {
-      //             alert("Invalid code")
-      //             this.$message = {type: 'error', title: 'Error', text: 'Invalid code'};
-      //             this.clearField = !this.clearField;
-      //           })
-      //       })
-      //       .catch(e => {
-      //         alert("Invalid password")
-      //         this.$message = {type: 'error', title: 'Error', text: 'Invalid password'};
-      //       });
-      //   },
-      //   enteredLastValue(value){
-      //     this.twaCode = value;
-      //   }
-      // },
-      // mounted(){}
+export default {
+  name: "StepFour",
+  components: {
+    TwoFaGoogleAuthForm,
+  },
+  data() {
+    return {
+      code: '',
+      password: '',
+      actionType: 'login',
+      clearField: false,
+      showPass: false,
+      isErrors: false,
     }
+  },
+  props: {
+    confirm: {
+      type: Boolean,
+      required: false,
+      default: false,
+    }
+  },
+  watch: {
+    confirm(newValue, oldValue) {
+      this.send();
+    }
+  },
+  methods: {
+    onUpdateCode(code) {
+      this.code = code;
+    },
+    send() {
+      let enableTwoFaDTO = {
+        password: this.password,
+        code: this.code
+      };
+
+      API.enable2FA(enableTwoFaDTO)
+          .then(res => {
+            if (res.data.status !== 200) {
+              this.showErrors()
+            } else {
+              this.closeSuccessWindow();
+            }
+          })
+          .catch(err => {
+            //this.$modalWindow = { type: err.message };
+          })
+
+    },
+    showPassword() {
+      this.showPass = !this.showPass;
+    },
+    showErrors() {
+      this.isErrors = true;
+      setTimeout(() => {
+        this.isErrors = false;
+      }, 3000);
+    },
+    closeSuccessWindow() {
+      // this.$modalWindow = {type: 'error'};
+      this.$emit('success', true);
+    }
+  },
+  mounted() {
+  }
+}
 </script>
 
 <style scoped>

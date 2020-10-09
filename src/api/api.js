@@ -33,6 +33,12 @@ const restorePasswordCheckToken = ({ token, password }) => {
   return axios.post(`restore_password/${token}/${password}`);
 };
 
+// Google 2FA
+const get2FAQrLink = () => axios.post('get_two_fa_qr_link');
+const get2FASecret = () => axios.post('get_two_fa_secret');
+
+const enable2FA = data => axios.post('enable_two_fa', data);
+const disable2FA = data => axios.post('disable_two_fa', data);
 
 export default {
   register,
@@ -40,6 +46,10 @@ export default {
   confirmLogin,
   confirm2FA,
   checkToken,
+  get2FAQrLink,
+  get2FASecret,
+  enable2FA,
+  disable2FA,
   restorePasswordCheckEmail,
   restorePasswordCheckToken,
 };

@@ -7,55 +7,48 @@
     </div>
     <div class="qr-box">
       <div class="qr-box__value">
-<!--        <img style="height: 120px" :src="qrcodelink" alt="">-->
-        <img style="height: 120px" src="@/assets/img/qr.png" alt="">
+        <img style="height: 120px" :src="qrCodeLink" alt="">
+<!--        <img style="height: 120px" src="@/assets/img/qr.png" alt="">-->
       </div>
       <div class="twoFaText">
         <p>If you are unable to scan the QR code, please enter this code manually into the app.<br>
         <strong class="d-block mt-3">
-<!--            {{codeSecret}}-->
+            {{codeSecret}}
         </strong></p>
       </div>
     </div>
   </div>
 </template>
 
-<!--<script>-->
-<!--    import { mapGetters, mapMutations, mapActions } from 'vuex'-->
+<script>
+    import API from '@/api/api';
 
-<!--    export default {-->
-<!--        name: "StepTwo",-->
-<!--      data() {-->
-<!--        return {-->
-<!--          qrcodelink: '',-->
-<!--          codeSecret: '',-->
-<!--        }-->
-<!--      },-->
-<!--      computed: {-->
-<!--        ...mapGetters({-->
-<!--          getUserSecret: 'user/getUserSecret'-->
-<!--        }),-->
-<!--      },-->
-<!--      methods: {-->
-<!--        ...mapActions({-->
-<!--          loadTwaLink: 'user/loadTwaLink',-->
-<!--          loadUserSettings: 'user/loadUserSettings',-->
-<!--          getUserInfo: 'user/getUserInfo',-->
-<!--        }),-->
-<!--      },-->
-<!--      mounted(){-->
-<!--        this.getUserInfo().then(res => {-->
-<!--          this.loadUserSettings().then(res => {-->
-<!--            this.loadTwaLink().then(res => {-->
-<!--              let qrSecret = this.getUserSecret;-->
-<!--              this.qrcodelink = res;-->
-<!--              this.codeSecret= qrSecret;-->
-<!--            })-->
-<!--          })-->
-<!--        });-->
-<!--      }-->
-<!--    }-->
-<!--</script>-->
+    export default {
+        name: "StepTwo",
+      data() {
+        return {
+          qrCodeLink: '',
+          codeSecret: '',
+        }
+      },
+      mounted(){
+        API.get2FAQrLink()
+            .then(res => {
+              this.qrCodeLink = res.data.response;
+            })
+            .catch(err => {
+              this.$modalWindow = { type: err.message };
+            });
+        API.get2FASecret()
+            .then(res => {
+              this.codeSecret = res.data.response;
+            })
+            .catch(err => {
+              this.$modalWindow = { type: err.message };
+            })
+      }
+    }
+</script>
 
 <style scoped lang="scss">
 
