@@ -1,7 +1,7 @@
 <template>
 	<div class="dashboard-page">
 		<div class="page-title">
-			<p>Account settings</p>
+			<p>Dashboard</p>
 		</div>
 		<div class="content">
 			<div class="content__wrap">
@@ -21,7 +21,7 @@
 								/>
 							</label>
 						</div>
-						<button class="copy-btn">
+						<button class="copy-btn" @click="copy">
 							<img src="@/assets/img/copy.svg" alt="" /> copy
 						</button>
 					</div>
@@ -77,39 +77,39 @@
 					<div>
 						<doughnut :data="data" :label="label" />
 					</div>
-          <ul class="chart-controls mt-3">
-            <li>
-              <p>
-                <span style="background: #6237A0;"></span>
-                Deposit
-                <strong>45,523 VSN</strong>
-              </p>
-            </li>
-            <li>
-              <p>
-                <span style="background: #D932C5;"></span>
-                Withdraw
-                <strong>45,523 VSN</strong>
-              </p>
-            </li>
-          </ul>
+					<ul class="chart-controls mt-3">
+						<li>
+							<p>
+								<span style="background: #6237A0;"></span>
+								Deposit
+								<strong>45,523 VSN</strong>
+							</p>
+						</li>
+						<li>
+							<p>
+								<span style="background: #D932C5;"></span>
+								Withdraw
+								<strong>45,523 VSN</strong>
+							</p>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
+		<ModalWindowSuccess />
 	</div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 import API from '@/api/api';
+import ModalWindowSuccess from '@/components/SuccessModal';
 import Doughnut from '../plugins/Charts/Doughnut';
 import LineChart from '../plugins/Charts/Line';
 export default {
 	name: 'Dashboard',
 	data() {
 		return {
-			userWalletAddress: null,
-			userWalletBalance: null,
 			data: [75, 25],
 			label: ['Deposit', 'Send'],
 			linearData: [10000, 12000, 15000, 19000, 21000, 30000],
@@ -126,6 +126,7 @@ export default {
 	components: {
 		Doughnut,
 		LineChart,
+		ModalWindowSuccess,
 	},
 	computed: {
 		...mapState({
@@ -137,6 +138,10 @@ export default {
 		...mapActions({
 			getUserWallet: 'getUserWallet',
 		}),
+		copy() {
+			this.$clipboard(this.userAddress);
+			this.$modalWindowSuccess = { type: 'Text copied!' };
+		},
 	},
 	mounted() {
 		this.getUserWallet();

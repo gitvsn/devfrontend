@@ -184,7 +184,10 @@
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div class="custom-input has-content" :class="userInfo ? '' : 'error'">
+						<div
+							class="custom-input has-content"
+							:class="userInfo ? '' : 'error'"
+						>
 							<label>
 								<input
 									type="text"
@@ -311,6 +314,8 @@
 			v-if="openDisable2FaModalWindow"
 			@closeWindow="closeDisableModalWindow"
 		/>
+		<ModalWindowSuccess />
+		<ModalWindowError />
 	</div>
 </template>
 
@@ -320,12 +325,16 @@ import API from '@/api/api';
 import { mapActions, mapState } from 'vuex';
 import GoogleAuthDisableModal from '@/views/plugins/TwoFaGoogle/GoogleAuthDisableModal';
 import GoogleAuthSetModal from '@/views/plugins/TwoFaGoogle/GoogleAuthSetModal';
+import ModalWindowSuccess from '@/components/SuccessModal';
+import ModalWindowError from '@/components/ErrorModal';
 
 export default {
 	name: 'Profile',
 	components: {
 		GoogleAuthSetModal,
 		GoogleAuthDisableModal,
+		ModalWindowSuccess,
+		ModalWindowError,
 	},
 	data() {
 		return {
@@ -358,13 +367,13 @@ export default {
 		...mapActions({
 			uploadUserAvatar: 'uploadUserAvatar',
 			getGoogle2FAStatus: 'getGoogle2FAStatus',
-      changePersonalInfo: 'changePersonalInfo',
+			changePersonalInfo: 'changePersonalInfo',
 		}),
-    cleanFields(){
-      this.password = '';
-      this.newPassword = '';
-      this.confirmNewPassword = '';
-    },
+		cleanFields() {
+			this.password = '';
+			this.newPassword = '';
+			this.confirmNewPassword = '';
+		},
 		uploadAvatar() {
 			let files = this.$refs.avatarInput.files;
 			if (!files.length) return;
@@ -401,14 +410,14 @@ export default {
 		},
 		closeEnableModalWindow(isSuccess) {
 			if (isSuccess) {
-				//this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_ENABLED};
+				this.$modalWindowSuccess = { type: 'Google auth enabled!' };
 			}
 			this.openEnable2FaModalWindow = false;
 			this.getGoogle2FAStatus();
 		},
 		closeDisableModalWindow(isSuccess) {
 			if (isSuccess) {
-				//this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_DISABLED};
+				this.$modalWindowSuccess = { type: 'Google auth disabled!' };
 			}
 			this.openDisable2FaModalWindow = false;
 			this.getGoogle2FAStatus();
@@ -440,10 +449,10 @@ export default {
 				if (this.newPassword !== this.confirmNewPassword) {
 					this.confirmPassword = false;
 				} else {
-          this.changePersonalInfo(userInfo)
+					this.changePersonalInfo(userInfo)
 						.then((res) => {
-						  this.cleanFields();
-							//this.$modalWindow = {type: modalTypes.DATA_SAVED};
+							this.cleanFields();
+							this.$modalWindowSuccess = { type: 'Data saved!' };
 						})
 						.catch((err) => {
 							this.oldPassword = false;

@@ -3,8 +3,11 @@ import App from './App.vue';
 import router from './router/index';
 import store from './store';
 import API from './api/api';
+import Clipboard from 'v-clipboard';
 import './api/config';
 //Vue.config.productionTip = true;
+
+Vue.use(Clipboard);
 
 const modalWindowSuccess = Vue.observable({
 	modalWindowSuccess: {

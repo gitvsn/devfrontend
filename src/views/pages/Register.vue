@@ -224,13 +224,16 @@
 				Forgot your password?
 			</router-link>
 		</div>
+		<modal-window-error />
+		<modal-window-success />
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import API from '@/api/api';
-
+import ModalWindowError from '@/components/ErrorModal';
+import ModalWindowSuccess from '@/components/SuccessModal';
 export default {
 	name: 'Register',
 	data() {
@@ -249,6 +252,7 @@ export default {
 			isPending: false,
 		};
 	},
+	components: { ModalWindowError, ModalWindowSuccess },
 	computed: {
 		...mapGetters({
 			getRoute: 'user/getRoute',
@@ -268,7 +272,13 @@ export default {
 				API.register(payload)
 					.then((response) => {
 						if (response.data.status === 200) {
-							//this.$modalWindow = { type: modalTypes.SUCCESS_REGISTER };
+							setTimeout(
+								() =>
+									(this.$modalWindowSuccess = {
+										type: 'Registration successful!',
+									}),
+								400
+							);
 							return this.goToLoginPage();
 						}
 
@@ -277,11 +287,11 @@ export default {
 								return this.errors.push('email-in-use');
 
 							default:
-							//this.$modalWindow = { type: res.data.error };
+								this.$modalWindowError = { type: res.data.error };
 						}
 					})
 					.catch((err) => {
-						this.$modalWindow = { type: err.message };
+						this.$modalWindowError = { type: err.message };
 					})
 					.finally(() => {
 						this.isPending = false;

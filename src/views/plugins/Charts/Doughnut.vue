@@ -27,7 +27,7 @@ export default {
 				},
 				{
 					legend: {
-						display: true,
+						display: false,
 						position: 'bottom',
 						fullWidth: true,
 						labels: {
