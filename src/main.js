@@ -4,6 +4,7 @@ import router from './router/index';
 import store from './store';
 import API from './api/api'
 import './api/config';
+import customFormat from "@/util/customDate";
 //Vue.config.productionTip = true;
 
 const modalWindow = Vue.observable({

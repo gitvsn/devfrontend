@@ -18,11 +18,12 @@
         </div>
         <div class="custom-input mt-3">
           <label>
-            <input type="password" class="custom-input__input" required>
+            <input :type="showPass? 'text' : 'password'" v-model="password" class="custom-input__input" required>
             <span class="custom-input__content">
           <span class="custom-input__text">Password</span>
         <span class="custom-input__icon">
-          <button class="pass-toggle"></button>
+          <button @click="showPassword"
+                  :class="!showPass ? 'pass-toggle active' : 'pass-toggle'"></button>
         </span>
         </span>
           </label>
@@ -31,7 +32,7 @@
           </div>
         </div>
         <div class="mt-3">
-          <TwoFaGoogleAuthForm/>
+          <TwoFaGoogleAuthForm @twaCode="twoFa"/>
         </div>
       </div>
     </div>
@@ -43,6 +44,7 @@ import TwoFaGoogleAuthForm from "./TwoFaGoogleAuthForm";
 import {mapActions, mapState} from 'vuex'
 import SuccessModal from "../../../components/SuccessModal";
 import ErrorModal from "../../../components/ErrorModal";
+import API from "@/api/api";
 
 export default {
   name: "GoogleAuthDisableModal",
@@ -59,22 +61,19 @@ export default {
       isErrors: false,
     }
   },
-  // props:{
-  //     confirm:{
-  //         type : Boolean,
-  //         required: false,
-  //         default: false,
-  //     }
-  // },
-  // watch: {
-  //     confirm(newValue, oldValue) {
-  //         this.send();
-  //     }
-  // },
+  props: {
+    confirm: {
+      type: Boolean,
+      required: false,
+      default: false,
+    }
+  },
+  watch: {
+    confirm(newValue, oldValue) {
+      this.send();
+    }
+  },
   methods: {
-    ...mapActions({
-      disableTwoFa: 'user/disableTwoFa',
-    }),
     send() {
       this.validation();
       let disableTwoFaDTO = {
@@ -82,19 +81,15 @@ export default {
         code: this.twaCode
       };
 
-      this.disableTwoFa(disableTwoFaDTO)
+      API.disable2FA(disableTwoFaDTO)
           .then(res => {
             if (res.data.status !== 200) {
               this.clearTwoFa = !this.clearTwoFa;
               this.showErrors()
             } else {
-              this.closeSuccessWindow()
+              this.closeWindow()
             }
           })
-
-    },
-    getTwaCode(code) {
-      this.twaCode = code;
     },
     showPassword() {
       this.showPass = !this.showPass;
@@ -111,6 +106,11 @@ export default {
     // },
     closeWindow(isSuccess) {
       this.$emit("closeWindow", isSuccess);
+    },
+    twoFa(twoFa) {
+      debugger
+      this.twaCode = twoFa;
+      this.send();
     },
     validation() {
       return this.passwordValid && this.passwordTwaCode;

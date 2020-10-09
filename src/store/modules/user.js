@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const GET_GOOGLE_2FA_STATUS = '/two_fa_is_enable';
 
-//const GET_PERSONAL_INFO = '/get_personal_info';
+const GET_PERSONAL_INFO = '/get_personal_info';
 
 //const GET_SUBSCRIBE_INFO = '/getSubInfo';
 
@@ -30,7 +30,6 @@ const mutations = {
 		state[field] = value;
 	},
 }
-
 
 const actions = {
 	// setAvatar(context) {
@@ -66,16 +65,16 @@ const actions = {
 	// 		});
 	// },
 
-	// setPersonalInfo(context) {
-	// 	return axios.post(GET_PERSONAL_INFO)
-	// 		.then(res => {
-	// 			const data = {
-	// 				field: 'personalInfo',
-	// 				value: res.data,
-	// 			}
-	// 			context.commit('setUserState', data);
-	// 		});
-	// },
+	setPersonalInfo(context) {
+		return axios.post(GET_PERSONAL_INFO)
+			.then(res => {
+				const data = {
+					field: 'personalInfo',
+					value: res.data,
+				}
+				context.commit('setUserState', data);
+			});
+	},
 
 	// uploadUserAvatar(context, payload) {
 	// 	const formData = new FormData();

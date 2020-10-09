@@ -49,7 +49,6 @@ export default {
       this.twaCode += this.inp4;this.twaCode += this.inp5;this.twaCode += this.inp6;
       this.$emit('twaCode',this.twaCode);
 
-
       this.twaCode = "";
     },
     paste(e) {
@@ -105,6 +104,7 @@ export default {
     input_6(value){
       if (value.data !== null){
         this.sendInputsValue()
+        this.clearField()
       } else {
         this.$refs.ref5.focus();
       }
