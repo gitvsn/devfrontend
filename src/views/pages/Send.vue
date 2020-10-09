@@ -8,7 +8,7 @@
         <div class="box send-wallet-wrapper mb-3">
           <div class="custom-input mb-3">
             <label>
-              <input type="text" class="custom-input__input" required>
+              <input v-model="send.address" type="text" class="custom-input__input" required>
               <span class="custom-input__content">
           <span class="custom-input__text">Wallet Address</span>
         </span>
@@ -20,7 +20,7 @@
           <div class="amount">
             <div class="custom-input">
               <label>
-                <input type="text" class="custom-input__input" required>
+                <input  v-model="send.amount" type="text" class="custom-input__input" required>
                 <span class="custom-input__content">
           <span class="custom-input__text">Amount in VSN</span>
         </span>
@@ -32,7 +32,7 @@
             <div class="amount__info">
               <p><span>0 USD</span> Сommission 1%</p>
             </div>
-            <button class="my-btn"><span>send</span></button>
+            <button @click="sendTokens" class="my-btn"><span>send</span></button>
           </div>
         </div>
       </div>
@@ -96,7 +96,11 @@ export default {
     return {
       transactions: [],
       currentPage: 1,
-      userWalletBalance: null,
+      send:{
+        currency : 'VSN',
+        amount: null,
+        address: null
+      }
     }
   },
   computed: {
@@ -123,6 +127,17 @@ export default {
       let href = `https://etherscan.io/tx/${link}`;
       window.open(href, '_blank');
     },
+    sendTokens() {
+      API.send(this.send)
+          .then(res => {
+            if (res.data.status === 200) {
+              debugger
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    }
   },
   mounted() {
         this.getTransactions();
