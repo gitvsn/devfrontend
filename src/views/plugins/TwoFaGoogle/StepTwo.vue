@@ -7,9 +7,9 @@
 			</p>
 		</div>
 		<div class="qr-box">
-			<div class="qr-box__value">
+      <Preloader v-if="this.isPending"/>
+			<div class="qr-box__value" v-else>
 				<img style="height: 120px" :src="qrCodeLink" alt="" />
-				<!--        <img style="height: 120px" src="@/assets/img/qr.png" alt="">-->
 			</div>
 			<div class="twoFaText">
 				<p>
@@ -28,19 +28,22 @@
 <script>
 import API from '@/api/api';
 import ModalWindowError from '@/components/ErrorModal';
+import Preloader from "@/views/plugins/Preloader";
 export default {
 	name: 'StepTwo',
 	data() {
 		return {
+		  isPending: true,
 			qrCodeLink: '',
 			codeSecret: '',
 		};
 	},
-	components: { ModalWindowError },
+	components: {Preloader, ModalWindowError },
 	mounted() {
 		API.get2FAQrLink()
 			.then((res) => {
 				this.qrCodeLink = res.data.response;
+        this.isPending = false;
 			})
 			.catch((err) => {
 				this.$modalWindowError = { type: err.message };

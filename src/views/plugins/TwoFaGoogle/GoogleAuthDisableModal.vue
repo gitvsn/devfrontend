@@ -17,7 +17,7 @@
 						Disabling Google Authenticator makes it easier to hack your account.
 					</p>
 				</div>
-				<div class="custom-input mt-3">
+				<div class="custom-input mt-3" :class="{error : isErrorInPass}">
 					<label>
 						<input
 							:type="showPass ? 'text' : 'password'"
@@ -39,9 +39,12 @@
 						<p>User is not found</p>
 					</div>
 				</div>
-				<div class="mt-3">
+				<div class="mt-3" :class="{error : isErrorInCode}">
 					<TwoFaGoogleAuthForm @twaCode="twoFa" />
 				</div>
+        <div class="error-msg">
+          <p>User is not found</p>
+        </div>
 			</div>
 		</div>
 	</div>
@@ -65,7 +68,8 @@ export default {
 			password: '',
 			showPass: false,
 			clearTwoFa: false,
-			isErrors: false,
+      isErrorInPass: false,
+      isErrorInCode: false,
 		};
 	},
 	props: {
@@ -89,23 +93,26 @@ export default {
 			};
 
 			API.disable2FA(disableTwoFaDTO).then((res) => {
-				if (res.data.status !== 200) {
-					this.clearTwoFa = !this.clearTwoFa;
-					this.showErrors();
-				} else {
-					this.closeWindow();
-				}
+        if (res.data.status === 400) {
+          this.isErrorInCode = true;
+        } else if (res.data.status === 403){
+          this.isErrorInPass = true;
+        } else {
+          this.closeWindow();
+        }
 			});
 		},
 		showPassword() {
 			this.showPass = !this.showPass;
 		},
-		showErrors() {
-			this.isErrors = true;
-			setTimeout(() => {
-				this.isErrors = false;
-			}, 2300);
-		},
+    showErrors() {
+      this.isErrorInPass = true;
+      this.isErrorInCode = true;
+      setTimeout(() => {
+        this.isErrorInPass = false;
+        this.isErrorInCode = false;
+      }, 3000);
+    },
 		// closeSuccessWindow() {
 		//   this.$modalWindow = {type: 'error'};
 		//   this.$emit('closeWindow');
