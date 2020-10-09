@@ -40,6 +40,10 @@ const get2FASecret = () => axios.post('get_two_fa_secret');
 const enable2FA = data => axios.post('enable_two_fa', data);
 const disable2FA = data => axios.post('disable_two_fa', data);
 
+
+//User wallets
+const getWallet = () => axios.post('getWallets');
+
 export default {
   register,
   login,
@@ -52,4 +56,5 @@ export default {
   disable2FA,
   restorePasswordCheckEmail,
   restorePasswordCheckToken,
+  getWallet
 };
