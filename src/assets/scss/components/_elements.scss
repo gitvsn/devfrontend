@@ -49,6 +49,14 @@
 			opacity: 1;
 		}
 	}
+	&:disabled {
+		background: #b9b9ce;
+		&:hover {
+			&:before {
+				opacity: 0;
+			}
+		}
+	}
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -148,8 +156,8 @@ input:-webkit-autofill:active {
 		font-size: 14px;
 	}
 }
-.has-content{
-	.custom-input__input{
+.has-content {
+	.custom-input__input {
 		border: 2px solid #f6f6f9;
 		background: #fff;
 		+ .custom-input__content {
@@ -322,12 +330,12 @@ input:-webkit-autofill:active {
 		flex: none;
 	}
 }
-.link{
+.link {
 	border: none;
 	padding: 0;
 	text-decoration: underline;
 	color: $pink;
-	&:hover{
+	&:hover {
 		text-decoration: none;
 	}
 }
