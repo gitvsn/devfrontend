@@ -12,9 +12,9 @@ const GET_PERSONAL_INFO = '/get_personal_info';
 
 // User wallets
 const GET_WALLET_INFO = '/getWallets';
-const changePersonalInfo = (personalInfo) => {
-	return axios.post('change_personal_info', personalInfo);
-};
+// const changePersonalInfo = (personalInfo) => {
+// 	return axios.post('change_personal_info', personalInfo);
+// };
 
 const state = () => ({
 	avatar: {},
