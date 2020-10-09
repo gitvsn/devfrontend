@@ -12,6 +12,7 @@
 					type="text"
 					class="custom-input__input"
 					v-model="email"
+					@keydown.enter="checkEmail"
 					@focus="deleteError('email')"
 					required
 				/>

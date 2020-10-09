@@ -24,6 +24,7 @@
 					type="text"
 					class="custom-input__input"
 					v-model="email"
+					@keydown.enter="login"
 					required
 				/>
 				<span class="custom-input__content">
@@ -50,6 +51,7 @@
 				<input
 					:type="fieldType ? 'text' : 'password'"
 					v-model="password"
+					@keydown.enter="login"
 					class="custom-input__input"
 					required
 				/>

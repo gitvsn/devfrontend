@@ -11,6 +11,7 @@
 				<input
 					:type="showField.password ? 'text' : 'password'"
 					v-model="password"
+					@keydown.enter="checkEmail"
 					class="custom-input__input"
 					required
 				/>
@@ -34,6 +35,7 @@
 				<input
 					:type="showField.repeatPassword ? 'text' : 'password'"
 					v-model="repeatPassword"
+					@keydown.enter="checkEmail"
 					class="custom-input__input"
 					required
 				/>

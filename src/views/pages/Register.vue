@@ -22,6 +22,7 @@
 				<input
 					type="text"
 					class="custom-input__input"
+					@keydown.enter="registration"
 					@focus="deleteError('name')"
 					v-model="name"
 					required
@@ -56,6 +57,7 @@
 				<input
 					type="text"
 					class="custom-input__input"
+					@keydown.enter="registration"
 					@focus="deleteError('surname')"
 					v-model="surname"
 					required
@@ -90,6 +92,7 @@
 				<input
 					type="text"
 					class="custom-input__input"
+					@keydown.enter="registration"
 					@focus="deleteError('email')"
 					v-model="email"
 					required
@@ -133,6 +136,7 @@
 				<input
 					:type="!showField.password ? 'password' : 'text'"
 					class="custom-input__input"
+					@keydown.enter="registration"
 					@focus="deleteError('password')"
 					v-model="password"
 					required
@@ -164,6 +168,7 @@
 				<input
 					:type="!showField.repeatPassword ? 'password' : 'text'"
 					class="custom-input__input"
+					@keydown.enter="registration"
 					@focus="deleteError('repeat_password')"
 					v-model="repeatPassword"
 					required
