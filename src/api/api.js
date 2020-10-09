@@ -10,7 +10,8 @@ const login = data => axios.post('authorization', data);
 const checkToken = () => axios.post('check_token');
 
 const confirmLogin = (code) => {
-  const config = setConfigParams({ code, email: localStorage.email });
+  const config = setConfigParams({ code : code,
+                                          email: localStorage.email });
 
   return axios.post('confirm_login', {}, config)
     .then(res => {
