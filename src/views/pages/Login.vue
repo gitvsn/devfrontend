@@ -1,5 +1,5 @@
 <template>
-  <TwoFaGoogle @close="closeModalWindow" v-if="open2fa"/>
+	<TwoFaGoogle @close="closeModalWindow" v-if="open2fa" />
 	<div class="auth-box__content" v-else>
 		<div class="auth-box__title">
 			<p>Sign in to account</p>
@@ -7,17 +7,13 @@
 		<nav class="auth-nav">
 			<ul>
 				<li class="active">
-					<button type="button">
-						<router-link style="text-decoration: none" to="login"
-							>Authorization</router-link
-						>
+					<button type="button" @click="$router.push('login')">
+						Authorization
 					</button>
 				</li>
 				<li>
-					<button type="button">
-						<router-link style="text-decoration: none" to="register"
-							>Registration</router-link
-						>
+					<button type="button" @click="$router.push('register')">
+						Registration
 					</button>
 				</li>
 			</ul>
@@ -53,7 +49,7 @@
 			<label>
 				<input
 					:type="fieldType ? 'text' : 'password'"
-          v-model="password"
+					v-model="password"
 					class="custom-input__input"
 					required
 				/>
@@ -87,7 +83,12 @@
 				</span>
 			</label>
 		</div>
-		<button type="button" class="my-btn w-100 mt-4" v-bind:disabled="isPending" @click="login">
+		<button
+			type="button"
+			class="my-btn w-100 mt-4"
+			v-bind:disabled="isPending"
+			@click="login"
+		>
 			<span>
 				sign in <img class="ml-3" src="@/assets/img/right-arrow.svg" alt="" />
 			</span>
@@ -97,26 +98,25 @@
 				Forgot your password?</router-link
 			>
 		</div>
-<!--    <Login2faModal :type="twoFaModalWindowType" v-if="open2fa" @enteredLastValue="enteredLastValue"/>-->
+		<!--    <Login2faModal :type="twoFaModalWindowType" v-if="open2fa" @enteredLastValue="enteredLastValue"/>-->
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import  API  from '@/api/api';
-import TwoFaGoogle from "@/views/pages/TwoFaGoogle";
-
+import API from '@/api/api';
+import TwoFaGoogle from '@/views/pages/TwoFaGoogle';
 
 export default {
 	name: 'Login',
-  components: {TwoFaGoogle},
-  data() {
+	components: { TwoFaGoogle },
+	data() {
 		return {
 			email: '',
 			password: '',
 			fieldType: false,
-      isPending: false,
-      open2fa: false,
+			isPending: false,
+			open2fa: false,
 			errors: [],
 		};
 	},
@@ -134,38 +134,38 @@ export default {
 
 			console.log(API);
 
-      API.login(payload)
-          .then(response => {
-            if (response.data.status === 200) {
-              if (!response.data.response.twoFaEnable){
-                localStorage.token =  'Bearer_' + response.data.response.token;
-                this.goToLDashboardPage();
-              } else {
-                localStorage.email = response.data.response.username;
-                this.open2fa = true;
-              }
-              return;
-            }
+			API.login(payload)
+				.then((response) => {
+					if (response.data.status === 200) {
+						if (!response.data.response.twoFaEnable) {
+							localStorage.token = 'Bearer_' + response.data.response.token;
+							this.goToLDashboardPage();
+						} else {
+							localStorage.email = response.data.response.username;
+							this.open2fa = true;
+						}
+						return;
+					}
 
-            switch (response.data.error) {
-              case 'Error authorization':
-                return this.errors.push("password");
+					switch (response.data.error) {
+						case 'Error authorization':
+							return this.errors.push('password');
 
-              default:
-                //this.$modalWindow = { type: response.data.error };
-            }
-          })
-          .catch(err => {
-          //  this.$modalWindow = { type: err.message };
-          })
-          .finally(() => {
-            this.isPending = false;
-          });
+						default:
+						//this.$modalWindow = { type: response.data.error };
+					}
+				})
+				.catch((err) => {
+					//  this.$modalWindow = { type: err.message };
+				})
+				.finally(() => {
+					this.isPending = false;
+				});
 		},
 
-    closeModalWindow() {
-      this.open2fa = false;
-    },
+		closeModalWindow() {
+			this.open2fa = false;
+		},
 		goToLDashboardPage() {
 			this.$router.push({ name: 'Dashboard' });
 		},
