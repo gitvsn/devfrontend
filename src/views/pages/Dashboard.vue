@@ -1,7 +1,7 @@
 <template>
 	<div class="dashboard-page">
 		<div class="page-title">
-			<p>Account settings</p>
+			<p>Dashboard</p>
 		</div>
 		<div class="content">
 			<div class="content__wrap">
