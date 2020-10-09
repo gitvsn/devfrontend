@@ -11,12 +11,18 @@ const GET_GOOGLE_2FA_STATUS = '/two_fa_is_enable';
 
 //const GET_SUBSCRIBE_INFO = '/getSubInfo';
 
+// User wallets
+const GET_WALLET_INFO = '/getWallets'
+
+
 const state = () => ({
 	avatar: {},
 	personalInfo: {},
 	subscribeInfo: {},
 	isGoogle2FAEnable: false,
 	userId: null,
+	balance:null,
+	address:null
 });
 
 const mutations = {
@@ -24,6 +30,7 @@ const mutations = {
 		state[field] = value;
 	},
 }
+
 
 const actions = {
 	// setAvatar(context) {
@@ -95,6 +102,25 @@ const actions = {
 			});
 	},
 
+	getUserWallet(context) {
+		return axios.post(GET_WALLET_INFO)
+			.then(response => {
+				if (response.data.status === 200) {
+					const data = {
+						field: 'balance',
+						value: response.data.response[0].balance,
+					}
+					context.commit('setUserState', data);
+
+					const data2 = {
+						field: 'address',
+						value: response.data.response[0].address,
+					}
+					context.commit('setUserState', data2);
+				}
+			});
+	},
+
 	// getUserId(context) {
 	// 	return axios.post(GET_USER_ID)
 	// 		.then(res => {
@@ -108,6 +134,7 @@ const actions = {
 	// 		});
 	// },
 };
+
 
 export default {
 	state,

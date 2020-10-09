@@ -12,7 +12,7 @@
           <div class="my-wallet">
             <div class="custom-input w-100">
               <label>
-                <input type="text" class="custom-input__input " v-model="userWalletAddress" readonly
+                <input type="text" class="custom-input__input " v-model="userAddress" readonly
                        required>
               </label>
             </div>
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="balance-box__value">
-            <p><span>{{userWalletBalance}}</span> VSN</p>
+            <p><span>{{userBalance}}</span> VSN</p>
           </div>
 
         </div>
@@ -75,6 +75,7 @@
 
 <script>
 
+import {mapActions, mapState} from 'vuex'
 import  API  from '@/api/api';
 
 export default {
@@ -85,23 +86,19 @@ export default {
       userWalletBalance: null,
     }
   },
+  computed: {
+    ...mapState({
+      userBalance: state => state.user.balance,
+      userAddress: state => state.user.address,
+    }),
+  },
   methods: {
-    getWalletAddress() {
-      API.getWallet()
-          .then(response => {
-            this.userWalletAddress = response.data.response[0].address
-            this.userWalletBalance = response.data.response[0].balance
-          })
-          .catch(err => {
-            //  this.$modalWindow = { type: err.message };
-          })
-          .finally(() => {
-          //  this.isPending = false;
-          });
-    }
+    ...mapActions({
+      getUserWallet: 'getUserWallet',
+    }),
   },
   mounted() {
-    this.getWalletAddress();
+    this.getUserWallet();
   }
 }
 </script>
