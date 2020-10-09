@@ -329,7 +329,6 @@ export default {
 	},
 	data() {
 		return {
-			//avatarUrl: "",
 			password: '',
 			newPassword: '',
 			confirmNewPassword: '',
@@ -361,6 +360,11 @@ export default {
 			getGoogle2FAStatus: 'getGoogle2FAStatus',
       changePersonalInfo: 'changePersonalInfo',
 		}),
+    cleanFields(){
+      this.password = '';
+      this.newPassword = '';
+      this.confirmNewPassword = '';
+    },
 		uploadAvatar() {
 			let files = this.$refs.avatarInput.files;
 			if (!files.length) return;
@@ -438,6 +442,7 @@ export default {
 				} else {
           this.changePersonalInfo(userInfo)
 						.then((res) => {
+						  this.cleanFields();
 							//this.$modalWindow = {type: modalTypes.DATA_SAVED};
 						})
 						.catch((err) => {

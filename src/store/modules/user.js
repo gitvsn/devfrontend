@@ -5,13 +5,9 @@ const GET_AVATAR = '/getAvatar';
 const GET_GOOGLE_2FA_STATUS = '/two_fa_is_enable';
 const GET_PERSONAL_INFO = '/get_personal_info';
 
-
 // User wallets
 const GET_WALLET_INFO = '/getWallets';
 const CHANGE_PERSONAL_INFO = '/change_personal_info';
-
-
-
 
 
 const state = () => ({

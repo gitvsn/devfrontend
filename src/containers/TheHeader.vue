@@ -8,7 +8,7 @@
 				<img src="@/assets/img/user-img.jpg" alt="" />
 			</router-link>
 			<div class="user-short__content">
-				<router-link to="profile">Mike Smith</router-link>
+				<router-link to="profile">{{name}} {{surname}}</router-link>
 			</div>
 			<div class="user-short__drop">
 				<ul>
@@ -29,6 +29,7 @@ export default {
   },
   data() {
     return {
+
       isShow: false,
     }
   },
