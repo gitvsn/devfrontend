@@ -98,6 +98,8 @@
 				Forgot your password?</router-link
 			>
 		</div>
+		<modal-window />
+		<modal-window-success />
 		<!--    <Login2faModal :type="twoFaModalWindowType" v-if="open2fa" @enteredLastValue="enteredLastValue"/>-->
 	</div>
 </template>
@@ -106,10 +108,11 @@
 import { mapGetters } from 'vuex';
 import API from '@/api/api';
 import TwoFaGoogle from '@/views/pages/TwoFaGoogle';
-
+import ModalWindow from '@/components/ErrorModal';
+import ModalWindowSuccess from '@/components/SuccessModal';
 export default {
 	name: 'Login',
-	components: { TwoFaGoogle },
+	components: { TwoFaGoogle, ModalWindow, ModalWindowSuccess },
 	data() {
 		return {
 			email: '',
@@ -150,11 +153,11 @@ export default {
 							return this.errors.push('password');
 
 						default:
-						//this.$modalWindow = { type: response.data.error };
+							this.$modalWindowError = { type: response.data.error };
 					}
 				})
 				.catch((err) => {
-					//  this.$modalWindow = { type: err.message };
+					this.$modalWindowError = { type: err.message };
 				})
 				.finally(() => {
 					this.isPending = false;
