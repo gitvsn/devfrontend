@@ -49,6 +49,8 @@ const getTransactions = (page = 1) => {
   );
 };
 
+const send = data => axios.post('send', data);
+
 
 export default {
   register,
@@ -62,5 +64,6 @@ export default {
   disable2FA,
   restorePasswordCheckEmail,
   restorePasswordCheckToken,
-  getTransactions
+  getTransactions,
+  send
 };
