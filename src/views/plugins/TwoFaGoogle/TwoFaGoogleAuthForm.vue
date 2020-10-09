@@ -44,28 +44,16 @@ export default {
     }
   },
   methods: {
-    // ...mapActions({
-    //     confirmTwoFa: 'user/confirmTwoFa',
-    // }),
-    //
-    // sendInputsValue(){
-    //     this.twaCode += this.inp1;this.twaCode += this.inp2;this.twaCode += this.inp3;
-    //     this.twaCode += this.inp4;this.twaCode += this.inp5;this.twaCode += this.inp6;
-    //     this.confirmTwoFa(this.twaCode)
-    //         .then(res => {
-    //             this.$emit('twoFaCorrect')
-    //         })
-    //         .catch(err => {
-    //             this.twaCode = "";
-    //             this.inp1="";this.inp2="";
-    //             this.inp3="";this.inp4="";
-    //             this.inp5="";this.inp6="";
-    //             this.$refs.ref1.focus()
-    //         })
-    // },
+    sendInputsValue(){
+      this.twaCode += this.inp1;this.twaCode += this.inp2;this.twaCode += this.inp3;
+      this.twaCode += this.inp4;this.twaCode += this.inp5;this.twaCode += this.inp6;
+      this.$emit('twaCode',this.twaCode);
+
+      this.twaCode = "";
+    },
     paste(e) {
       this.text = e.clipboardData.getData('text').replace(/[^\d;]/g, '');
-      if (this.text.length >= 6) {
+      if(this.text.length>=6) {
         this.inp1 = this.text[0];
         this.inp2 = this.text[1];
         this.inp3 = this.text[2];
@@ -75,74 +63,74 @@ export default {
       } else {
         this.inp1 = '';
       }
-      setTimeout(() => {
+      setTimeout(()=> {
         this.inp1 = this.inp1[0];
         this.$refs.ref6.focus();
-      }, 300);
+      },300);
     },
-    input_1(value) {
-      if (value.data !== null) {
+    input_1(value){
+      if (value.data !== null){
         this.$refs.ref2.focus();
       }
     },
-    input_2(value) {
-      if (value.data !== null) {
+    input_2(value){
+      if (value.data !== null){
         this.$refs.ref3.focus();
       } else {
         this.$refs.ref1.focus();
       }
     },
-    input_3(value) {
-      if (value.data !== null) {
+    input_3(value){
+      if (value.data !== null){
         this.$refs.ref4.focus();
       } else {
         this.$refs.ref2.focus();
       }
     },
-    input_4(value) {
-      if (value.data !== null) {
+    input_4(value){
+      if (value.data !== null){
         this.$refs.ref5.focus();
       } else {
         this.$refs.ref3.focus();
       }
     },
-    input_5(value) {
-      if (value.data !== null) {
+    input_5(value){
+      if (value.data !== null){
         this.$refs.ref6.focus();
       } else {
         this.$refs.ref4.focus();
       }
     },
-    input_6(value) {
-      if (value.data !== null) {
+    input_6(value){
+      if (value.data !== null){
         this.sendInputsValue()
       } else {
         this.$refs.ref5.focus();
       }
     },
-    clearField() {
-      setTimeout(() => {
-        this.twaCode = '';
+    clearField(){
+      setTimeout(()=>{
+        this.twaCode= '';
         this.inp6 = '';
         this.$refs.ref5.focus()
-      }, 200);
-      setTimeout(() => {
+      },200);
+      setTimeout(()=>{
         this.inp5 = '';
         this.$refs.ref4.focus()
-      }, 400);
-      setTimeout(() => {
+      },400);
+      setTimeout(()=>{
         this.inp4 = '';
         this.$refs.ref3.focus()
-      }, 600);
-      setTimeout(() => {
+      },600);
+      setTimeout(()=>{
         this.inp3 = '';
         this.$refs.ref2.focus()
-      }, 800);
-      setTimeout(() => {
+      },800);
+      setTimeout(()=>{
         this.inp2 = '';
         this.inp1 = '';
         this.$refs.ref1.focus()
-      }, 1000)
+      },1000)
     }
   },
   data() {
@@ -157,6 +145,9 @@ export default {
     }
   },
   created() {
+    setTimeout(()=> {
+      this.$refs.ref1.focus();
+    },300)
   }
 }
 </script>

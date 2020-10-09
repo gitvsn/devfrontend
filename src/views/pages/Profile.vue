@@ -27,7 +27,7 @@
               </span>
 						</p>
 					</div>
-					<div class="switcher-wrap ml-auto">
+					<div class="switcher-wrap ml-auto" @click="openModalWindow">
 						<div class="switcher">
 							<label>
 								<input type="checkbox" />
@@ -243,7 +243,9 @@
 				</div>
 			</div>
 		</div>
-	</div>
+    <GoogleAuthSetModal v-if="openEnable2FaModalWindow" @closeWindow="closeEnableModalWindow"/>
+    <GoogleAuthDisableModal v-if="openDisable2FaModalWindow" @closeWindow="closeDisableModalWindow"/>
+  </div>
 </template>
 
 <script>
@@ -251,10 +253,14 @@
 import { checkTypeFile, checkSizeFile } from '@/util/fileUploadValidation.js';
 import API from '@/api/api';
 import {mapActions, mapState} from 'vuex'
+import GoogleAuthDisableModal from "@/views/plugins/TwoFaGoogle/GoogleAuthDisableModal";
+import GoogleAuthSetModal from "@/views/plugins/TwoFaGoogle/GoogleAuthSetModal";
 
 export default {
 	name: 'Profile',
 	components: {
+    GoogleAuthSetModal,
+    GoogleAuthDisableModal
 	},
   data() {
     return {
@@ -290,27 +296,27 @@ export default {
     //
     //   this.uploadUserAvatar(binary);
     // },
-    // openModalWindow() {
-    //   if (this.google2FAStatus) {
-    //     this.openDisable2FaModalWindow = true;
-    //   } else {
-    //     this.openEnable2FaModalWindow = true;
-    //   }
-    // },
-    // closeEnableModalWindow(isSuccess) {
-    //   if (isSuccess) {
-    //     //this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_ENABLED};
-    //   }
-    //   this.openEnable2FaModalWindow = false;
-    //   this.getGoogle2FAStatus();
-    // },
-    // closeDisableModalWindow(isSuccess) {
-    //   if (isSuccess) {
-    //     //this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_DISABLED};
-    //   }
-    //   this.openDisable2FaModalWindow = false;
-    //   this.getGoogle2FAStatus();
-    // },
+    openModalWindow() {
+      if (this.google2FAStatus) {
+        this.openDisable2FaModalWindow = true;
+      } else {
+        this.openEnable2FaModalWindow = true;
+      }
+    },
+    closeEnableModalWindow(isSuccess) {
+      if (isSuccess) {
+        //this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_ENABLED};
+      }
+      this.openEnable2FaModalWindow = false;
+      this.getGoogle2FAStatus();
+    },
+    closeDisableModalWindow(isSuccess) {
+      if (isSuccess) {
+        //this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_DISABLED};
+      }
+      this.openDisable2FaModalWindow = false;
+      this.getGoogle2FAStatus();
+    },
     // changeUserPersonalInfo(e) {
     //   let userInfo = {
     //     'oldPassword': this.userInfo.oldPassword !== null ? this.userInfo.oldPassword.replace(/\s+/g, '') : null,
