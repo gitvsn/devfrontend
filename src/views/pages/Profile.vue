@@ -20,15 +20,12 @@
 						<p>
 							Safety
 							<span>
-              {{(google2FAStatus
-                    ? '2FA enabled'
-                    : '2FA disabled'
-                )}}
-              </span>
+								{{ google2FAStatus ? '2FA enabled' : '2FA disabled' }}
+							</span>
 						</p>
 					</div>
 					<div class="switcher-wrap ml-auto" @click="openModalWindow">
-						<div class="switcher" :class="{active:google2FAStatus}">
+						<div class="switcher" :class="{ active: google2FAStatus }">
 							<label>
 								<input type="checkbox" />
 								<span class="switcher__box"></span>
@@ -45,7 +42,12 @@
 					<div class="col-md-6">
 						<div class="custom-input" :class="userInfo ? '' : 'error'">
 							<label>
-								<input type="text" class="custom-input__input" v-model="name" required />
+								<input
+									type="text"
+									class="custom-input__input"
+									v-model="name"
+									required
+								/>
 								<span class="custom-input__content">
 									<span class="custom-input__text">Name</span>
 									<span class="custom-input__icon">
@@ -72,7 +74,12 @@
 					<div class="col-md-6">
 						<div class="custom-input" :class="userInfo ? '' : 'error'">
 							<label>
-								<input type="text" class="custom-input__input" v-model="surname" required />
+								<input
+									type="text"
+									class="custom-input__input"
+									v-model="surname"
+									required
+								/>
 								<span class="custom-input__content">
 									<span class="custom-input__text">Surname</span>
 									<span class="custom-input__icon">
@@ -99,7 +106,12 @@
 					<div class="col-md-6">
 						<div class="custom-input" :class="userInfo ? '' : 'error'">
 							<label>
-								<input type="text" class="custom-input__input" v-model="country" required />
+								<input
+									type="text"
+									class="custom-input__input"
+									v-model="country"
+									required
+								/>
 								<span class="custom-input__content">
 									<span class="custom-input__text">Country</span>
 									<span class="custom-input__icon">
@@ -126,8 +138,16 @@
 					<div class="col-md-6">
 						<div class="custom-input" :class="userInfo ? '' : 'error'">
 							<label>
-								<input type="text" class="custom-input__input"  v-model="phone" required />
-								<span class="custom-input__content" :class="confirmPassword ? '' : 'error'">
+								<input
+									type="text"
+									class="custom-input__input"
+									v-model="phone"
+									required
+								/>
+								<span
+									class="custom-input__content"
+									:class="confirmPassword ? '' : 'error'"
+								>
 									<span class="custom-input__text">Phone</span>
 									<span class="custom-input__icon">
 										<svg
@@ -160,7 +180,12 @@
 					<div class="col-md-12">
 						<div class="custom-input" :class="userInfo ? '' : 'error'">
 							<label>
-								<input type="text" class="custom-input__input" v-model="email" disabled/>
+								<input
+									type="text"
+									class="custom-input__input"
+									v-model="email"
+									readonly
+								/>
 								<span class="custom-input__content">
 									<span class="custom-input__text">E-mail</span>
 									<span class="custom-input__icon">
@@ -192,15 +217,20 @@
 					<div class="col-md-12">
 						<div class="custom-input" :class="oldPassword ? '' : 'error'">
 							<label>
-								<input :type="passField ? 'text' : 'password'"
-                       v-model="password"
-                       class="custom-input__input" required />
+								<input
+									:type="passField ? 'text' : 'password'"
+									v-model="password"
+									class="custom-input__input"
+									required
+								/>
 								<span class="custom-input__content">
 									<span class="custom-input__text">Old password</span>
 									<span class="custom-input__icon">
-										<button class="pass-toggle"
-                            :class="{ active: !passField }"
-                            @click="passField = !passField"></button>
+										<button
+											class="pass-toggle"
+											:class="{ active: !passField }"
+											@click="passField = !passField"
+										></button>
 									</span>
 								</span>
 							</label>
@@ -212,15 +242,20 @@
 					<div class="col-md-6">
 						<div class="custom-input" :class="confirmPassword ? '' : 'error'">
 							<label>
-								<input :type="newPassField ? 'text' : 'password'"
-                       v-model="newPassword"
-                       class="custom-input__input" required />
+								<input
+									:type="newPassField ? 'text' : 'password'"
+									v-model="newPassword"
+									class="custom-input__input"
+									required
+								/>
 								<span class="custom-input__content">
 									<span class="custom-input__text">New password</span>
 									<span class="custom-input__icon">
-										<button class="pass-toggle"
-                            :class="{ active: !newPassField }"
-                            @click="newPassField = !newPassField"></button>
+										<button
+											class="pass-toggle"
+											:class="{ active: !newPassField }"
+											@click="newPassField = !newPassField"
+										></button>
 									</span>
 								</span>
 							</label>
@@ -232,15 +267,20 @@
 					<div class="col-md-6">
 						<div class="custom-input" :class="confirmPassword ? '' : 'error'">
 							<label>
-								<input :type="confNewPasField ? 'text' : 'password'"
-                       v-model="confirmNewPassword"
-                       class="custom-input__input" required />
+								<input
+									:type="confNewPasField ? 'text' : 'password'"
+									v-model="confirmNewPassword"
+									class="custom-input__input"
+									required
+								/>
 								<span class="custom-input__content">
 									<span class="custom-input__text">Confirm new password</span>
 									<span class="custom-input__icon">
-										<button class="pass-toggle"
-                            :class="{ active: !confNewPasField }"
-                            @click="confNewPasField = !confNewPasField"></button>
+										<button
+											class="pass-toggle"
+											:class="{ active: !confNewPasField }"
+											@click="confNewPasField = !confNewPasField"
+										></button>
 									</span>
 								</span>
 							</label>
@@ -250,146 +290,162 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<button class="my-btn w-100" @click="changeUserPersonalInfo"><span>save changes</span></button>
+						<button class="my-btn w-100" @click="changeUserPersonalInfo">
+							<span>save changes</span>
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-    <GoogleAuthSetModal v-if="openEnable2FaModalWindow" @closeWindow="closeEnableModalWindow"/>
-    <GoogleAuthDisableModal v-if="openDisable2FaModalWindow" @closeWindow="closeDisableModalWindow"/>
-  </div>
+		<GoogleAuthSetModal
+			v-if="openEnable2FaModalWindow"
+			@closeWindow="closeEnableModalWindow"
+		/>
+		<GoogleAuthDisableModal
+			v-if="openDisable2FaModalWindow"
+			@closeWindow="closeDisableModalWindow"
+		/>
+	</div>
 </template>
 
 <script>
-
 import { checkTypeFile, checkSizeFile } from '@/util/fileUploadValidation.js';
 import API from '@/api/api';
-import {mapActions, mapState} from 'vuex'
-import GoogleAuthDisableModal from "@/views/plugins/TwoFaGoogle/GoogleAuthDisableModal";
-import GoogleAuthSetModal from "@/views/plugins/TwoFaGoogle/GoogleAuthSetModal";
+import { mapActions, mapState } from 'vuex';
+import GoogleAuthDisableModal from '@/views/plugins/TwoFaGoogle/GoogleAuthDisableModal';
+import GoogleAuthSetModal from '@/views/plugins/TwoFaGoogle/GoogleAuthSetModal';
 
 export default {
 	name: 'Profile',
 	components: {
-    GoogleAuthSetModal,
-    GoogleAuthDisableModal
+		GoogleAuthSetModal,
+		GoogleAuthDisableModal,
 	},
-  data() {
-    return {
-      password: "",
-      newPassword: "",
-      confirmNewPassword: "",
-      passField: false,
-      newPassField: false,
-      confNewPasField: false,
-      openEnable2FaModalWindow: false,
-      openDisable2FaModalWindow: false,
-      oldPassword: true,
-      confirmPassword: true,
-      userInfo: true,
-      name: "",
-      surname: "",
-      country: "",
-      phone: "",
-      email: "",
+	data() {
+		return {
+			password: '',
+			newPassword: '',
+			confirmNewPassword: '',
+			passField: false,
+			newPassField: false,
+			confNewPasField: false,
+			openEnable2FaModalWindow: false,
+			openDisable2FaModalWindow: false,
+			oldPassword: true,
+			confirmPassword: true,
+			userInfo: true,
+			name: '',
+			surname: '',
+			country: '',
+			phone: '',
+			email: '',
+		};
+	},
+	computed: {
+		...mapState({
+			//avatarUrl: state => state.user.avatar.avatar,
+			//userInfo: state => ({ ...state.user.personalInfo }),
+			google2FAStatus: (state) => state.user.isGoogle2FAEnable,
+		}),
+	},
+	methods: {
+		...mapActions({
+			//uploadUserAvatar: 'uploadUserAvatar',
+			getGoogle2FAStatus: 'getGoogle2FAStatus',
+		}),
+		// uploadAvatar() {
+		//   let files = this.$refs.avatarInput.files;
+		//   if (!files.length) return;
+		//   if (!checkTypeFile(files)) {
+		//     return;
+		//   }
+		//   if (!checkSizeFile(files)) {
+		//     return;
+		//   }
+		//   let file = files[0];
+		//   let binary = file;
+		//
+		//   this.uploadUserAvatar(binary);
+		// },
+		getUserInfo() {
+			API.getPersonalInfo()
+				.then((res) => {
+					this.name = res.data.name;
+					this.surname = res.data.surname;
+					this.country = res.data.country;
+					this.phone = res.data.phone;
+					this.email = res.data.email;
+				})
+				.catch((err) => {
+					this.userInfo = false;
+				});
+		},
+		openModalWindow() {
+			if (this.google2FAStatus) {
+				this.openDisable2FaModalWindow = true;
+			} else {
+				this.openEnable2FaModalWindow = true;
+			}
+		},
+		closeEnableModalWindow(isSuccess) {
+			if (isSuccess) {
+				//this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_ENABLED};
+			}
+			this.openEnable2FaModalWindow = false;
+			this.getGoogle2FAStatus();
+		},
+		closeDisableModalWindow(isSuccess) {
+			if (isSuccess) {
+				//this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_DISABLED};
+			}
+			this.openDisable2FaModalWindow = false;
+			this.getGoogle2FAStatus();
+		},
+		changeUserPersonalInfo(e) {
+			let userInfo = {
+				name: this.name !== null ? this.name.replace(/\s+/g, '') : null,
+				surname:
+					this.surname !== null ? this.surname.replace(/\s+/g, '') : null,
+				country:
+					this.country !== null ? this.country.replace(/\s+/g, '') : null,
+				phone: this.phone !== null ? this.phone.replace(/\s+/g, '') : null,
 
-    }
-  },
-  computed: {
-    ...mapState({
-      //avatarUrl: state => state.user.avatar.avatar,
-      //userInfo: state => ({ ...state.user.personalInfo }),
-      google2FAStatus: state => state.user.isGoogle2FAEnable,
-    }),
-  },
-  methods: {
-    ...mapActions({
-      //uploadUserAvatar: 'uploadUserAvatar',
-      getGoogle2FAStatus: 'getGoogle2FAStatus',
-    }),
-    // uploadAvatar() {
-    //   let files = this.$refs.avatarInput.files;
-    //   if (!files.length) return;
-    //   if (!checkTypeFile(files)) {
-    //     return;
-    //   }
-    //   if (!checkSizeFile(files)) {
-    //     return;
-    //   }
-    //   let file = files[0];
-    //   let binary = file;
-    //
-    //   this.uploadUserAvatar(binary);
-    // },
-    getUserInfo(){
-      API.getPersonalInfo()
-          .then(res => {
-            this.name = res.data.name;
-            this.surname = res.data.surname;
-            this.country = res.data.country;
-            this.phone = res.data.phone;
-            this.email = res.data.email;
-          })
-          .catch(err => {
-            this.userInfo = false;
-          });
-    },
-    openModalWindow() {
-      if (this.google2FAStatus) {
-        this.openDisable2FaModalWindow = true;
-      } else {
-        this.openEnable2FaModalWindow = true;
-      }
-    },
-    closeEnableModalWindow(isSuccess) {
-      if (isSuccess) {
-        //this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_ENABLED};
-      }
-      this.openEnable2FaModalWindow = false;
-      this.getGoogle2FAStatus();
-    },
-    closeDisableModalWindow(isSuccess) {
-      if (isSuccess) {
-        //this.$modalWindow = {type: modalTypes.GOOGLE_AUTH_DISABLED};
-      }
-      this.openDisable2FaModalWindow = false;
-      this.getGoogle2FAStatus();
-    },
-    changeUserPersonalInfo(e) {
-      let userInfo = {
-        'name': this.name !== null ? this.name.replace(/\s+/g, '') : null,
-        'surname': this.surname !== null ? this.surname.replace(/\s+/g, '') : null,
-        'country': this.country !== null ? this.country.replace(/\s+/g, '') : null,
-        'phone': this.phone !== null ? this.phone.replace(/\s+/g, '') : null,
+				oldPassword:
+					this.password !== null ? this.password.replace(/\s+/g, '') : null,
+				newPassword:
+					this.newPassword !== null
+						? this.newPassword.replace(/\s+/g, '')
+						: null,
+				confirmPassword:
+					this.confirmNewPassword !== null
+						? this.confirmNewPassword.replace(/\s+/g, '')
+						: null,
+			};
 
-        'oldPassword': this.password !== null ? this.password.replace(/\s+/g, '') : null,
-        'newPassword': this.newPassword !== null ? this.newPassword.replace(/\s+/g, '') : null,
-        'confirmPassword': this.confirmNewPassword !== null ? this.confirmNewPassword.replace(/\s+/g, '') : null,
-      };
+			if (this.oldPassword && this.confirmPassword) {
+				e.preventDefault();
 
-      if (this.oldPassword && this.confirmPassword) {
-        e.preventDefault();
-
-        if (this.newPassword !== this.confirmNewPassword) {
-          this.confirmPassword = false;
-        }
-        else {
-          API.changePersonalInfo(userInfo)
-              .then(res => {
-                //this.$modalWindow = {type: modalTypes.DATA_SAVED};
-              })
-              .catch(err => {
-                this.oldPassword = false;
-                (this.newPassword !== this.confirmPassword) ? this.confirmPassword = false : this.confirmPassword = true;
-              });
-        }
-      }
-    }
-  },
-  mounted() {
-    this.getGoogle2FAStatus();
-    this.getUserInfo();
-  }
+				if (this.newPassword !== this.confirmNewPassword) {
+					this.confirmPassword = false;
+				} else {
+					API.changePersonalInfo(userInfo)
+						.then((res) => {
+							//this.$modalWindow = {type: modalTypes.DATA_SAVED};
+						})
+						.catch((err) => {
+							this.oldPassword = false;
+							this.newPassword !== this.confirmPassword
+								? (this.confirmPassword = false)
+								: (this.confirmPassword = true);
+						});
+				}
+			}
+		},
+	},
+	mounted() {
+		this.getGoogle2FAStatus();
+		this.getUserInfo();
+	},
 };
 </script>
 

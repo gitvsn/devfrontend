@@ -118,6 +118,14 @@ input:-webkit-autofill:active {
 		&[readonly] {
 			color: #c6c6d7 !important;
 			background: #f6f6f9 !important;
+			+ .custom-input__content {
+				.custom-input__text {
+					color: #b9b9ce;
+					font-size: 12px;
+					background: #fff;
+					margin-top: -25px;
+				}
+			}
 		}
 	}
 	&__icon {
