@@ -359,6 +359,7 @@ export default {
 		...mapActions({
 			uploadUserAvatar: 'uploadUserAvatar',
 			getGoogle2FAStatus: 'getGoogle2FAStatus',
+      changePersonalInfo: 'changePersonalInfo',
 		}),
 		uploadAvatar() {
 			let files = this.$refs.avatarInput.files;
@@ -435,7 +436,7 @@ export default {
 				if (this.newPassword !== this.confirmNewPassword) {
 					this.confirmPassword = false;
 				} else {
-					API.changePersonalInfo(userInfo)
+          this.changePersonalInfo(userInfo)
 						.then((res) => {
 							//this.$modalWindow = {type: modalTypes.DATA_SAVED};
 						})

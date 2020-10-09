@@ -2,19 +2,17 @@ import axios from 'axios';
 
 const UPLOAD_AVATAR = '/upload/avatar';
 const GET_AVATAR = '/getAvatar';
-//const GET_USER_ID = '/get_id';
-
 const GET_GOOGLE_2FA_STATUS = '/two_fa_is_enable';
-
 const GET_PERSONAL_INFO = '/get_personal_info';
 
-//const GET_SUBSCRIBE_INFO = '/getSubInfo';
 
 // User wallets
 const GET_WALLET_INFO = '/getWallets';
-const changePersonalInfo = (personalInfo) => {
-	return axios.post('change_personal_info', personalInfo);
-};
+const CHANGE_PERSONAL_INFO = '/change_personal_info';
+
+
+
+
 
 const state = () => ({
 	avatar: {},
@@ -53,17 +51,6 @@ const actions = {
 			context.commit('setUserState', data);
 		});
 	},
-
-	// setSubscribeInfo(context) {
-	// 	return axios.post(GET_SUBSCRIBE_INFO)
-	// 		.then(res => {
-	// 			const data = {
-	// 				field: 'subscribeInfo',
-	// 				value: res.data.response,
-	// 			}
-	// 			context.commit('setUserState', data);
-	// 		});
-	// },
 
 	setPersonalInfo(context) {
 		return axios.post(GET_PERSONAL_INFO).then((res) => {
@@ -116,18 +103,10 @@ const actions = {
 		});
 	},
 
-	// getUserId(context) {
-	// 	return axios.post(GET_USER_ID)
-	// 		.then(res => {
-	// 			if (res.data.status === 200) {
-	// 				const data = {
-	// 					field: 'userId',
-	// 					value: res.data.response,
-	// 				}
-	// 				context.commit('setUserState', data);
-	// 			}
-	// 		});
-	// },
+	changePersonalInfo(context,payload) {
+		return axios.post(CHANGE_PERSONAL_INFO, payload)
+	}
+
 };
 
 export default {

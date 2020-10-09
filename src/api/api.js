@@ -21,12 +21,12 @@ const confirmLogin = (code) => {
 		return res;
 	});
 };
-const changePersonalInfo = (personalInfo) => {
-	return axios.post('change_personal_info', personalInfo);
-};
+
 const getPersonalInfo = () => {
 	return axios.post('get_personal_info');
 };
+
+
 const confirm2FA = (code) => {
 	return axios.post('confirm_two_fa', {}, setConfigParams({ code }));
 };
@@ -64,7 +64,6 @@ export default {
 	get2FASecret,
 	enable2FA,
 	disable2FA,
-	changePersonalInfo,
 	getPersonalInfo,
 	restorePasswordCheckEmail,
 	restorePasswordCheckToken,
