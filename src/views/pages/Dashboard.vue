@@ -81,10 +81,7 @@ import  API  from '@/api/api';
 export default {
   name: "Dashboard",
   data() {
-    return {
-      userWalletAddress: null,
-      userWalletBalance: null,
-    }
+    return {}
   },
   computed: {
     ...mapState({

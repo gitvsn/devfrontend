@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const TRANSACTIONS_LIMIT = 10;
 
 const setConfigParams = (params) => ({ params });
 
@@ -46,6 +47,14 @@ const getPersonalInfo = () => {
   return axios.post('get_personal_info');
 };
 
+// Transactions
+const getTransactions = (page = 1) => {
+  return axios.post(
+      'get_user_transactions' +
+      `?page=${page}` +
+      `&size=${TRANSACTIONS_LIMIT}`
+  );
+};
 
 export default {
   register,
@@ -61,4 +70,5 @@ export default {
   getPersonalInfo,
   restorePasswordCheckEmail,
   restorePasswordCheckToken,
+  getTransactions,
 };
