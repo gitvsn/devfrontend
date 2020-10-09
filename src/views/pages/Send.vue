@@ -77,7 +77,7 @@
               <td>{{new Date(el.created).customFormat("#DD#.#MM#.#YYYY#")}}</td>
               <td>{{new Date(el.created).customFormat("#hh#:#mm#:#ss#")}}</td>
               <td>{{el.type === 'DEPOSIT' ? 'Received' : 'Sent'}}</td>
-              <td><p :class="el.type === 'DEPOSIT' ? 'amount-value positive' :'amount-value negative' ">10,457 VSN</p></td>
+              <td><p :class="el.type === 'DEPOSIT' ? 'amount-value positive' :'amount-value negative' ">{{el.amount}} VSN</p></td>
             </tr>
             </tbody>
           </table>
