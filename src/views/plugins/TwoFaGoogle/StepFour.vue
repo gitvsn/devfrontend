@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="mt-3">
-      <TwoFaGoogleAuthForm @twoFa="getTwoFa"/>
+      <TwoFaGoogleAuthForm @twaCode="getTwoFa"/>
     </div>
 
   </div>
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      twaCode: '',
+      code: null,
       password: '',
       actionType: 'login',
       clearField: false,
@@ -66,13 +66,10 @@ export default {
     }
   },
   methods: {
-    onUpdateCode(code) {
-      this.twaCode = code;
-    },
     send() {
       let enableTwoFaDTO = {
         password: this.password,
-        code: localStorage.getItem("twaCode")
+        code: this.code
       };
 
       API.enable2FA(enableTwoFaDTO)
@@ -102,7 +99,6 @@ export default {
       this.code = twoFa;
     },
     closeSuccessWindow() {
-      // this.$modalWindow = {type: 'error'};
       this.$emit('success', true);
     }
   },
