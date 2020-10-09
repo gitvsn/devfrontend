@@ -2,7 +2,7 @@
 	<TwoFaGoogle @close="closeModalWindow" v-if="open2fa" />
 	<div class="auth-box__content" v-else>
 		<div class="auth-box__title">
-			<p>Sign in to account</p>
+			<p>Authorization</p>
 		</div>
 		<nav class="auth-nav">
 			<ul>

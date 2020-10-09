@@ -424,12 +424,14 @@ export default {
 		},
 		changeUserPersonalInfo(e) {
 			let userInfo = {
-				name: this.name !== null ? this.name.replace(/\s+/g, '') : null,
+				name:
+            this.name !== null ? this.name.replace(/\s+/g, '') : null,
 				surname:
 					this.surname !== null ? this.surname.replace(/\s+/g, '') : null,
 				country:
 					this.country !== null ? this.country.replace(/\s+/g, '') : null,
-				phone: this.phone !== null ? this.phone.replace(/\s+/g, '') : null,
+				phone:
+            this.phone !== null ? this.phone.replace(/\s+/g, '') : null,
 
 				oldPassword:
 					this.password !== null ? this.password.replace(/\s+/g, '') : null,
