@@ -188,7 +188,7 @@
 					<div class="col-md-12">
 						<div
 							class="custom-input has-content"
-							:class="userInfo ? '' : 'error'"
+							:class="userInfoErrors ? '' : 'error'"
 						>
 							<label>
 								<input
