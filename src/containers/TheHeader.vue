@@ -9,11 +9,10 @@
 				<img v-else :src="avatarUrl" alt="" />
 			</router-link>
 			<div class="user-short__content">
-				<router-link to="profile">{{ name }} {{ surname }}</router-link>
+				<router-link to="profile">{{ userInfo.name }} {{ userInfo.surname }}</router-link>
 			</div>
 			<div class="user-short__drop">
 				<ul>
-					<!--					<li><router-link to="login" @click="goToLoginPage">Log out</router-link></li>-->
 					<li><a @click="goToLoginPage">Log out</a></li>
 				</ul>
 			</div>
@@ -29,19 +28,19 @@ export default {
 	components: {},
 	data() {
 		return {
-			name: localStorage.name,
-			surname: localStorage.surname,
 			isShow: false,
 		};
 	},
 	computed: {
 		...mapState({
 			avatarUrl: (state) => state.user.avatar.avatar,
+      userInfo: state => state.user.personalInfo,
 		}),
 	},
 	methods: {
 		...mapActions({
 			setAvatar: 'setAvatar',
+      setPersonalInfo: "setPersonalInfo",
 		}),
 		goToLoginPage() {
 			localStorage.removeItem('token');
@@ -66,6 +65,7 @@ export default {
 	mounted() {
 		window.addEventListener('click', this.toggleMobileUserCard);
 		this.setAvatar();
+		this.setPersonalInfo();
 	},
 	beforeDestroy() {
 		window.removeEventListener('click', this.toggleMobileUserCard);

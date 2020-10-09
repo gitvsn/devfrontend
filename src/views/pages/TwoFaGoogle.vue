@@ -9,11 +9,14 @@
 				<p>Google Authentication</p>
 			</div>
 		</div>
-		<div class="google-auth">
+		<div class="google-auth" :class="{error : error}">
 			<TwoFaGoogleAuthForm @twaCode="twoFa" />
 			<button class="my-btn w-100 mt-3" @click="onSubmit">
 				<span>submit</span>
 			</button>
+      <div class="error-msg" >
+        <p>Wrong code!</p>
+      </div>
 		</div>
 		<ModalWindowError />
 	</div>
@@ -35,7 +38,7 @@ export default {
 				.catch((err) => {
 					localStorage.removeItem('token');
 					if (err.response && err.response.status === 400) {
-						this.setError('invalid_code');
+						this.error = true;
 					} else {
 						this.$modalWindowError = { type: err.message };
 					}
@@ -52,6 +55,7 @@ export default {
 		return {
 			code: null,
 			clearField: false,
+      error: false
 		};
 	},
 };

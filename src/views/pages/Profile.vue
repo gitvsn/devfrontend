@@ -33,9 +33,9 @@
 					<div class="switcher-wrap ml-auto" @click="openModalWindow">
 						<div class="switcher">
 							<label>
-								<input type="checkbox"/>
+								<input type="checkbox" :checked="!{google2FAStatus}"/>
 								<span
-									class="switcher__box" :checked="!{getGoogle2FAStatus}"
+									class="switcher__box"
 								></span>
 							</label>
 						</div>
@@ -48,7 +48,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<div class="custom-input" :class="userInfo ? '' : 'error'">
+						<div class="custom-input" :class="userInfoErrors ? '' : 'error'">
 							<label>
 								<input
 									type="text"
@@ -80,7 +80,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="custom-input" :class="userInfo ? '' : 'error'">
+						<div class="custom-input" :class="userInfoErrors ? '' : 'error'">
 							<label>
 								<input
 									type="text"
@@ -112,7 +112,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="custom-input" :class="userInfo ? '' : 'error'">
+						<div class="custom-input" :class="userInfoErrors ? '' : 'error'">
 							<label>
 								<input
 									type="text"
@@ -144,7 +144,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="custom-input" :class="userInfo ? '' : 'error'">
+						<div class="custom-input" :class="userInfoErrors ? '' : 'error'">
 							<label>
 								<input
 									type="text"
@@ -350,7 +350,7 @@ export default {
 			openDisable2FaModalWindow: false,
 			oldPassword: true,
 			confirmPassword: true,
-			userInfo: true,
+			userInfoErrors: true,
 			name: '',
 			surname: '',
 			country: '',
@@ -398,8 +398,6 @@ export default {
 					this.country = res.data.country;
 					this.phone = res.data.phone;
 					this.email = res.data.email;
-					localStorage.name = res.data.name;
-					localStorage.surname = res.data.surname;
 				})
 				.catch((err) => {
 					this.userInfo = false;

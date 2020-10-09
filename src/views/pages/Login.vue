@@ -102,7 +102,6 @@
 		</div>
 		<modal-window />
 		<modal-window-success />
-		<!--    <Login2faModal :type="twoFaModalWindowType" v-if="open2fa" @enteredLastValue="enteredLastValue"/>-->
 	</div>
 </template>
 
