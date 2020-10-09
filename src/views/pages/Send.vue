@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="balance-box__value mt-2 text-center">
-            <p><span>47 547</span> VSN</p>
+            <p><span>{{userBalance}}</span> VSN</p>
           </div>
 
         </div>
@@ -95,10 +95,19 @@ export default {
   data() {
     return {
       transactions: [],
-      currentPage: 1
+      currentPage: 1,
+      userWalletBalance: null,
     }
   },
+  computed: {
+    ...mapState({
+      userBalance: state => state.user.balance,
+    }),
+  },
   methods: {
+    ...mapActions({
+      getUserWallet: 'getUserWallet',
+    }),
     getTransactions() {
       API.getTransactions(this.currentPage)
           .then(res => {
@@ -113,10 +122,11 @@ export default {
     goToEtherscan(link){
       let href = `https://etherscan.io/tx/${link}`;
       window.open(href, '_blank');
-    }
+    },
   },
   mounted() {
-    this.getTransactions()
+        this.getTransactions();
+        this.getUserWallet();
   }
 }
 </script>
