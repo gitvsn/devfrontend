@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="google-auth">
-      <TwoFaGoogleAuthForm/>
+      <TwoFaGoogleAuthForm @twoFa="getTwoFa"/>
       <button class="my-btn w-100 mt-3" @click="onSubmit"><span>submit</span></button>
     </div>
 
@@ -44,13 +44,17 @@ export default {
     //     this.twaCode = value;
     //     this.authorize();
     // },
+
+    getTwoFa(twoFa){
+      this.code = twoFa;
+    },
     goToLDashboardPage() {
       this.$router.push({name: "Dashboard"});
     },
   },
   data() {
     return {
-      code : "dsfa",
+      code : null,
       clearField: false
     }
   }

@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="mt-3">
-      <TwoFaGoogleAuthForm />
+      <TwoFaGoogleAuthForm @twoFa="getTwoFa"/>
     </div>
 
   </div>
@@ -97,6 +97,9 @@ export default {
       setTimeout(() => {
         this.isErrors = false;
       }, 3000);
+    },
+    getTwoFa(twoFa){
+      this.code = twoFa;
     },
     closeSuccessWindow() {
       // this.$modalWindow = {type: 'error'};
