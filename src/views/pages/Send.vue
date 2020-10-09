@@ -1,5 +1,7 @@
 <template>
   <div class="dashboard-page">
+    <ErrorModal/>
+    <SuccessModal/>
     <div class="page-title">
       <p>Send</p>
     </div>
@@ -89,9 +91,15 @@
 <script>
 import {mapActions, mapState} from 'vuex'
 import API from '@/api/api';
+import ErrorModal from "@/components/ErrorModal";
+import SuccessModal from "@/components/SuccessModal";
 
 export default {
   name: "Send",
+  components:{
+    ErrorModal,
+    SuccessModal
+  },
   data() {
     return {
       transactions: [],
@@ -128,14 +136,23 @@ export default {
       window.open(href, '_blank');
     },
     sendTokens() {
+      if (parseFloat(this.send.amount) < 0 || this.send.amount === null || isNaN(parseFloat(this.send.amount))) {
+          this.$modalWindowError = {type: "Not valid amount"}
+          return;
+        }
+      if(this.send.address.length !== 42 || this.send.address[0] !== '0' || this.send.address[1] !== 'x'){
+        this.$modalWindowError = {type: "Not valid address"}
+        return;
+      }
+
       API.send(this.send)
           .then(res => {
             if (res.data.status === 200) {
-              debugger
+               this.$modalWindowSuccess = { type: "You sent VSN"}
             }
           })
           .catch(err => {
-            console.log(err);
+            this.$modalWindowError = { type: "Error sending"}
           });
     }
   },
