@@ -255,7 +255,6 @@ export default {
 				repeatPassword: false,
 			},
 			isPending: false,
-			registerPressed: false,
 		};
 	},
 	components: { ModalWindowError, ModalWindowSuccess },
