@@ -216,7 +216,7 @@
 		<button
 			type="button"
 			class="my-btn w-100 mt-4"
-			v-bind:disabled="isPending"
+			:disabled="isPending"
 			@click="registration"
 		>
 			<span>
@@ -274,6 +274,7 @@ export default {
 			};
 
 			if (this.validationFields()) {
+				this.isPending = true;
 				API.register(payload)
 					.then((response) => {
 						if (response.data.status === 200) {
