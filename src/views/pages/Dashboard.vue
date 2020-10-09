@@ -74,7 +74,9 @@
 					<div class="title">
 						<p>Balance statistics</p>
 					</div>
-					<doughnut :data="data" :label="label" />
+					<div style="display:flex; height:100%; align-items: center">
+						<doughnut :data="data" :label="label" />
+					</div>
 				</div>
 			</div>
 		</div>
