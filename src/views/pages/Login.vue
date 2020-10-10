@@ -78,7 +78,7 @@
 		</div>
 		<div class="checkbox mt-4">
 			<label>
-				<input type="checkbox" name="remember" :checked="safeData"  @click="addDataToLocalStorage()"/>
+				<input type="checkbox" name="remember" v-model="safeData"  @click="addDataToLocalStorage()"/>
 				<span class="checkbox__content">
 					<span class="checkbox__box"></span>
 					<span class="checkbox__text">Remember me</span>
