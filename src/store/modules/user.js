@@ -100,6 +100,15 @@ const actions = {
 	changePersonalInfo(context, payload) {
 		return axios.post(CHANGE_PERSONAL_INFO, payload);
 	},
+
+	setGoogle2FAStatus(context,payload) {
+		const data = {
+			field: 'isGoogle2FAEnable',
+			value: payload,
+		};
+		context.commit('setUserState', data);
+	},
+
 };
 
 export default {

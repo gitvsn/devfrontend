@@ -370,6 +370,7 @@ export default {
 			uploadUserAvatar: 'uploadUserAvatar',
 			getGoogle2FAStatus: 'getGoogle2FAStatus',
 			changePersonalInfo: 'changePersonalInfo',
+      setGoogle2FAStatus: 'setGoogle2FAStatus',
 		}),
 		cleanFields() {
 			this.password = '';
@@ -411,13 +412,16 @@ export default {
 			}
 		},
 		closeEnableModalWindow(isSuccess) {
+      this.setGoogle2FAStatus(!isSuccess);
 			if (isSuccess) {
 				this.$modalWindowSuccess = { type: 'Google auth enabled!' };
+				this.google2FAStatus = true;
 			}
 			this.openEnable2FaModalWindow = false;
 			this.getGoogle2FAStatus();
 		},
 		closeDisableModalWindow(isSuccess) {
+      this.setGoogle2FAStatus(!isSuccess);
 			if (isSuccess) {
 				this.$modalWindowSuccess = { type: 'Google auth disabled!' };
 			}
