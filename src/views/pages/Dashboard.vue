@@ -145,14 +145,27 @@ export default {
       API.getTrChartInfo()
           .then(res => {
             if (res.data.status === 200) {
+
+
+              let keys = [];
+              for (let k in res.data.response) {
+                if (res.data.response.hasOwnProperty(k)) {
+                    keys.push(parseInt(k));
+                }
+              }
+
+              keys.sort();
+
               this.transitions = res.data.response;
 
               let lab = [];
               let data = [];
 
+              let i = 0;
               for (const property in this.transitions) {
-                data.push(this.transitions[property]);
-                lab.push(new Date(parseInt(property)).customFormat("#DD#.#MM# #hh#:#mm#"));
+                data.push(this.transitions[keys[i]]);
+                lab.push(new Date(keys[i]).customFormat("#DD# #MMM#"));
+                i++;
               }
               this.linearData = data;
               this.linearLabel = lab;
