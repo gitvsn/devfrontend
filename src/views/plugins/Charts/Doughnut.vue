@@ -38,7 +38,6 @@ export default {
 							fontSize: 14,
 						},
 					},
-					rotation: 0,
 					cutoutPercentage: 60,
 					responsive: true,
 					maintainAspectRatio: true,
