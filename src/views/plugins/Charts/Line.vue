@@ -20,7 +20,6 @@ export default {
 					datasets: [
 						{
 							data: this.chartData,
-							pointRadius: [0],
 							pointHitRadius: [0],
 							fill: false,
 							backgroundColor: 'rbga(0,0,0,1)',
@@ -44,24 +43,38 @@ export default {
 					scales: {
 						yAxes: [
 							{
-								display: 'none',
+								display: true,
 								showLabelBackdrop: false,
 								position: 'right',
-								ticks: {
-									stepSize: 10000,
-								},
+                ticks: {
+                  maxTicksLimit: 5,
+                  fontSize: 12,
+                  fontColor: '#7f7f7f',
+                  fontFamily: 'Gotham-Bold,sans-serif',
+                  fontStyle: 'bold',
+                },
+                gridLines: {
+                  drawBorder: false,
+                  color: "rgba(0, 0, 0, 0)",
+                  display: false,
+                },
 							},
-							{
-								gridLines: {
-									color: '#F3F0FA',
-								},
-							},
+
 						],
 						xAxes: [
 							{
-								gridLines: {
-									display: false,
-								},
+                ticks: {
+                  maxTicksLimit: 5,
+                  fontSize: 13,
+                  fontColor: '#7f7f7f',
+                  fontFamily: 'Gotham-Bold,sans-serif',
+                  fontStyle: 'bold',
+                },
+                   gridLines: {
+                  drawBorder: false,
+                  color: "rgba(0, 0, 0, 0)",
+                  display: false,
+                },
 							},
 						],
 					},
