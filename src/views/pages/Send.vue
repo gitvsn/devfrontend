@@ -31,9 +31,9 @@
                 <p>User is not found</p>
               </div>
             </div>
-            <div class="amount__info">
-              <p><span>0 USD</span> Сommission 1%</p>
-            </div>
+<!--            <div class="amount__info">-->
+<!--              <p><span>0 USD</span> Сommission 1%</p>-->
+<!--            </div>-->
             <button @click="sendTokens" class="my-btn"><span>send</span></button>
           </div>
         </div>

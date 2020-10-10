@@ -78,7 +78,7 @@
 		</div>
 		<div class="checkbox mt-4">
 			<label>
-				<input type="checkbox" name="remember" :checked="{isDataSafe}" @click="addDataToLocalStorage()"/>
+				<input type="checkbox" name="remember" :checked="{safeData}" @click="addDataToLocalStorage()"/>
 				<span class="checkbox__content">
 					<span class="checkbox__box"></span>
 					<span class="checkbox__text">Remember me</span>
@@ -166,16 +166,13 @@ export default {
 				});
 		},
     addDataToLocalStorage(){
-		  if(!this.safeData){
+		  if(!this.safeData && this.email !== null){
         localStorage.setItem("email", this.email);
         this.safeData = true;
       } else{
         localStorage.removeItem("email");
         this.safeData = false;
       }
-    },
-    isDataSafe(){
-		  return localStorage.getItem("email") !== undefined;
     },
 		closeModalWindow() {
 			this.open2fa = false;
