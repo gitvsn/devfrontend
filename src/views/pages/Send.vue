@@ -169,7 +169,7 @@ export default {
             }
           })
           .catch(err => {
-            this.$modalWindowError = { type: "Error sending"}
+            this.$modalWindowError = { type: err.data.error}
           });
     }
   },
