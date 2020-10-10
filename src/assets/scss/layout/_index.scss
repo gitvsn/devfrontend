@@ -460,6 +460,7 @@ body {
 }
 
 .my-wallet {
+  position: relative;
   display: flex;
   .custom-input__input{
     border-top-right-radius: 0;
@@ -1105,4 +1106,33 @@ body {
       }
     }
   }
+}
+.copy-result{
+  display: flex;
+  align-items: center;
+}
+.tooltip-result{
+  position: absolute;
+  top: calc(100% + 15px);
+  background: #40404E;
+  border-radius: 5px;
+  padding: 15px 20px;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 16px;
+  color: #fff;
+  z-index: 100;
+  &:before{
+    content: '';
+    @include horizontal-absolute();
+    top: -10px;
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+    border-width: 0 7px 10px 7px;
+    border-color: transparent transparent #40404E transparent;
+
+  }
+
 }
