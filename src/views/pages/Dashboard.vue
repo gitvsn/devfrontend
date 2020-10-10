@@ -14,7 +14,9 @@
 							<label>
 								<input
 									type="text"
-									class="custom-input__input "
+									class="custom-input__input"
+									style="cursor: pointer"
+									@click="copy"
 									v-model="userAddress"
 									readonly
 									required
@@ -24,12 +26,12 @@
 						<button class="copy-btn" @click="copy">
 							<img src="@/assets/img/copy.svg" alt="" /> copy
 						</button>
-            <div class="tooltip-result">
-              <div class="d-flex align-items-center">
-                <img src="@/assets/img/copy-icon-ok.svg" alt="" class="mr-2">
-                <p>Text copied!</p>
-              </div>
-            </div>
+						<div class="tooltip-result" :class="{ active: copyAddress }">
+							<div class="d-flex align-items-center">
+								<img src="@/assets/img/copy-icon-ok.svg" alt="" class="mr-2" />
+								<p>Text copied!</p>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="box balance-box-wrapper mb-3 mb-xl-0">
@@ -88,14 +90,14 @@
 							<p>
 								<span style="background: #6237A0;"></span>
 								Deposit
-								<strong>{{deposit}} VSN</strong>
+								<strong>{{ deposit }} VSN</strong>
 							</p>
 						</li>
 						<li>
 							<p>
 								<span style="background: #D932C5;"></span>
 								Withdraw
-								<strong>{{withdraw}} VSN</strong>
+								<strong>{{ withdraw }} VSN</strong>
 							</p>
 						</li>
 					</ul>
@@ -107,7 +109,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import API from '@/api/api';
 import ModalWindowSuccess from '@/components/SuccessModal';
 import Doughnut from '../plugins/Charts/Doughnut';
@@ -128,8 +130,9 @@ export default {
 				'2:59 AM',
 				'3:59 AM',
 			],
-      deposit: 0,
-      withdraw: 0,
+			deposit: 0,
+			withdraw: 0,
+			copyAddress: false,
 		};
 	},
 	components: {
@@ -147,29 +150,30 @@ export default {
 		...mapActions({
 			getUserWallet: 'getUserWallet',
 		}),
-    getTrInfo(){
-      API.getTrInfo()
-          .then(res => {
-            if (res.data.status === 200) {
-              let deposit = res.data.response.deposit;
-              let withdraw = res.data.response.withdraw;
+		getTrInfo() {
+			API.getTrInfo()
+				.then((res) => {
+					if (res.data.status === 200) {
+						let deposit = res.data.response.deposit;
+						let withdraw = res.data.response.withdraw;
 
-              this.deposit = deposit;
-              this.withdraw = withdraw;
+						this.deposit = deposit;
+						this.withdraw = withdraw;
 
-              let sum = deposit + withdraw;
-              let depositPercent = deposit !== 0 ? (deposit*100)/sum : 50;
-              let withdrawPercent = withdraw !== 0 ? (withdraw*100)/sum : 50;
-              this.data = [depositPercent , withdrawPercent];
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-    },
+						let sum = deposit + withdraw;
+						let depositPercent = deposit !== 0 ? (deposit * 100) / sum : 50;
+						let withdrawPercent = withdraw !== 0 ? (withdraw * 100) / sum : 50;
+						this.data = [depositPercent, withdrawPercent];
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		},
 		copy() {
 			this.$clipboard(this.userAddress);
-			this.$modalWindowSuccess = { type: 'Text copied!' };
+			this.copyAddress = true;
+			setTimeout(() => (this.copyAddress = false), 2000);
 		},
 	},
 	mounted() {
