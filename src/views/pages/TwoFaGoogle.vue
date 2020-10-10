@@ -39,6 +39,9 @@ export default {
 					localStorage.removeItem('token');
 					if (err.response && err.response.status === 400) {
 						this.error = true;
+            setTimeout(() => {
+              this.error = false;
+            }, 3000);
 					} else {
 						this.$modalWindowError = { type: err.message };
 					}
