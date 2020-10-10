@@ -28,7 +28,7 @@ const mutations = {
 const actions = {
 	setAvatar(context) {
 		const normalizeAvatarObject = (data) => {
-			const defaultAvatar = require('@/assets/img/user-img.jpg');
+			const defaultAvatar = require('@/assets/img/user-default.svg');
 
 			if (data) {
 				return !data.avatar || data.avatar === 'none'
