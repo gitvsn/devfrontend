@@ -78,7 +78,7 @@
 		</div>
 		<div class="checkbox mt-4">
 			<label>
-				<input type="checkbox" name="remember" />
+				<input type="checkbox" name="remember" :checked="{isDataSafe}" @click="addDataToLocalStorage()"/>
 				<span class="checkbox__content">
 					<span class="checkbox__box"></span>
 					<span class="checkbox__text">Remember me</span>
@@ -116,11 +116,12 @@ export default {
 	components: { TwoFaGoogle, ModalWindow, ModalWindowSuccess },
 	data() {
 		return {
-			email: '',
+			email: localStorage.getItem("email") !== undefined ? localStorage.getItem("email") : '',
 			password: '',
 			fieldType: false,
 			isPending: false,
 			open2fa: false,
+      safeData: localStorage.getItem("email") !== undefined,
 			errors: [],
 		};
 	},
@@ -164,7 +165,18 @@ export default {
 					this.isPending = false;
 				});
 		},
-
+    addDataToLocalStorage(){
+		  if(!this.safeData){
+        localStorage.setItem("email", this.email);
+        this.safeData = true;
+      } else{
+        localStorage.removeItem("email");
+        this.safeData = false;
+      }
+    },
+    isDataSafe(){
+		  return localStorage.getItem("email") !== undefined;
+    },
 		closeModalWindow() {
 			this.open2fa = false;
 		},
