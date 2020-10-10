@@ -130,6 +130,7 @@ export default {
 			],
       deposit: 0,
       withdraw: 0,
+      copyAddress: false,
 		};
 	},
 	components: {
