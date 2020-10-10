@@ -16,6 +16,8 @@
 									type="text"
 									class="custom-input__input "
 									v-model="userAddress"
+                  style="cursor: pointer"
+                  @click="copy"
 									readonly
 									required
 								/>
@@ -24,9 +26,9 @@
 						<button class="copy-btn" @click="copy">
 							<img src="@/assets/img/copy.svg" alt="" /> copy
 						</button>
-            <div class="tooltip-result">
+            <div class="tooltip-result" :class="{ active: copyAddress }">
               <div class="d-flex align-items-center">
-                <img src="@/assets/img/copy-icon-ok.svg" alt="" class="mr-2">
+                <img src="@/assets/img/copy-icon-ok.svg" alt="" class="mr-2" />
                 <p>Text copied!</p>
               </div>
             </div>
@@ -117,8 +119,8 @@ export default {
 	name: 'Dashboard',
 	data() {
 		return {
-			data: [50, 50],
-			label: ['Deposit %', 'Send %'],
+			data: null,
+			label: ['Deposit', 'Withdraw'],
 			linearData: [10000, 12000, 15000, 19000, 21000, 30000],
 			linearLabel: [
 				'10:59 PM',
@@ -159,9 +161,13 @@ export default {
               this.withdraw = withdraw;
 
               let sum = deposit + withdraw;
-              let depositPercent = deposit !== 0 ? (deposit*100)/sum : 50;
-              let withdrawPercent = withdraw !== 0 ? (withdraw*100)/sum : 50;
-              this.data = [this.rounding(depositPercent) , this.rounding(withdrawPercent)];
+              let depositPercent = deposit !== 0 ? (deposit*100)/sum : 0;
+              let withdrawPercent = withdraw !== 0 ? (withdraw*100)/sum : 0;
+              if (depositPercent===0 && withdraw === 0){
+                this.data= [50, 50];
+              } else {
+                this.data = [this.rounding(depositPercent) , this.rounding(withdrawPercent)];
+              }
             }
           })
           .catch(err => {
