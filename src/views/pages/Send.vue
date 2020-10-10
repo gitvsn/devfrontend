@@ -167,6 +167,8 @@ export default {
             if (res.data.status === 200) {
                this.$modalWindowSuccess = { type: "You sent VSN"}
                this.getTransactions();
+            } else if (res.data.status === 400) {
+              this.$modalWindowSuccess = { type: res.data.error}
             }
           })
           .catch(err => {
