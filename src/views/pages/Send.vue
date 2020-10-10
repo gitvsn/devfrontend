@@ -79,7 +79,7 @@
               <td>{{new Date(el.created).customFormat("#hh#:#mm#:#ss#")}}</td>
               <td>{{el.type === 'DEPOSIT' ? 'Received' : 'Sent'}}</td>
               <td><p :class="el.type === 'DEPOSIT' ? 'amount-value positive' :'amount-value negative' ">{{el.amount}} VSN</p></td>
-              <td><p>{{el.status}}</p></td>
+              <td><p class="failed pending success">{{el.status}}</p></td>
             </tr>
             </tbody>
           </table>
