@@ -79,7 +79,9 @@
               <td>{{new Date(el.created).customFormat("#hh#:#mm#:#ss#")}}</td>
               <td>{{el.type === 'DEPOSIT' ? 'Received' : 'Sent'}}</td>
               <td><p :class="el.type === 'DEPOSIT' ? 'amount-value positive' :'amount-value negative' ">{{el.amount}} VSN</p></td>
-              <td><p class="failed pending success">{{el.status}}</p></td>
+              <td><p v-if="el.status==='SUCCESS'" :class="getStatusClass(el.status)">Success</p></td>
+              <td><p v-if="el.status==='FAILED'" :class="getStatusClass(el.status)">Failed</p></td>
+              <td><p v-if="el.status==='PENDING'" :class="getStatusClass(el.status)">Pending</p></td>
             </tr>
             </tbody>
           </table>
@@ -132,6 +134,16 @@ export default {
           .catch(err => {
             console.log(err);
           });
+    },
+    getStatusClass(status){
+      switch (status) {
+        case 'SUCCESS':
+          return 'success';
+        case 'CANCEL':
+          return 'failed';
+        default :
+          return  'pending'
+      }
     },
     goToEtherscan(link){
       let href = `https://etherscan.io/tx/${link}`;
