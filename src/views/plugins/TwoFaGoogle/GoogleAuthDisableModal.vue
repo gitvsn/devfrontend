@@ -21,7 +21,7 @@
 					<label>
 						<input
 							:type="showPass ? 'text' : 'password'"
-							v-model="password"
+							v-model="password" @focus="isErrorInPass=false"
 							class="custom-input__input"
 							required
 						/>
@@ -36,15 +36,15 @@
 						</span>
 					</label>
 					<div class="error-msg">
-						<p>User is not found</p>
+						<p>Wrong password!</p>
 					</div>
 				</div>
 				<div class="mt-3" :class="{error : isErrorInCode}">
-					<TwoFaGoogleAuthForm @twaCode="twoFa" />
+					<TwoFaGoogleAuthForm @twaCode="twoFa"/>
+          <div class="error-msg">
+            <p>Wrong code!</p>
+          </div>
 				</div>
-        <div class="error-msg">
-          <p>User is not found</p>
-        </div>
 			</div>
 		</div>
 	</div>
@@ -94,10 +94,21 @@ export default {
 
 			API.disable2FA(disableTwoFaDTO).then((res) => {
         if (res.data.status === 400) {
+
           this.isErrorInCode = true;
+          setTimeout(() => {
+            this.isErrorInCode = false;
+          }, 3000);
+
         } else if (res.data.status === 403){
+
           this.isErrorInPass = true;
+
         } else {
+
+          this.$modalWindowSuccess = {
+            type: 'Success disable!',
+          };
           this.closeWindow();
         }
 			});
@@ -128,21 +139,21 @@ export default {
 			return this.passwordValid && this.passwordTwaCode;
 		},
 	},
-	// computed: {
-	//   passwordValid() {
-	//     if (this.password === null || this.password === undefined) {
-	//       return false;
-	//     }
-	//     return this.password.replace(/\s/g, '').length > 4;
-	//   },
-	//   passwordTwaCode() {
-	//     if (this.twaCode === null || this.twaCode === undefined) {
-	//       return false;
-	//     }
-	//     return this.twaCode.replace(/\s/g, '').length === 6;
-	//   }
-	// },
-	// mounted(){}
+	computed: {
+	  passwordValid() {
+	    if (this.password === null || this.password === undefined) {
+	      return false;
+	    }
+	    return this.password.replace(/\s/g, '').length > 4;
+	  },
+	  passwordTwaCode() {
+	    if (this.twaCode === null || this.twaCode === undefined) {
+	      return false;
+	    }
+	    return this.twaCode.replace(/\s/g, '').length === 6;
+	  }
+	},
+	mounted(){}
 };
 </script>
 

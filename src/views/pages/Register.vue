@@ -289,7 +289,7 @@ export default {
 								return this.errors.push('email-in-use');
 
 							default:
-								this.$modalWindowError = { type: res.data.error };
+								this.$modalWindowError = { type: response.data.error };
 						}
 					})
 					.catch((err) => {

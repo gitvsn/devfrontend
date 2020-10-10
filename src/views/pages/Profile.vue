@@ -230,7 +230,7 @@
 							<label>
 								<input
 									:type="passField ? 'text' : 'password'"
-									v-model="password"
+									v-model="password" @focus="oldPassword=true"
 									class="custom-input__input"
 									required
 								/>
@@ -255,7 +255,7 @@
 							<label>
 								<input
 									:type="newPassField ? 'text' : 'password'"
-									v-model="newPassword"
+									v-model="newPassword" @focus="confirmPassword=true"
 									class="custom-input__input"
 									required
 								/>
@@ -280,7 +280,7 @@
 							<label>
 								<input
 									:type="confNewPasField ? 'text' : 'password'"
-									v-model="confirmNewPassword"
+									v-model="confirmNewPassword" @focus="confirmPassword=true"
 									class="custom-input__input"
 									required
 								/>

@@ -7,7 +7,7 @@
     <div class="custom-input mt-3" :class="{error : isErrorInPass}">
       <label>
         <input class="custom-input__input" :type="showPass? 'text' : 'password'"
-               v-model="password" required>
+               v-model="password" @focus="isErrorInPass=false" required>
         <span class="custom-input__content">
           <span
               class="custom-input__text"
@@ -23,7 +23,7 @@
         </span>
       </label>
       <div class="error-msg" >
-        <p>Wrong data!</p>
+        <p>Wrong password!</p>
       </div>
     </div>
     <div class="mt-3" :class="{error : isErrorInCode}">
@@ -80,9 +80,15 @@ export default {
           .then(res => {
             if (res.data.status === 400) {
               this.isErrorInCode = true;
+              setTimeout(() => {
+                this.isErrorInCode = false;
+              }, 3000);
             } else if (res.data.status === 403){
               this.isErrorInPass = true;
             } else {
+              this.$modalWindowSuccess = {
+                type: 'Success enable!',
+              };
               this.closeSuccessWindow();
             }
           })
