@@ -88,14 +88,14 @@
 							<p>
 								<span style="background: #6237A0;"></span>
 								Deposit
-								<strong>45,523 VSN</strong>
+								<strong>{{deposit}} VSN</strong>
 							</p>
 						</li>
 						<li>
 							<p>
 								<span style="background: #D932C5;"></span>
 								Withdraw
-								<strong>45,523 VSN</strong>
+								<strong>{{withdraw}} VSN</strong>
 							</p>
 						</li>
 					</ul>
@@ -107,16 +107,17 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import {mapActions, mapState} from 'vuex';
 import API from '@/api/api';
 import ModalWindowSuccess from '@/components/SuccessModal';
 import Doughnut from '../plugins/Charts/Doughnut';
 import LineChart from '../plugins/Charts/Line';
+
 export default {
 	name: 'Dashboard',
 	data() {
 		return {
-			data: [75, 25],
+			data: [50, 50],
 			label: ['Deposit', 'Send'],
 			linearData: [10000, 12000, 15000, 19000, 21000, 30000],
 			linearLabel: [
@@ -127,6 +128,8 @@ export default {
 				'2:59 AM',
 				'3:59 AM',
 			],
+      deposit: 0,
+      withdraw: 0,
 		};
 	},
 	components: {
@@ -144,6 +147,26 @@ export default {
 		...mapActions({
 			getUserWallet: 'getUserWallet',
 		}),
+    getTrInfo(){
+      API.getTrInfo()
+          .then(res => {
+            if (res.data.status === 200) {
+              let deposit = res.data.response.deposit;
+              let withdraw = res.data.response.withdraw;
+
+              this.deposit = deposit;
+              this.withdraw = withdraw;
+
+              let sum = deposit + withdraw;
+              let depositPercent = deposit !== 0 ? (deposit*100)/sum : 50;
+              let withdrawPercent = withdraw !== 0 ? (withdraw*100)/sum : 50;
+              this.data = [depositPercent , withdrawPercent];
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    },
 		copy() {
 			this.$clipboard(this.userAddress);
 			this.$modalWindowSuccess = { type: 'Text copied!' };
@@ -151,6 +174,7 @@ export default {
 	},
 	mounted() {
 		this.getUserWallet();
+		this.getTrInfo();
 	},
 };
 </script>

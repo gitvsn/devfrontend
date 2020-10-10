@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="balance-box__value mt-2 text-center">
-            <p><span>{{userBalance}}</span> VSN</p>
+            <p><span>{{ userBalance }}</span> VSN</p>
           </div>
 
         </div>

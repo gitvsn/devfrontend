@@ -53,6 +53,7 @@ const getTransactions = (page = 1) => {
 		'get_user_transactions' + `?page=${page}` + `&size=${TRANSACTIONS_LIMIT}`
 	);
 };
+const getTrInfo = () => axios.post('get_transactions_info');
 const send = data => axios.post('send', data);
 
 export default {
@@ -69,5 +70,6 @@ export default {
 	restorePasswordCheckEmail,
 	restorePasswordCheckToken,
 	getTransactions,
+	getTrInfo,
 	send
 };
