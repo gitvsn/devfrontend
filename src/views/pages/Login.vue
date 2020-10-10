@@ -121,7 +121,7 @@ export default {
 			fieldType: false,
 			isPending: false,
 			open2fa: false,
-      safeData: localStorage.getItem("email") !== undefined,
+      safeData: localStorage.getItem("email") !== undefined && localStorage.getItem("email") !== null,
 			errors: [],
 		};
 	},
@@ -166,7 +166,7 @@ export default {
 				});
 		},
     addDataToLocalStorage(){
-		  if(!this.safeData && this.email !== null){
+		  if (!this.safeData && this.email !== null){
         localStorage.setItem("email", this.email);
         this.safeData = true;
       } else{
