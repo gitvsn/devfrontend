@@ -854,13 +854,13 @@ body {
 
       p{
         &.failed{
-          color: red;
+          color: #DD63A5;
         }
         &.success{
-          color: green;
+          color: #72DD69;
         }
         &.pending{
-          color: gray;
+
         }
       }
     }
