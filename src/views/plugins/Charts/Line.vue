@@ -1,11 +1,13 @@
 <script>
 import { Line } from 'vue-chartjs';
+import API from "@/api/api";
 
 export default {
 	extends: Line,
 	props: ['data', 'label'],
 	mounted() {
 		this.renderLineChart();
+    this.getTransactionsData();
 	},
 	computed: {
 		chartData: function() {
@@ -20,6 +22,7 @@ export default {
 					datasets: [
 						{
 							data: this.chartData,
+              transitions: [],
 							pointRadius: [0],
 							pointHitRadius: [0],
 							fill: false,
@@ -68,6 +71,17 @@ export default {
 				}
 			);
 		},
+    getTransactionsData(){
+      API.getTrChartInfo()
+          .then(res => {
+            if (res.data.status === 200) {
+              this.transitions = res.data.response;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    },
 		isArrayContentSame(a, b) {
 			if (Array.isArray(a) && Array.isArray(b) && a.length == b.length) {
 				a = a.concat().sort();

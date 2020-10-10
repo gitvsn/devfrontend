@@ -54,6 +54,7 @@ const getTransactions = (page = 1) => {
 	);
 };
 const getTrInfo = () => axios.post('get_transactions_info');
+const getTrChartInfo = () => axios.post('get_transactions_to_chart');
 const send = data => axios.post('send', data);
 
 export default {
@@ -70,6 +71,7 @@ export default {
 	restorePasswordCheckEmail,
 	restorePasswordCheckToken,
 	getTransactions,
+	getTrChartInfo,
 	getTrInfo,
 	send
 };
