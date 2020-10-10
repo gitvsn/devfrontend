@@ -69,6 +69,7 @@
               <td>Time</td>
               <td>Type</td>
               <td>Amount</td>
+              <td>Status</td>
             </tr>
             </thead>
             <tbody>
@@ -78,6 +79,7 @@
               <td>{{new Date(el.created).customFormat("#hh#:#mm#:#ss#")}}</td>
               <td>{{el.type === 'DEPOSIT' ? 'Received' : 'Sent'}}</td>
               <td><p :class="el.type === 'DEPOSIT' ? 'amount-value positive' :'amount-value negative' ">{{el.amount}} VSN</p></td>
+              <td><p>{{el.status}}</p></td>
             </tr>
             </tbody>
           </table>
@@ -149,6 +151,7 @@ export default {
           .then(res => {
             if (res.data.status === 200) {
                this.$modalWindowSuccess = { type: "You sent VSN"}
+               this.getTransactions();
             }
           })
           .catch(err => {
