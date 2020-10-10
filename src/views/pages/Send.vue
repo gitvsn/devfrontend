@@ -78,10 +78,12 @@
               <td>{{new Date(el.created).customFormat("#DD#.#MM#.#YYYY#")}}</td>
               <td>{{new Date(el.created).customFormat("#hh#:#mm#:#ss#")}}</td>
               <td>{{el.type === 'DEPOSIT' ? 'Received' : 'Sent'}}</td>
-              <td><p :class="el.type === 'DEPOSIT' ? 'amount-value positive' :'amount-value negative' ">{{el.amount}} VSN</p></td>
-              <td><p v-if="el.status==='SUCCESS'" :class="getStatusClass(el.status)">Success</p></td>
-              <td><p v-if="el.status==='FAILED'" :class="getStatusClass(el.status)">Failed</p></td>
-              <td><p v-if="el.status==='PENDING'" :class="getStatusClass(el.status)">Pending</p></td>
+              <td><p :class="el.type === 'DEPOSIT' ? 'amount-value' :'amount-value' ">{{el.amount}} VSN</p></td>
+              <td>
+                  <p v-if="el.status==='SUCCESS'" :class="getStatusClass(el.status)">Success</p>
+                  <p v-if="el.status==='FAILED'" :class="getStatusClass(el.status)">Failed</p>
+                  <p v-if="el.status==='PENDING'" :class="getStatusClass(el.status)">Pending</p>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -139,7 +141,7 @@ export default {
       switch (status) {
         case 'SUCCESS':
           return 'success';
-        case 'CANCEL':
+        case 'FAILED':
           return 'failed';
         default :
           return  'pending'
