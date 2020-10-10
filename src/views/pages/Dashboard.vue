@@ -118,7 +118,7 @@ export default {
 	data() {
 		return {
 			data: [50, 50],
-			label: ['Deposit', 'Send'],
+			label: ['Deposit %', 'Send %'],
 			linearData: [10000, 12000, 15000, 19000, 21000, 30000],
 			linearLabel: [
 				'10:59 PM',
@@ -160,12 +160,19 @@ export default {
               let sum = deposit + withdraw;
               let depositPercent = deposit !== 0 ? (deposit*100)/sum : 50;
               let withdrawPercent = withdraw !== 0 ? (withdraw*100)/sum : 50;
-              this.data = [depositPercent , withdrawPercent];
+              this.data = [this.rounding(depositPercent) , this.rounding(withdrawPercent)];
             }
           })
           .catch(err => {
             console.log(err);
           });
+    },
+    rounding(value) {
+      if (value === null || value === undefined) {
+        return value;
+      } else {
+        return Number((value.toFixed(2)) > 0 ? Number((value.toFixed(2))) : 0);
+      }
     },
 		copy() {
 			this.$clipboard(this.userAddress);
