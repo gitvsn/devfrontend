@@ -1122,6 +1122,7 @@ body {
   line-height: 16px;
   color: #fff;
   z-index: 100;
+  display: none;
   &:before{
     content: '';
     @include horizontal-absolute();
@@ -1134,5 +1135,7 @@ body {
     border-color: transparent transparent #40404E transparent;
 
   }
-
+  &.active{
+    display: block;
+  }
 }
