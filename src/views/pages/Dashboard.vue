@@ -183,7 +183,7 @@ export default {
     },
 		copy() {
 			this.$clipboard(this.userAddress);
-			this.$modalWindowSuccess = { type: 'Text copied!' };
+			//this.$modalWindowSuccess = { type: 'Text copied!' };
 		},
 	},
 	mounted() {
