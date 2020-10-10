@@ -118,7 +118,7 @@ export default {
 	data() {
 		return {
 			data: [50, 50],
-			label: ['Deposit %', 'Send %'],
+			label: ['Deposit', 'Withdraw'],
 			linearData: [10000, 12000, 15000, 19000, 21000, 30000],
 			linearLabel: [
 				'10:59 PM',
