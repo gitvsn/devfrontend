@@ -1,14 +1,9 @@
 <script>
 import { Line } from 'vue-chartjs';
-import API from '@/api/api';
 
 export default {
 	extends: Line,
 	props: ['data', 'label'],
-	mounted() {
-		this.renderLineChart();
-		this.getTransactionsData();
-	},
 	computed: {
 		chartData: function() {
 			return this.data;
@@ -72,7 +67,7 @@ export default {
                   fontFamily: 'Gotham-Bold,sans-serif',
                   fontStyle: 'bold',
                 },
-                   gridLines: {
+                gridLines: {
                   drawBorder: false,
                   color: "rgba(0, 0, 0, 0)",
                   display: false,
@@ -83,17 +78,6 @@ export default {
 				}
 			);
 		},
-    getTransactionsData(){
-      API.getTrChartInfo()
-          .then(res => {
-            if (res.data.status === 200) {
-              this.transitions = res.data.response;
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-    },
 		isArrayContentSame(a, b) {
 			if (Array.isArray(a) && Array.isArray(b) && a.length == b.length) {
 				a = a.concat().sort();
@@ -106,11 +90,7 @@ export default {
 	},
 	watch: {
 		data: function(newData, oldData) {
-			if (oldData.length == 0 || !this.isArrayContentSame(oldData, newData)) {
-				this.$data._chart.destroy();
-				//this.renderChart(this.data, this.options);
 				this.renderLineChart();
-			}
 		},
 	},
 };

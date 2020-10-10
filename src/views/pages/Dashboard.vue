@@ -119,15 +119,8 @@ export default {
 		return {
 			data: [50, 50],
 			label: ['Deposit', 'Withdraw'],
-			linearData: [10000, 12000, 15000, 19000, 21000, 30000],
-			linearLabel: [
-				'10:59 PM',
-				'11:59 PM',
-				'12:59 PM',
-				'1:59 AM',
-				'2:59 AM',
-				'3:59 AM',
-			],
+			linearData: null,
+			linearLabel: null,
 			deposit: 0,
 			withdraw: 0,
 			copyAddress: false,
@@ -148,6 +141,27 @@ export default {
 		...mapActions({
 			getUserWallet: 'getUserWallet',
 		}),
+    getTransactionsData(){
+      API.getTrChartInfo()
+          .then(res => {
+            if (res.data.status === 200) {
+              this.transitions = res.data.response;
+
+              let lab = [];
+              let data = [];
+
+              for (const property in this.transitions) {
+                data.push(this.transitions[property]);
+                lab.push(new Date(parseInt(property)).customFormat("#DD#.#MM# #hh#:#mm#"));
+              }
+              this.linearData = data;
+              this.linearLabel = lab;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    },
 		getTrInfo() {
 			API.getTrInfo()
 				.then((res) => {
@@ -193,6 +207,7 @@ export default {
 	mounted() {
 		this.getUserWallet();
 		this.getTrInfo();
+		this.getTransactionsData();
 	},
 };
 </script>
