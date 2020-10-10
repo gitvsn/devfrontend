@@ -448,7 +448,7 @@ export default {
 			if (this.oldPassword && this.confirmPassword) {
 				e.preventDefault();
 
-				if (this.newPassword !== this.confirmNewPassword || this.newPassword==='' || this.confirmNewPassword === '') {
+				if (this.newPassword !== this.confirmNewPassword && (this.password ==='' && this.newPassword==='' || this.confirmNewPassword === '')) {
 					this.confirmPassword = false;
 				} else {
 					this.changePersonalInfo(userInfo)
