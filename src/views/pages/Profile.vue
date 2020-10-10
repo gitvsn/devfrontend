@@ -33,7 +33,7 @@
 					<div class="switcher-wrap ml-auto" @click="openModalWindow">
 						<div class="switcher">
 							<label>
-								<input type="checkbox" :checked="!{google2FAStatus}"/>
+								<input type="checkbox" :checked="google2FAStatus"/>
 								<span
 									class="switcher__box"
 								></span>
