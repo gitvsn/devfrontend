@@ -24,6 +24,12 @@
 						<button class="copy-btn" @click="copy">
 							<img src="@/assets/img/copy.svg" alt="" /> copy
 						</button>
+            <div class="tooltip-result">
+              <div class="d-flex align-items-center">
+                <img src="@/assets/img/copy-icon-ok.svg" alt="" class="mr-2">
+                <p>Text copied!</p>
+              </div>
+            </div>
 					</div>
 				</div>
 				<div class="box balance-box-wrapper mb-3 mb-xl-0">
