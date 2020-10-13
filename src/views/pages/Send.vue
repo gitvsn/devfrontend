@@ -130,7 +130,7 @@ export default {
       API.getTransactions(this.currentPage)
           .then(res => {
             if (res.data.status === 200) {
-               this.transactions = res.data.response.content;
+               this.transactions = res.data.response;
                this.transactions = this.transactions.reverse();
             }
           })
