@@ -84,7 +84,7 @@ const actions = {
 			if (response.data.status === 200) {
 				const data = {
 					field: 'balance',
-					value: response.data.response[0].balance,
+					value: response.data.response[0].balance.toFixed(2),
 				};
 				context.commit('setUserState', data);
 
