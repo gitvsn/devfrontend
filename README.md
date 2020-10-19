@@ -27,7 +27,7 @@ npm run lint
 | git clone https://github.com/gitvsnwallet/devfrontend.git    | clone project      |
 | cd devfrontend    |  (project directory)      |
 | npm run build   |  (build command)      |
-| cd ./target   | (dist -- main directory )     |
+| ls   | (dist -- main directory )     |
 | apt-get install nginx   | install nginx web server     |
 | change nginx settings   | props file (/etc/nginx/sites-enabled/default)    |
 | service nginx start   | start nginx web server     |
