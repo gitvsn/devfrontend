@@ -20,5 +20,15 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Install and run webserver (nginx)
+
+| Command | Text |
+| :---         |     ---:      |  
+| git clone https://github.com/devfrontend/devfrontend.git    | clone project      |
+| cd devfrontend    |  (project directory)      |
+| npm run build   |  (build command)      |
+| cd ./target   | (dist -- main directory )     |
+| apt-get install nginx   | install nginx web server     |
+| change nginx settings   | props file (/etc/nginx/sites-enabled/default)    |
+| service nginx start   | start nginx web server     |
+
