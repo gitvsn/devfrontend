@@ -24,7 +24,7 @@ npm run lint
 
 | Command | Text |
 | :---         |     ---:      |  
-| git clone https://github.com/devfrontend/devfrontend.git    | clone project      |
+| git clone https://github.com/gitvsnwallet/devfrontend.git    | clone project      |
 | cd devfrontend    |  (project directory)      |
 | npm run build   |  (build command)      |
 | cd ./target   | (dist -- main directory )     |
